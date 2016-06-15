@@ -70,3 +70,6 @@ Route::any('Logout', 'Admin\LoginController@Logout');
 Route::get('admin',  'Admin\AdminController@index');
 Route::get('adminlist',  'Admin\AdminController@lists');
 Route::get('adminadd',  'Admin\AdminController@add');
+
+// 后台地区管理
+Route::get('AreaList',  'Admin\AreaController@AreaList');

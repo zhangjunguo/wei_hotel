@@ -20,7 +20,7 @@
 
 		<!-- fonts -->
 
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+		<link rel="stylesheet" href="js/admin/fonts.googleapis.js" />
 
 		<!-- ace styles -->
 
@@ -271,12 +271,12 @@
 
 		<!--[if !IE]> -->
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script src="js/admin/jquery1.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/admin/jquery1.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->
@@ -305,6 +305,6 @@
 			 jQuery('#'+id).addClass('visible');
 			}
 		</script>
-	<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

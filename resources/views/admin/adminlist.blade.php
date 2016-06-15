@@ -18,7 +18,7 @@
 
 		<!-- fonts -->
 
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+		<link rel="stylesheet" href="js/admin/fonts.googleapis.js" />
 
 		<!-- ace styles -->
 
@@ -246,79 +246,7 @@
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
 
-					<ul class="nav nav-list">
-						<li class="active">
-							<a href="admin" target="_top">
-								<i class="icon-dashboard"></i>
-								<span class="menu-text">管理列表</span>
-							</a>
-						</li>
-                         <li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-desktop"></i>
-								<span class="menu-text">管理员管理</span>
-
-								<b class="arrow icon-angle-down"></b>
-							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="adminlist" target="_top">
-										<i class="icon-double-angle-right"></i>
-										管理员信息列表
-									</a>
-								</li>
-
-								<li>
-									<a href="adminadd" target="_top">
-										<i class="icon-double-angle-right"></i>
-										添加管理员
-									</a>
-								</li>
-
-								<li>
-									<a href="treeview.html">
-										<i class="icon-double-angle-right"></i>
-										管理员角色分配
-									</a>
-								</li>
-
-								<li>
-									<a href="jquery-ui.html">
-										<i class="icon-double-angle-right"></i>
-										管理员权限分配
-									</a>
-								</li>
-                                <li>
-									<a href="nestable-list.html">
-										<i class="icon-double-angle-right"></i>
-										添加权限
-									</a>
-								</li>
-								<li>
-									<a href="#" >
-										<i class="icon-double-angle-right"></i>
-                                         权限列表
-									</a>
-                               </li>
-                               <li>
-									<a href="#" class="dropdown-toggle">
-										<i class="icon-double-angle-right"></i>
-                                         管理员日志列表
-									</a>
-                               </li>
-							</ul>
-						</li>
-					</ul><!-- /.nav-list -->
-
-					<div class="sidebar-collapse" id="sidebar-collapse">
-						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
-					</div>
-
-					<script type="text/javascript">
-						try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-					</script>
-				</div>
+			@include('admin/left');
 
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
@@ -449,12 +377,12 @@
 
 		<!--[if !IE]> -->
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script src="js/admin/jquery1.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/admin/jquery1.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->
@@ -485,6 +413,6 @@
 		<script src="assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
-	<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
