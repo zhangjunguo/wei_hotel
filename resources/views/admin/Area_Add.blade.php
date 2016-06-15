@@ -55,7 +55,7 @@
 	</head>
 
 	<body>
-@include('admin/header');
+		@include('admin/header');
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -82,7 +82,7 @@
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
 
-			@include('admin/left');
+@include('admin/left');
 
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
@@ -97,9 +97,9 @@
 							</li>
 
 							<li>
-								<a href="#">管理员管理</a>
+								<a href="#">地区管理</a>
 							</li>
-							<li class="active">管理信息列表</li>
+							<li class="active">地区管理添加</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -115,46 +115,68 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								地区管理列表
+								地区管理添加
 							</h1>
 						</div><!-- /.page-header -->
 						<div class="row">
-									<div class="col-xs-12">
-										<div class="table-responsive">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+                            <form class="form-horizontal" role="form" action="DoAreaAdd" method="post">
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">省份</label>
 
-											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
-												<thead>
-													<tr>
-														<th class="center">编号</th>
-														<th>用户名</th>
-														<th>邮箱</th>
-														<th>手机号</th>
-														<th>操作</th>
-													</tr>
-												</thead>
-                                            @foreach($results as $v)
-												<tbody>
-													<tr>
-														<td class="center">{{$v->adm_id}}</td>
-                                                        <td>{{$v->adm_name}}</td>
-														<td>{{$v->adm_email}}</td>
-														<td>{{$v->adm_phone}}</td>
-														<td>
-															   <button class="btn btn-xs btn-info">
-																	<i class="icon-edit bigger-120"></i>
-																</button>
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="city_province" placeholder="省份" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
 
-																<button class="btn btn-xs btn-danger">
-																	<i class="icon-trash bigger-120"></i>
-																</button>
-                                                        </td>
-                                                        </tr>
-													</tbody>
-													 @endforeach
-											       </table>
-										        </div><!-- /.table-responsive -->
-									   </div><!-- /span -->
-								 </div><!-- /row -->
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">城市</label>
+
+										<div class="col-sm-9">
+											<input type="password" id="form-field-2" placeholder="Password" name="pwd" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-3">邮箱</label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-3" placeholder="email" name="email" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">手机号</label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-4" placeholder="Password" name="phone" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+								     <div class="col-sm-9">
+											<input type="hidden" class="form-control" name="_token" value="<?php echo csrf_token(); ?>" />
+									 </div>
+									</div>
+                                    <div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="icon-ok bigger-110"></i>
+												提交
+											</button>
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="icon-undo bigger-110"></i>
+												重置
+											</button>
+										</div>
+									</div>
+
                </div>
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">

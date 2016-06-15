@@ -73,14 +73,14 @@
 
 							<ul class="submenu">
 								<li>
-									<a href="Arealist" target="_top">
+									<a href="AreaList" target="_top">
 										<i class="icon-double-angle-right"></i>
 										地区列表
 									</a>
 								</li>
 
 								<li>
-									<a href="Areaadd">
+									<a href="AreaAdd">
 										<i class="icon-double-angle-right"></i>
 										地区添加
 									</a>
