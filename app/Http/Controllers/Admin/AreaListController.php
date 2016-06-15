@@ -5,16 +5,28 @@ use DB,Request;
 use App\Http\Controllers\Controller;
 class AreaListController extends Controller 
 {
-	// 管理中心页面
-	public function index()
-	{
-	    return view('admin.main');
-	}
 	/**
 	 * 后台地区列表
 	 */
 	public function AreaList()
 	{
-		return view('admin/Area_List');
+		// return view('admin/Area_List');
+		// echo 1;
+	}
+
+	/**
+	 * 后台添加地区列表
+	 */
+	public function AreaAdd()
+	{
+		return view('admin/Area_Add');
+	}
+
+	/**
+	 * 后台添加地区列表
+	 */
+	public function DoAreaAdd()
+	{
+		echo 22;
 	}
 }

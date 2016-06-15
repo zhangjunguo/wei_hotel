@@ -72,4 +72,6 @@ Route::get('adminlist',  'Admin\AdminController@lists');
 Route::get('adminadd',  'Admin\AdminController@add');
 
 // 后台地区管理
-Route::get('AreaList',  'Admin\AreaController@AreaList');
+Route::get('AreaList',  'Admin\AreaListController@AreaList');
+Route::get('AreaAdd',  'Admin\AreaListController@AreaAdd');
+Route::get('DoAreaAdd',  'Admin\AreaListController@DoAreaAdd');
