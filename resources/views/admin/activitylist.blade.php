@@ -56,6 +56,7 @@
 
 	<body>
 @include('admin/header')
+
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
@@ -70,27 +71,7 @@
 					<script type="text/javascript">
 						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 					</script>
-
-					<!-- <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-						<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-							<button class="btn btn-success">
-								<i class="icon-signal"></i>
-							</button>
-
-							<button class="btn btn-info">
-								<i class="icon-pencil"></i>
-							</button>
-
-							<button class="btn btn-warning">
-								<i class="icon-group"></i>
-							</button>
-
-							<button class="btn btn-danger">
-								<i class="icon-cogs"></i>
-							</button>
-						</div>
- -->
-						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 							<span class="btn btn-success"></span>
 
 							<span class="btn btn-info"></span>
@@ -100,7 +81,9 @@
 							<span class="btn btn-danger"></span>
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
+
 @include('admin/left')
+
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
 						<script type="text/javascript">
@@ -113,10 +96,10 @@
 								<a href="#">管理中心</a>
 							</li>
 
-							<!-- <li>
-								<a href="#">Other Pages</a>
-							</li> -->
-							<li class="active">欢迎页</li>
+							<li>
+								<a href="#">活动管理</a>
+							</li>
+							<li class="active">活动列表</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -130,15 +113,95 @@
 					</div>
 
 					<div class="page-content">
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
+						<div class="page-header">
+							<h1>
+								活动列表
+							</h1>
+						</div><!-- /.page-header -->
+						活动名称:<input type="text" id="name">
+						开始时间:<input type="text" id="s_time">
+						结束时间:<input type="text" id="e_time">
+						<button type="button" class="btn btn-purple btn-sm" onclick="search(1)">
+							搜索
+						<i class="icon-search icon-on-right bigger-110"></i>
+						</button>
+<script type="text/javascript" src="js/jq.js"></script>
+<script type="text/javascript">
+	function search(page)
+	{
+		var name = $("#name").val();
+		var s_time = $("#s_time").val();
+		var e_time = $("#e_time").val();
+		
+		$.get('activitysearch',{'name':name,'s_time':s_time,'e_time':e_time,'page':page},function(msg){
+			$("#div1").html(msg);
+		})
+	}
+</script>
+						<div class="row" id="div1">
+									<div class="col-xs-12">
+										<div class="table-responsive">
+										<div id="div2">
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">编号</th>
+														<th>活动名称</th>
+														<th>开始时间</th>
+														<th>结束时间</th>
+														<th>图片</th>
+														<th>描述</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+                                            @foreach($data['data'] as $v)
+												<tbody>
+													<tr>
+														<td class="center">{{$v->act_id}}</td>
 
-								<!-- PAGE CONTENT ENDS -->
-							</div><!-- /.col -->
-						</div><!-- /.row -->
-					</div><!-- /.page-content -->
-				</div><!-- /.main-content -->
+										<!-- 文章标题的即点即改 -->
+
+                                                        <td onclick="fun1({{$v->act_id}})">
+
+			                                      <input type="text" value="{{$v->act_name}}" id="i{{$v->act_id}}" onblur="fun2({{$v->act_id}})" style="display:none"  /> 
+			                                       <span id="s{{$v->act_id}}">{{$v->act_name}}</span>
+
+                                                        </td>
+
+											<!-- 结束 -->
+
+														<td>{{ date('Y-m-d H:i:s',$v->act_start_time)}}</td>
+														<td>{{ date('Y-m-d H:i:s',$v->act_end_time)}}</td>
+														<td><img src="{{$v->act_img}}" alt="image" width="80px" height="50px"></td>
+														<td>{{$v->act_desc}}</td>
+														<td>	
+														<a href="activitysave?id={{$v->act_id}}">
+															   <button class="btn btn-xs btn-info">
+																	<i class="icon-edit bigger-120"></i>
+																</button>
+														</a>
+														
+														<a href="activitydel?id={{$v->act_id}}">
+																<button class="btn btn-xs btn-danger">
+																	<i class="icon-trash bigger-120"></i>
+																</button>
+														</a>
+                                                        </td>
+                                                        </tr>
+													</tbody>
+													 @endforeach
+											       </table>
+											      </div>
+											    <ul class="pagination">
+											        <li  class="disabled"><a href="javascript:search(1)">首页</a></li>
+													<li><a href="javascript:search({{$data['last']}})">上一页</a></li>
+													<li><a href="javascript:search({{$data['next']}})">下一页</a></li>
+													<li><a href="javascript:search({{$data['pages']}})">尾页</a></li>
+										        </ul>
+										        </div><!-- /.table-responsive -->
+									   </div><!-- /span -->
+								 </div><!-- /row -->
+               </div>
 
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
@@ -236,3 +299,28 @@
 	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
+
+<script type="text/javascript" src="js/jq.js"></script>
+<script type="text/javascript">
+/**
+ * 即点即改
+ * @param  {[type]} id [description]
+ * @return {[type]}    [description]
+ */
+	function fun1(id)
+	{
+		document.getElementById('i'+id).style.display='block';
+        document.getElementById('i'+id).focus();
+        document.getElementById('s'+id).innerHTML="";
+	}
+	function fun2(id){
+		var act_name =$("#i"+id).val();
+		$.get('activityedit',{'act_name':act_name,'id':id},function(msg){
+			if(msg==1){
+				document.getElementById('i'+id).style.display='none';
+				$("#s"+id).html(act_name);
+			}
+		})
+	}
+</script>
+<script type="text/javascript">

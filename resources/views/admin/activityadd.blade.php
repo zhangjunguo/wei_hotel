@@ -56,6 +56,7 @@
 
 	<body>
 @include('admin/header')
+
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
@@ -70,27 +71,7 @@
 					<script type="text/javascript">
 						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 					</script>
-
-					<!-- <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-						<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-							<button class="btn btn-success">
-								<i class="icon-signal"></i>
-							</button>
-
-							<button class="btn btn-info">
-								<i class="icon-pencil"></i>
-							</button>
-
-							<button class="btn btn-warning">
-								<i class="icon-group"></i>
-							</button>
-
-							<button class="btn btn-danger">
-								<i class="icon-cogs"></i>
-							</button>
-						</div>
- -->
-						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 							<span class="btn btn-success"></span>
 
 							<span class="btn btn-info"></span>
@@ -100,7 +81,9 @@
 							<span class="btn btn-danger"></span>
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
+
 @include('admin/left')
+
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
 						<script type="text/javascript">
@@ -113,10 +96,10 @@
 								<a href="#">管理中心</a>
 							</li>
 
-							<!-- <li>
-								<a href="#">Other Pages</a>
-							</li> -->
-							<li class="active">欢迎页</li>
+							<li>
+								<a href="#">活动管理</a>
+							</li>
+							<li class="active">添加活动</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -130,15 +113,78 @@
 					</div>
 
 					<div class="page-content">
+						<div class="page-header">
+							<h1>
+								活动信息添加
+							</h1>
+						</div><!-- /.page-header -->
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
+                            <form class="form-horizontal" role="form" action="activityinsert" method="post" enctype="multipart/form-data">
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">活动名称</label>
 
-								<!-- PAGE CONTENT ENDS -->
-							</div><!-- /.col -->
-						</div><!-- /.row -->
-					</div><!-- /.page-content -->
-				</div><!-- /.main-content -->
+										<div class="col-sm-9">
+											<input type="text" name="act_name" placeholder="活动名称" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">开始时间</label>
+
+										<div class="col-sm-9">
+											<input type="text"   name="act_start_time" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-3">结束时间</label>
+
+										<div class="col-sm-9">
+											<input type="text" name="act_end_time" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">活动图片</label>
+
+										<div class="col-sm-9">
+											<input type="file" name="act_img">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">活动描述</label>
+
+										<div class="col-sm-9">
+											<textarea name="act_desc" cols="38" rows="5"></textarea>
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+								     <div class="col-sm-9">
+											<input type="hidden" class="form-control" name="_token" value="<?php echo csrf_token(); ?>" />
+									 </div>
+									</div>
+                                    <div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="icon-ok bigger-110"></i>
+												提交
+											</button>
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="icon-undo bigger-110"></i>
+												重置
+											</button>
+										</div>
+									</div>
+  				</form>
+                </div>
 
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">

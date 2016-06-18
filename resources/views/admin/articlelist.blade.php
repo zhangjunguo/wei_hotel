@@ -56,6 +56,7 @@
 
 	<body>
 @include('admin/header')
+
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
@@ -70,27 +71,7 @@
 					<script type="text/javascript">
 						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 					</script>
-
-					<!-- <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-						<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-							<button class="btn btn-success">
-								<i class="icon-signal"></i>
-							</button>
-
-							<button class="btn btn-info">
-								<i class="icon-pencil"></i>
-							</button>
-
-							<button class="btn btn-warning">
-								<i class="icon-group"></i>
-							</button>
-
-							<button class="btn btn-danger">
-								<i class="icon-cogs"></i>
-							</button>
-						</div>
- -->
-						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 							<span class="btn btn-success"></span>
 
 							<span class="btn btn-info"></span>
@@ -113,10 +94,10 @@
 								<a href="#">管理中心</a>
 							</li>
 
-							<!-- <li>
-								<a href="#">Other Pages</a>
-							</li> -->
-							<li class="active">欢迎页</li>
+							<li>
+								<a href="#">文章管理</a>
+							</li>
+							<li class="active">文章列表</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -130,16 +111,83 @@
 					</div>
 
 					<div class="page-content">
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
+						<div class="page-header">
+							<h1>
+								文章列表
+							</h1>
+						</div><!-- /.page-header -->
 
-								<!-- PAGE CONTENT ENDS -->
-							</div><!-- /.col -->
-						</div><!-- /.row -->
-					</div><!-- /.page-content -->
-				</div><!-- /.main-content -->
+						<!-- 搜索 -->
+						添加人:<select id="adm_id">
+								<option value="">--请选择--</option>
+								@foreach($admin as $v)
+								
+									<option value="{{$v->adm_id}}">{{$v->adm_name}}</option>
+								
+								@endforeach
+								</select>
+						 标题：<input type="text" id="ar_title"  >
+						<!--时间范围:<input type="text" id="time_start"> - <input type="text" id="time_end"> -->
+						<button class="btn" id="but">
+							查询
+						</button>
 
+						<div class="row" >
+									<div class="col-xs-12">
+										<div class="table-responsive" id="div1">
+
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">编号</th>
+														<th>添加人</th>
+														<th>标题</th>
+														<th>时间</th>
+														<th>图片</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+                                           		@foreach($data as $v)
+												
+													<tr>
+														<td class="center">{{$v->ar_id}}</td>
+														<td>{{$v->adm_name}}</td>
+
+													<!-- 文章标题的即点即改 -->
+
+                                                        <td onclick="fun1({{$v->ar_id}})">
+
+                                      <input type="text" value="{{$v->ar_title}}" id="i{{$v->ar_id}}" onblur="fun2({{$v->ar_id}})" style="display:none"  /> 
+                                       <span id="s{{$v->ar_id}}">{{$v->ar_title}}</span>
+
+                                                        </td>
+
+													<!-- 结束 -->
+														<td>{{ date('Y-m-d H-i-s',$v->ar_time)}}</td>
+														<td><img src="{{$v->ar_img}}" alt="image" width="80px" height="50px"></td>
+														<td>
+															<a href="articlesave?id={{$v->ar_id}}">
+															   <button class="btn btn-xs btn-info">
+																	<i class="icon-edit bigger-120"></i>
+																</button>
+															</a>
+															<a href="articledel?id={{$v->ar_id}}">	
+																<button class="btn btn-xs btn-danger">
+																	<i class="icon-trash bigger-120"></i>
+																</button>
+															</a>
+                                                        </td>
+                                                       </tr>
+                                               	@endforeach	
+												</tbody>
+											
+											       </table>
+											      <?php echo $data->render(); ?>
+										        </div><!-- /.table-responsive -->
+									   </div><!-- /span -->
+								 </div><!-- /row -->
+               </div>
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
 						<i class="icon-cog bigger-150"></i>
@@ -236,3 +284,42 @@
 	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
+<script type="text/javascript" src="js/jq.js"></script>
+<script type="text/javascript">
+/**
+ * 即点即改
+ * @param  {[type]} id [description]
+ * @return {[type]}    [description]
+ */
+	function fun1(id)
+	{
+		document.getElementById('i'+id).style.display='block';
+        document.getElementById('i'+id).focus();
+        document.getElementById('s'+id).innerHTML="";
+	}
+	function fun2(id){
+		var ar_title =$("#i"+id).val();
+		$.get('articleedit',{'ar_title':ar_title,'id':id},function(msg){
+			if(msg==1){
+				document.getElementById('i'+id).style.display='none';
+				$("#s"+id).html(ar_title);
+			}
+		})
+	}
+</script>
+<script type="text/javascript">
+/**
+ *搜索
+ * 
+ */
+ 	$("#but").click(function(){
+ 		
+ 		var adm_id = $("#adm_id").val();
+ 		var ar_title = $("#ar_title").val();
+ 		var time_start = $("#time_start").val();
+ 		var time_end = $("#time_end").val();
+ 		$.get('articlesearch',{'adm_id':adm_id,'ar_title':ar_title,'time_start':time_start,'time_end':time_end},function(msg){
+ 			$("#div1").html(msg)
+ 		})
+  	})
+</script>
