@@ -55,7 +55,7 @@
 	</head>
 
 	<body>
-@include('admin/header');
+@include('admin/header')
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -82,7 +82,7 @@
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
 
-			@include('admin/left');
+			@include('admin/left')
 
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
@@ -102,7 +102,7 @@
 							<li class="active">管理信息列表</li>
 						</ul><!-- .breadcrumb -->
 
-						<div c ==ilass="nav-search" id="nav-search">
+						<div class="nav-search" id="nav-search">
 							<form class="form-search">
 								<span class="input-icon">
 									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
