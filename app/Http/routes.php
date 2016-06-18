@@ -110,3 +110,40 @@ Route::get('RoomShow', 'Admin\HotelController@roomlist');
 Route::any('RoomAdd', 'Admin\HotelController@roomadd');
 Route::any('RoomEdit', 'Admin\HotelController@roomedit');
 Route::get('RoomDel', 'Admin\HotelController@roomdel');
+
+//文章列表
+route::get('articlelist','Admin\ArticleController@ArticleList');
+//文章添加
+route::get('articleadd','Admin\ArticleController@ArticleAdd');
+//文章入库
+route::post('articleinsert','Admin\ArticleController@ArticleInsert');
+//验证文章标题唯一性
+route::get('check_title','Admin\ArticleController@CheckTitle');
+//文章删除
+route::get('articledel','Admin\ArticleController@ArticleDel');
+//文章的修改
+route::get('articlesave','Admin\ArticleController@ArticleSave');
+//执行修改
+route::post('articleupdate','Admin\ArticleController@ArticleUpdate');
+//即点即改
+route::get('articleedit','Admin\ArticleController@ArticleEdit');
+//多条件搜索
+route::get('articlesearch','Admin\ArticleController@ArticleSearch');
+
+
+//活动列表
+route::get('activitylist','Admin\ActivityController@ActivityList');
+//活动添加
+route::get('activityadd','Admin\ActivityController@ActivityAdd');
+//活动入库
+route::post('activityinsert','Admin\ActivityController@ActivityInsert');
+//活动删除
+route::get('activitydel','Admin\ActivityController@ActivityDel');
+//活动修改
+route::get('activitysave','Admin\ActivityController@ActivitySave');
+//执行修改
+route::post('activityupdate','Admin\ActivityController@ActivityUpdate');
+//活动名称的即点即改
+route::get('activityedit','Admin\ActivityController@ActivityEdit');
+//多条件搜索
+route::get('activitysearch','Admin\ActivityController@ActivitySearch');
