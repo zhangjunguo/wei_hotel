@@ -7,40 +7,48 @@
 
 		<!-- basic styles -->
 
-		<link href="http://www.zhang.com/assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/font-awesome.min.css" />
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 
 		<!--[if IE 7]>
-		  <link rel="stylesheet" href="http://www.zhang.com/assets/css/font-awesome-ie7.min.css" />
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
 
 		<!-- page specific plugin styles -->
 
 		<!-- fonts -->
 
-		<link rel="stylesheet" href="http://www.zhang.com/js/admin/fonts.googleapis.js" />
+		<link rel="stylesheet" href="js/admin/fonts.googleapis.js" />
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/ace.min.css" />
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/ace-rtl.min.css" />
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="assets/css/ace.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+		<link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="assets/css/chosen.css" />
+		<link rel="stylesheet" href="assets/css/datepicker.css" />
+		<link rel="stylesheet" href="assets/css/bootstrap-timepicker.css" />
+		<link rel="stylesheet" href="assets/css/daterangepicker.css" />
+		<link rel="stylesheet" href="assets/css/colorpicker.css" />
+
 
 		<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="http://www.zhang.com/assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
 
 		<!-- inline styles related to this page -->
 
 		<!-- ace settings handler -->
 
-		<script src="http://www.zhang.com/assets/js/ace-extra.min.js"></script>
+		<script src="assets/js/ace-extra.min.js"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
 		<!--[if lt IE 9]>
-		<script src="http://www.zhang.com/assets/js/html5shiv.js"></script>
-		<script src="http://www.zhang.com/assets/js/respond.min.js"></script>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
 		<script>
         setInterval('fun()',1000);
@@ -55,9 +63,7 @@
 	</head>
 
 	<body>
-
 @include('admin/header')
-
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -99,9 +105,9 @@
 							</li>
 
 							<li>
-								<a href="#">管理员管理</a>
+								<a href="#">活动管理</a>
 							</li>
-							<li class="active">管理信息列表</li>
+							<li class="active">活动修改</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -117,58 +123,90 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								管理员信息添加
+								活动修改
 							</h1>
 						</div><!-- /.page-header -->
+						
+						<div style="margin-right: 10%;" >
+							<a href="activitylist">
+							<button class="btn" style="float:right" >
+								<i class="icon-undo bigger-110"></i>
+								退出编辑
+							</button>
+							</a>
+						</div>
+
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-                            <form class="form-horizontal" role="form" action="admininsert" method="post">
+							
+
+
+                            <form class="form-horizontal" role="form" action="activityupdate" method="post" enctype="multipart/form-data">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">管理员名称</label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">活动名称</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-1" name="username" placeholder="Username" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-1" name="act_name" class="col-xs-10 col-sm-5" value="{{$data->act_name}}" />
 										</div>
 									</div>
 
 									<div class="space-4"></div>
-
+								
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">管理员密码</label>
-
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">开始时间</label>
+											
 										<div class="col-sm-9">
-											<input type="password" id="form-field-2" placeholder="Password" name="pwd" class="col-xs-10 col-sm-5" />
+											<input type="text" name="act_start_time"  class="col-xs-10 col-sm-5" value="{{date('Y-m-d H:i:s',$data->act_start_time)}}" />
 										</div>
 									</div>
 
 									<div class="space-4"></div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-3">邮箱</label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-3">结束时间</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-3" placeholder="email" name="email" class="col-xs-10 col-sm-5" />
+											
+											 <input type="text" name="act_end_time" class="col-xs-10 col-sm-5" value="{{ date('Y-m-d H:i:s',$data->act_end_time) }}" />
 										</div>
+										
+									
 									</div>
 									<div class="space-4"></div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">手机号</label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">活动原图片</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-4" placeholder="Password" name="phone" class="col-xs-10 col-sm-5" />
+											<img src="{{$data->act_img}}" alt="图片" style="width: 50%; height="50%">
+											<input type="hidden" name="img" value="{{$data->act_img}}">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">活动新图片</label>
+
+										<div class="col-sm-9">
+											<input type="file" name="act_img">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">活动描述</label>
+
+										<div class="col-sm-9">
+											<textarea name="act_desc" class="form-control"  cols="30" style="width: 50%;" rows="10">{{$data->act_desc}}</textarea>
 										</div>
 									</div>
 									<div class="space-4"></div>
 									<div class="form-group">
 								     <div class="col-sm-9">
 											<input type="hidden" class="form-control" name="_token" value="<?php echo csrf_token(); ?>" />
+										<input type="hidden" name="act_id" value="{{$data->act_id}}">
 									 </div>
 									</div>
                                     <div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
 											<button class="btn btn-info" type="submit">
 												<i class="icon-ok bigger-110"></i>
-												提交
+												修改
 											</button>
 
 											&nbsp; &nbsp; &nbsp;
@@ -180,6 +218,8 @@
 									</div>
 
                </div>
+               </form>
+
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
 						<i class="icon-cog bigger-150"></i>
@@ -237,42 +277,42 @@
 
 		<!--[if !IE]> -->
 
-		<script src="http://www.zhang.com/assets/js/jquery-2.0.3.min.js"></script>
+		<script src="js/admin/jquery1.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="http://www.zhang.com/assets/js/jquery-2.0.3.min.js"></script>
+<script src="js/admin/jquery1.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='http://www.zhang.com/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
 <script type="text/javascript">
- window.jQuery || document.write("<script src='http://www.zhang.com/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
 </script>
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='http://www.zhang.com/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-		<script src="http://www.zhang.com/assets/js/bootstrap.min.js"></script>
-		<script src="http://www.zhang.com/assets/js/typeahead-bs2.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/typeahead-bs2.min.js"></script>
 
 		<!-- page specific plugin scripts -->
 
 		<!-- ace scripts -->
 
-		<script src="http://www.zhang.com/assets/js/ace-elements.min.js"></script>
-		<script src="http://www.zhang.com/assets/js/ace.min.js"></script>
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
-	<div style="display:none"><script src='http://www.zhang.com/js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
+	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

@@ -46,6 +46,8 @@ Route::get('home/Login',"home\LoginController@Index");
 
 // 前台注册
 Route::get('home/Register',"home\LoginController@Register");
+// 注册
+Route::post('home/enroll',"home\LoginController@Enroll");
 
 // 前台预订酒店
 Route::get('home/Hotel',"home\HotelController@Index");
@@ -70,6 +72,43 @@ Route::any('Logout', 'Admin\LoginController@Logout');
 Route::get('admin',  'Admin\AdminController@index');
 Route::get('adminlist',  'Admin\AdminController@lists');
 Route::get('adminadd',  'Admin\AdminController@add');
+
+//文章列表
+route::get('articlelist','Admin\ArticleController@ArticleList');
+//文章添加
+route::get('articleadd','Admin\ArticleController@ArticleAdd');
+//文章入库
+route::post('articleinsert','Admin\ArticleController@ArticleInsert');
+//验证文章标题唯一性
+route::get('check_title','Admin\ArticleController@CheckTitle');
+//文章删除
+route::get('articledel','Admin\ArticleController@ArticleDel');
+//文章的修改
+route::get('articlesave','Admin\ArticleController@ArticleSave');
+//执行修改
+route::post('articleupdate','Admin\ArticleController@ArticleUpdate');
+//即点即改
+route::get('articleedit','Admin\ArticleController@ArticleEdit');
+//多条件搜索
+route::get('articlesearch','Admin\ArticleController@ArticleSearch');
+
+
+//活动列表
+route::get('activitylist','Admin\ActivityController@ActivityList');
+//活动添加
+route::get('activityadd','Admin\ActivityController@ActivityAdd');
+//活动入库
+route::post('activityinsert','Admin\ActivityController@ActivityInsert');
+//活动删除
+route::get('activitydel','Admin\ActivityController@ActivityDel');
+//活动修改
+route::get('activitysave','Admin\ActivityController@ActivitySave');
+//执行修改
+route::post('activityupdate','Admin\ActivityController@ActivityUpdate');
+//活动名称的即点即改
+route::get('activityedit','Admin\ActivityController@ActivityEdit');
+//多条件搜索
+route::get('activitysearch','Admin\ActivityController@ActivitySearch');
 
 // 后台地区管理列表
 Route::get('AreaList',  'Admin\AreaListController@AreaList');
@@ -96,5 +135,6 @@ Route::get('OrderSearch',  'Admin\OrderController@OrderSearch');
 Route::get('OrderXiang',  'Admin\OrderController@OrderXiang');
 // 鼠标划过详情
 Route::get('OrderXiangqing',  'Admin\OrderController@OrderXiangqing');
+
 
 

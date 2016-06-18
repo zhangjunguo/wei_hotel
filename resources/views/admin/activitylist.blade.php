@@ -7,40 +7,40 @@
 
 		<!-- basic styles -->
 
-		<link href="http://www.zhang.com/assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/font-awesome.min.css" />
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 
 		<!--[if IE 7]>
-		  <link rel="stylesheet" href="http://www.zhang.com/assets/css/font-awesome-ie7.min.css" />
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
 
 		<!-- page specific plugin styles -->
 
 		<!-- fonts -->
 
-		<link rel="stylesheet" href="http://www.zhang.com/js/admin/fonts.googleapis.js" />
+		<link rel="stylesheet" href="js/admin/fonts.googleapis.js" />
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/ace.min.css" />
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/ace-rtl.min.css" />
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="assets/css/ace.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
 
 		<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="http://www.zhang.com/assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
 
 		<!-- inline styles related to this page -->
 
 		<!-- ace settings handler -->
 
-		<script src="http://www.zhang.com/assets/js/ace-extra.min.js"></script>
+		<script src="assets/js/ace-extra.min.js"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
 		<!--[if lt IE 9]>
-		<script src="http://www.zhang.com/assets/js/html5shiv.js"></script>
-		<script src="http://www.zhang.com/assets/js/respond.min.js"></script>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
 		<script>
         setInterval('fun()',1000);
@@ -55,9 +55,7 @@
 	</head>
 
 	<body>
-
-		@include('admin/header')
-
+@include('admin/header')
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -84,9 +82,7 @@
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
 
-
-			@include('admin/left')
-
+@include('admin/left')
 
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
@@ -101,9 +97,9 @@
 							</li>
 
 							<li>
-								<a href="#">管理员管理</a>
+								<a href="#">活动管理</a>
 							</li>
-							<li class="active">管理信息列表</li>
+							<li class="active">活动列表</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -119,47 +115,94 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								管理员信息列表
+								活动列表
 							</h1>
 						</div><!-- /.page-header -->
-						<div class="row">
+						活动名称:<input type="text" id="name">
+						开始时间:<input type="text" id="s_time">
+						结束时间:<input type="text" id="e_time">
+						<button type="button" class="btn btn-purple btn-sm" onclick="search(1)">
+							搜索
+						<i class="icon-search icon-on-right bigger-110"></i>
+						</button>
+<script type="text/javascript" src="js/jq.js"></script>
+<script type="text/javascript">
+	function search(page)
+	{
+		var name = $("#name").val();
+		var s_time = $("#s_time").val();
+		var e_time = $("#e_time").val();
+		
+		$.get('activitysearch',{'name':name,'s_time':s_time,'e_time':e_time,'page':page},function(msg){
+			$("#div1").html(msg);
+		})
+	}
+</script>
+						<div class="row" id="div1">
 									<div class="col-xs-12">
 										<div class="table-responsive">
-
+										<div id="div2">
 											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
 												<thead>
 													<tr>
 														<th class="center">编号</th>
-														<th>用户名</th>
-														<th>邮箱</th>
-														<th>手机号</th>
+														<th>活动名称</th>
+														<th>开始时间</th>
+														<th>结束时间</th>
+														<th>图片</th>
+														<th>描述</th>
 														<th>操作</th>
 													</tr>
 												</thead>
-                                            @foreach($results as $v)
+                                            @foreach($data['data'] as $v)
 												<tbody>
 													<tr>
-														<td class="center">{{$v->adm_id}}</td>
-                                                        <td>{{$v->adm_name}}</td>
-														<td>{{$v->adm_email}}</td>
-														<td>{{$v->adm_phone}}</td>
-														<td>
+														<td class="center">{{$v->act_id}}</td>
+
+										<!-- 文章标题的即点即改 -->
+
+                                                        <td onclick="fun1({{$v->act_id}})">
+
+			                                      <input type="text" value="{{$v->act_name}}" id="i{{$v->act_id}}" onblur="fun2({{$v->act_id}})" style="display:none"  /> 
+			                                       <span id="s{{$v->act_id}}">{{$v->act_name}}</span>
+
+                                                        </td>
+
+											<!-- 结束 -->
+
+														<td>{{ date('Y-m-d H:i:s',$v->act_start_time)}}</td>
+														<td>{{ date('Y-m-d H:i:s',$v->act_end_time)}}</td>
+														<td><img src="{{$v->act_img}}" alt="image" width="80px" height="50px"></td>
+														<td>{{$v->act_desc}}</td>
+														<td>	
+														<a href="activitysave?id={{$v->act_id}}">
 															   <button class="btn btn-xs btn-info">
 																	<i class="icon-edit bigger-120"></i>
 																</button>
-
+														</a>
+														
+														<a href="activitydel?id={{$v->act_id}}">
 																<button class="btn btn-xs btn-danger">
 																	<i class="icon-trash bigger-120"></i>
 																</button>
+														</a>
                                                         </td>
                                                         </tr>
 													</tbody>
 													 @endforeach
 											       </table>
+											      </div>
+											    <ul class="pagination">
+											        <li  class="disabled"><a href="javascript:search(1)">首页</a></li>
+													<li><a href="javascript:search({{$data['last']}})">上一页</a></li>
+													<li><a href="javascript:search({{$data['next']}})">下一页</a></li>
+													<li><a href="javascript:search({{$data['pages']}})">尾页</a></li>
+										        </ul>
 										        </div><!-- /.table-responsive -->
 									   </div><!-- /span -->
 								 </div><!-- /row -->
                </div>
+
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
 						<i class="icon-cog bigger-150"></i>
@@ -217,42 +260,67 @@
 
 		<!--[if !IE]> -->
 
-		<script src="http://www.zhang.com/assets/js/jquery-2.0.3.min.js"></script>
+		<script src="js/admin/jquery1.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="http://www.zhang.com/assets/js/jquery-2.0.3.min.jsjs/admin/jquery1.js"></script>
+<script src="js/admin/jquery1.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='http://www.zhang.com/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
 <script type="text/javascript">
- window.jQuery || document.write("<script src='http://www.zhang.com/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
 </script>
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='http://www.zhang.com/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-		<script src="http://www.zhang.com/assets/js/bootstrap.min.js"></script>
-		<script src="http://www.zhang.com/assets/js/typeahead-bs2.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/typeahead-bs2.min.js"></script>
 
 		<!-- page specific plugin scripts -->
 
 		<!-- ace scripts -->
 
-		<script src="http://www.zhang.com/assets/js/ace-elements.min.js"></script>
-		<script src="http://www.zhang.com/assets/js/ace.min.js"></script>
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
-	<div style="display:none"><script src='http://www.zhang.com/js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
+	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
+
+<script type="text/javascript" src="js/jq.js"></script>
+<script type="text/javascript">
+/**
+ * 即点即改
+ * @param  {[type]} id [description]
+ * @return {[type]}    [description]
+ */
+	function fun1(id)
+	{
+		document.getElementById('i'+id).style.display='block';
+        document.getElementById('i'+id).focus();
+        document.getElementById('s'+id).innerHTML="";
+	}
+	function fun2(id){
+		var act_name =$("#i"+id).val();
+		$.get('activityedit',{'act_name':act_name,'id':id},function(msg){
+			if(msg==1){
+				document.getElementById('i'+id).style.display='none';
+				$("#s"+id).html(act_name);
+			}
+		})
+	}
+</script>
+<script type="text/javascript">
