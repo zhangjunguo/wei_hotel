@@ -56,9 +56,7 @@
 
 	<body>
 
-
-@include('admin/header')
-
+		@include('admin/header')
 
 
 		<div class="main-container" id="main-container">
@@ -180,6 +178,9 @@
 											</button>
 										</div>
 									</div>
+								</form>
+							</div>
+						</div>	
 
                </div>
 				<div class="ace-settings-container" id="ace-settings-container">

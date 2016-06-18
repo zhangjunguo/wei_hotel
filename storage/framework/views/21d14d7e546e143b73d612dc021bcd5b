@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>酒店简介</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<link href="../home/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../home/css/NewGlobal.css" rel="stylesheet" />
+
+<script type="text/javascript" src="../home/js/zepto.js"></script>
+
+</head>
+<body>
+ <div class="header">
+ <a href="/" class="home">
+            <span class="header-icon header-icon-home"></span>
+            <span class="header-name">主页</span>
+</a>
+<div class="title" id="titleString"></div>
+<a href="javascript:history.go(-1);" class="back">
+            <span class="header-icon header-icon-return"></span>
+            <span class="header-name">返回</span>
+        </a>
+ </div>
+
+
+    
+<div class="container">
+<ul class="unstyled hotel-bar">
+	<li class="first">
+    <a href="HotelInfo">房型</a>
+	</li>
+	<li><a href="home/HotelDesc"  class="active">简介</a></li>
+	<li><a href="#">地图</a></li>
+	<li><a href="HotelReview">评论</a></li>
+</ul>
+<script type="text/javascript">
+    $('#titleString').text($(document)[0].title);
+</script>
+<div class="hotel-prompt ">
+    <span class="hotel-prompt-title">酒店图片</span>
+<div id="slider" style="margin-top: 10px;">
+    
+ <div>
+        <img src="http://www.gridinn.com/photos/201212/20121231113309m.jpg">
+        <p>酒店外观</p>
+ </div>             
+       
+ <div>
+        <img src="http://www.gridinn.com/photos/201212/20121231113406m.jpg">
+        <p>大堂</p>
+ </div>             
+       
+ <div>
+        <img src="http://www.gridinn.com/photos/201212/20121231113520m.jpg">
+        <p>阳光大床房</p>
+ </div>             
+        
+</div>
+</div>
+<div id="hotelinfo" class="hotel-prompt ">
+			<span class="hotel-prompt-title">酒店简介</span>
+			<p>格子微酒店南宁南宁秀灵路店位于广西最著名大学广西大学东门旁，紧邻邕江边，周边超市、餐饮、银行等配套设施完善，出行便利。 酒店倡导低碳环保，客房内配有24小时热水、wifi网络、电视等设施，客房虽小，设施齐全。酒店服务周到细致，是您出行的不错选择。 酒店开业时间2012年12月。</p>
+            <p>地址：秀灵路55号（出入境管理局旁）</p>
+            <p>电话：0771-3391588</p>
+		</div>
+</div>
+<script>
+    //创建slider组件
+    $('#slider').slider({ imgZoom: true });
+</script>
+
+
+  <div class="footer">
+  <div class="gezifooter">
+      
+      <a href="Login" class="ui-link">立即登陆</a> <font color="#878787">|</font> 
+       <a href="Register" class="ui-link">免费注册</a> <font color="#878787">|</font>                   
+                  
+
+       <a href="../www.gridinn.com/@display=pc" class="ui-link">电脑版</a>
+  </div>
+  <div class="gezifooter">
+    <p style="color:#bbb;">格子微酒店连锁 &copy; 版权所有 2012-2014</p>
+  </div>
+  </div>
+
+</body>
+</html>
