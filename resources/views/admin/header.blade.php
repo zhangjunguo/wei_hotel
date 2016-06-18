@@ -9,7 +9,7 @@
 					<small>
 						<i class="icon-leaf"></i>
 						后台管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现在时刻
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现在时刻:
 						<time><font id="time" color="orange"></font></time>
 		             </small>
 					</a><!-- /.brand -->
@@ -121,8 +121,12 @@
 
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
-								<span class="user-info">
+							  <?php if (Session::get('rname')=='管理员'): ?>
+							  	 <img class="nav-user-photo" src="assets/avatars/avatar4.png" alt="Administrator's Photo" />
+							  <?php else: ?> 
+							  	 <img class="nav-user-photo" src="assets/avatars/avatar3.png" alt="Shopkeeper's Photo" />
+							  <?php endif ?>
+                               <span class="user-info">
 									<small>欢迎,</small>
 								    <font color="red">{{Session::get('username')}}</font>
 								</span>

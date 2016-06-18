@@ -124,7 +124,7 @@
 							<li>
 								<a href="#">管理员管理</a>
 							</li>
-							<li class="active">管理信息列表</li>
+							<li class="active">权限列表</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -140,7 +140,7 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								管理员信息列表
+								权限列表
 							</h1>
 						</div><!-- /.page-header -->
 						<div class="row">
@@ -150,33 +150,30 @@
 												<thead>
 													<tr>
 														<th class="center">编号</th>
-														<th>用户名</th>
-														<th>邮箱</th>
-														<th>手机号</th>
+														<th>权限名称</th>
+														<th>路由</th>
 														<th>操作</th>
 													</tr>
 												</thead>
                                             @foreach($results as $v)
 												<tbody>
 													<tr>
-														<td class="center">{{$v->adm_id}}</td>
-                                                        <td  id='t{{$v->adm_id}}' onclick='show({{$v->adm_id}})'><span id='s{{$v->adm_id}}'>{{$v->adm_name}}</span>
-                                                        <input type="text" style='display:none' id="i{{$v->adm_id}}"  value="{{$v->adm_name}}" onblur="update({{$v->adm_id}})" /></td>
-														<td>{{$v->adm_email}}</td>
-														<td>{{$v->adm_phone}}</td>
+														<td class="center">{{$v->p_id}}</td>
+                                                        <td>{{$v->p_name}}</td>
+														<td>{{$v->p_routes}}</td>
 														<td>
-															   <a href="adminsel?id={{$v->adm_id}}&act=adminsel">
+															   <a href="powersel?id={{$v->p_id}}&act=powersel">
 																	<i class="icon-edit bigger-120"></i>
-																</a>
-
-																<a href="admindel?id={{$v->adm_id}}">
+															  </a>
+                                                               <a href="powerdel?id={{$v->p_id}}">
 																	<i class="icon-trash bigger-120"></i>
 																</a>
                                                         </td>
-                                                        </tr>
+													 </tr>
 													</tbody>
 													 @endforeach
 											       </table>
+											         <?php echo $results->render(); ?>
 										        </div><!-- /.table-responsive -->
 									   </div><!-- /span -->
 								 </div><!-- /row -->
@@ -277,31 +274,4 @@
 	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
-<script>
-      function show(id){
-        // 显示文本框
-        $('#i'+id).show();
-        // 隐藏span标签
-        $('#s'+id).hide();
-     }
-     function update(id){
-        // 获取span标签中的值
-        var value=$('#i'+id).val();
-        // 定义数值
-        var data={name:value,id:id};
-        // 发送ajax请求
-        $.get('adminupdate1',data,function(msg){
-            if (msg=1) {
-              // 隐藏文本框
-              $('#i'+id).hide();
-              // 获取span标签中的新值
-              $('#s'+id).html(value);
-              // 显示span标签
-              $('#s'+id).show();
-            } else{
-                // 响应文本
-               $('#div1').html(msg);
-            };
-        });
-     }
-  </script>
+

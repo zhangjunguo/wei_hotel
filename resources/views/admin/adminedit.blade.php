@@ -25,7 +25,7 @@
 		<link rel="stylesheet" href="assets/css/ace.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
-         
+
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
@@ -35,7 +35,6 @@
 		<!-- ace settings handler -->
 
 		<script src="assets/js/ace-extra.min.js"></script>
-		<script src="./jq.js"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -53,33 +52,9 @@
         } 
 
     </script>
-    <style>
-       th{
-          background:#00676B;
-          color:#FF4500;
-          line-height:20px;
-          height:30px;
-          text-align: center;
-        }
-       td{
-         padding 6px 11px;
-         color: #FF0000;
-         border:1px solid #95bce2;
-         vertical-align:top;
-         text-align: center;
-       td * {
-          padding 6px 11px;
-       }
-       tr.alt td{
-          background: #ecf6fc;
-       }
-       tr.over td{
-          background: #bcd4ec;
-       }
-</style>
 	</head>
 
-	<body id="div1">
+	<body>
 		@include('admin/header')
 
 		<div class="main-container" id="main-container">
@@ -107,7 +82,7 @@
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
 
-			@include('admin/left')
+@include('admin/left')
 
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
@@ -140,47 +115,60 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								管理员信息列表
+								管理员信息编辑
 							</h1>
 						</div><!-- /.page-header -->
 						<div class="row">
-									<div class="col-xs-12">
-										<div class="table-responsive">
-                                        <table id="sample-table-1" class="table table-striped table-bordered table-hover" width="364" border="1" cellspacing="0" cellpadding="0" >
-												<thead>
-													<tr>
-														<th class="center">编号</th>
-														<th>用户名</th>
-														<th>邮箱</th>
-														<th>手机号</th>
-														<th>操作</th>
-													</tr>
-												</thead>
-                                            @foreach($results as $v)
-												<tbody>
-													<tr>
-														<td class="center">{{$v->adm_id}}</td>
-                                                        <td  id='t{{$v->adm_id}}' onclick='show({{$v->adm_id}})'><span id='s{{$v->adm_id}}'>{{$v->adm_name}}</span>
-                                                        <input type="text" style='display:none' id="i{{$v->adm_id}}"  value="{{$v->adm_name}}" onblur="update({{$v->adm_id}})" /></td>
-														<td>{{$v->adm_email}}</td>
-														<td>{{$v->adm_phone}}</td>
-														<td>
-															   <a href="adminsel?id={{$v->adm_id}}&act=adminsel">
-																	<i class="icon-edit bigger-120"></i>
-																</a>
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+                            <form class="form-horizontal" role="form" action="adminsel" method="post">
+                             @foreach($arr as $v)
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">管理员名称</label>
 
-																<a href="admindel?id={{$v->adm_id}}">
-																	<i class="icon-trash bigger-120"></i>
-																</a>
-                                                        </td>
-                                                        </tr>
-													</tbody>
-													 @endforeach
-											       </table>
-										        </div><!-- /.table-responsive -->
-									   </div><!-- /span -->
-								 </div><!-- /row -->
-               </div>
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="username" placeholder="Username" class="col-xs-10 col-sm-5" value="{{$v->adm_name}}" />
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-3">邮箱</label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-3" placeholder="email" name="email" class="col-xs-10 col-sm-5"  value="{{$v->adm_email}}" />
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">手机号</label>
+
+										<div class="col-sm-9">
+											<input type="text" id="form-field-4" placeholder="Phone" name="phone" class="col-xs-10 col-sm-5" value="{{$v->adm_phone}}" />
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+								     <div class="col-sm-9">
+								           <input type="hidden" name="id" value="{{$v->adm_id}}" />
+                                           <input type="hidden" name="act" value="adminupdate" />
+										   <input type="hidden" class="form-control" name="_token" value="<?php echo csrf_token(); ?>" />
+									 </div>
+									</div>
+                                    <div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="icon-ok bigger-110"></i>
+												修改
+											</button>
+										</div>
+                                   </div>
+									@endforeach
+								</form>
+							</div>
+						</div>
+                    </div>
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
 						<i class="icon-cog bigger-150"></i>
@@ -277,31 +265,3 @@
 	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
-<script>
-      function show(id){
-        // 显示文本框
-        $('#i'+id).show();
-        // 隐藏span标签
-        $('#s'+id).hide();
-     }
-     function update(id){
-        // 获取span标签中的值
-        var value=$('#i'+id).val();
-        // 定义数值
-        var data={name:value,id:id};
-        // 发送ajax请求
-        $.get('adminupdate1',data,function(msg){
-            if (msg=1) {
-              // 隐藏文本框
-              $('#i'+id).hide();
-              // 获取span标签中的新值
-              $('#s'+id).html(value);
-              // 显示span标签
-              $('#s'+id).show();
-            } else{
-                // 响应文本
-               $('#div1').html(msg);
-            };
-        });
-     }
-  </script>

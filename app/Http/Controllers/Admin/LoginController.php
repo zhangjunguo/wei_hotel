@@ -14,14 +14,22 @@ class LoginController extends Controller {
      // 登录操作
      public function PostLogin()
      {    
-
+              $ip=Request::getClientIp();
           $username=Request::input('username');
-          $pwd=Request::input('pwd');
-          $user= DB::table('admin')->where('adm_name',$username)->where('adm_pass',$pwd)->first();;
+          $pwd=md5(Request::input('pwd'));
+          $user= DB::table('admin')->where('adm_name',$username)->where('adm_pass',$pwd)->first();
           // print_r($user);die;
           if ($user){
             Session::put('username',$username);
+            Session::put('ip',$ip);
             Session::put('uid',$user->adm_id);
+            $uid=Session::get('uid');
+            $arr=DB::table('admin')
+            ->join('adm_role', 'adm_role.adm_id', '=', 'admin.adm_id')
+            ->join('role', 'adm_role.ro_id', '=', 'role.ro_id')
+            ->where('admin.adm_id',$uid)
+            ->first();
+            Session::put('rname',$arr->ro_name);
             return redirect('admin')->with('message', '成功登录');
           } 
           else {

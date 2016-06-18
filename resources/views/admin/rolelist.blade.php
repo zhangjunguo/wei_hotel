@@ -153,10 +153,10 @@
 														<th>用户名</th>
 														<th>邮箱</th>
 														<th>手机号</th>
-														<th>操作</th>
+														<th>角色</th>
 													</tr>
 												</thead>
-                                            @foreach($results as $v)
+                                            @foreach($arr as $v)
 												<tbody>
 													<tr>
 														<td class="center">{{$v->adm_id}}</td>
@@ -164,15 +164,7 @@
                                                         <input type="text" style='display:none' id="i{{$v->adm_id}}"  value="{{$v->adm_name}}" onblur="update({{$v->adm_id}})" /></td>
 														<td>{{$v->adm_email}}</td>
 														<td>{{$v->adm_phone}}</td>
-														<td>
-															   <a href="adminsel?id={{$v->adm_id}}&act=adminsel">
-																	<i class="icon-edit bigger-120"></i>
-																</a>
-
-																<a href="admindel?id={{$v->adm_id}}">
-																	<i class="icon-trash bigger-120"></i>
-																</a>
-                                                        </td>
+														<td>{{$v->ro_name}}</td>
                                                         </tr>
 													</tbody>
 													 @endforeach
