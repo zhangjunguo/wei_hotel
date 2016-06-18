@@ -154,7 +154,13 @@ class AreaListController extends Controller
 
 		$re = DB::table('region1')->where("region_id",$region_id)->delete();
 
-		$this->AreaJson();
+		$res = DB::table('region1')->get();
+		if($res){
+			$this->AreaJson();
+		}else{
+			unlink('area.js');
+		}
+		
 
 		if($re){
 			
