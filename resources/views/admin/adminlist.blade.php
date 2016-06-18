@@ -56,7 +56,9 @@
 
 	<body>
 
+
 		@include('admin/header')
+
 
 
 		<div class="main-container" id="main-container">
@@ -85,7 +87,9 @@
 					<!-- </div> --><!-- #sidebar-shortcuts -->
 
 
+
 			@include('admin/left')
+
 
 
 				<div class="main-content">

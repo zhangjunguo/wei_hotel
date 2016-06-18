@@ -1,6 +1,6 @@
 
 					<ul class="nav nav-list">
-						<li class="active">
+						<li class="active1">
 
 							<a href="admin" target="_top">
 								<i class="icon-dashboard"></i>
@@ -91,6 +91,27 @@
 						</li>
 						<!-- 地区管理////////end -->
 
+
+						<!-- 订单管理////////start -->
+							<li>
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-desktop"></i>
+								<span class="menu-text">订单管理</span>
+
+								<b class="arrow icon-angle-down"></b>
+							</a>
+
+							<ul class="submenu">
+								<li>
+									<a href="OrderList" target="_top">
+										<i class="icon-double-angle-right"></i>
+										订单列表
+									</a>
+								</li>
+							</ul>
+						</li>
+
+
 					
 					
 					<!-- 文章管理 start -->
@@ -114,10 +135,38 @@
 									<a href="articleadd">
 										<i class="icon-double-angle-right"></i>
 										文章添加
+
 									</a>
 								</li>
 							</ul>
 						</li>
+
+						
+					<!-- 酒店管理 start -->
+						<li>
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-desktop"></i>
+								<span class="menu-text">酒店管理</span>
+
+								<b class="arrow icon-angle-down"></b>
+							</a>
+
+							<ul class="submenu">
+								<li>
+									<a href="HotelShow" target="_top">
+										<i class="icon-double-angle-right"></i>
+										酒店列表
+									</a>
+								</li>
+								<li>
+
+									<a href="HotelAdd">
+										<i class="icon-double-angle-right"></i>
+										酒店添加
+									</a>
+								</li>
+							</ul>
+						</li>	
 						<!-- 文章管理 end -->
 					
 
@@ -137,7 +186,6 @@
 										活动列表
 									</a>
 								</li>
-
 								<li>
 									<a href="activityadd">
 										<i class="icon-double-angle-right"></i>
@@ -146,28 +194,7 @@
 								</li>
 							</ul>
 						</li>
-						<!-- 活动管理 end -->
-
-						<!-- 订单管理////////start -->
-							<li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-desktop"></i>
-								<span class="menu-text">订单管理</span>
-
-								<b class="arrow icon-angle-down"></b>
-							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="OrderList" target="_top">
-										<i class="icon-double-angle-right"></i>
-										订单列表
-
-									</a>
-								</li>
-							</ul>
-						</li>
-						<!-- 订单管理////////end -->
+						
 
 					</ul><!-- /.nav-list -->
 
@@ -181,7 +208,8 @@
 				</div>
 
 
-<script type="text/javascript" src="js/jq.js"></script>
+
+
 <script src="js/admin/jquery1.js"></script>
 <script>
 // alert(1);
