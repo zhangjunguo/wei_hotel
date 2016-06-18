@@ -71,27 +71,7 @@
 					<script type="text/javascript">
 						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 					</script>
-
-					<!-- <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-						<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-							<button class="btn btn-success">
-								<i class="icon-signal"></i>
-							</button>
-
-							<button class="btn btn-info">
-								<i class="icon-pencil"></i>
-							</button>
-
-							<button class="btn btn-warning">
-								<i class="icon-group"></i>
-							</button>
-
-							<button class="btn btn-danger">
-								<i class="icon-cogs"></i>
-							</button>
-						</div>
- -->
-						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 							<span class="btn btn-success"></span>
 
 							<span class="btn btn-info"></span>
@@ -101,7 +81,9 @@
 							<span class="btn btn-danger"></span>
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
+
 @include('admin/left')
+
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
 						<script type="text/javascript">
@@ -114,10 +96,10 @@
 								<a href="#">管理中心</a>
 							</li>
 
-							<!-- <li>
-								<a href="#">Other Pages</a>
-							</li> -->
-							<li class="active">欢迎页</li>
+							<li>
+								<a href="#">地区管理</a>
+							</li>
+							<li class="active">地区管理添加</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -131,16 +113,53 @@
 					</div>
 
 					<div class="page-content">
+						<div class="page-header">
+							<h1>
+								地区管理添加
+							</h1>
+						</div><!-- /.page-header -->
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
+                            <form class="form-horizontal" role="form" action="DoAreaAdd" method="post" onsubmit="return test()">
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">地区名称</label>
 
-								<!-- PAGE CONTENT ENDS -->
-							</div><!-- /.col -->
-						</div><!-- /.row -->
-					</div><!-- /.page-content -->
-				</div><!-- /.main-content -->
+										<div class="col-sm-9">
+											<input type="text" id="form-field-1" name="region_name" placeholder="地区名称" class="col-xs-10 col-sm-5" onblur="checkName()" />
+											<span id="check_name"></span>
+										</div>
+									</div>
 
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">请选择</label>
+										<div class="col-sm-9">
+											<select name="parent_id" id="parent_id">
+												<option value="0">顶级地区(省份)</option>
+												<?php foreach($data as $k => $v){$str=str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$v->level); ?>
+													<option value="{{$v->region_id}}">{{$str}}{{$v->region_name}}</option>
+												<?php } ?>
+											</select>
+										</div>
+									</div>
+									<input type="hidden" class="form-control" name="_token" value="<?php echo csrf_token(); ?>" />
+                                    <div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="icon-ok bigger-110"></i>
+												提交
+											</button>
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="icon-undo bigger-110"></i>
+												重置
+											</button>
+										</div>
+									</div>
+               </div>
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
 						<i class="icon-cog bigger-150"></i>
@@ -198,12 +217,12 @@
 
 		<!--[if !IE]> -->
 
-		<script src="js/admin/jquery1.js"></script>
+		<script src="http://www.zhang.com/assets/js/jquery-2.0.3.min.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="js/admin/jquery1.js"></script>
+<script src="http://www.zhang.com/assets/js/jquery-2.0.3.min.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->
@@ -235,5 +254,35 @@
 
 		<!-- inline scripts related to this page -->
 	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
+<script src="js/admin/jquery1.js"></script>
 </body>
 </html>
+<script>
+	var flag = false;
+	function checkName(){
+		var name = $("#form-field-1").val();
+		if(name == ''){
+			$("#check_name").html("<font color=red>地区名称不能为空</font>");
+			return false;
+		}else{
+			$.get('CheckName',{'name':name},function(i){
+				// alert(i)
+				if(i == 0){
+					$("#check_name").html("<font color=red>该地区已经存在</font>");
+					flag=false;
+				}else if(i == 1){
+					$("#check_name").html("<font color=red>OK</font>");
+					flag=true;
+				}
+			});
+			return flag;
+		}
+	}
+	function test(){
+		if(checkName()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+</script>

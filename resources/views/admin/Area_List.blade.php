@@ -54,8 +54,8 @@
     </script>
 	</head>
 
-	<body>
-		@include('admin/header')
+	<body id="div1">
+@include('admin/header')
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -71,27 +71,7 @@
 					<script type="text/javascript">
 						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 					</script>
-
-					<!-- <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-						<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-							<button class="btn btn-success">
-								<i class="icon-signal"></i>
-							</button>
-
-							<button class="btn btn-info">
-								<i class="icon-pencil"></i>
-							</button>
-
-							<button class="btn btn-warning">
-								<i class="icon-group"></i>
-							</button>
-
-							<button class="btn btn-danger">
-								<i class="icon-cogs"></i>
-							</button>
-						</div>
- -->
-						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 							<span class="btn btn-success"></span>
 
 							<span class="btn btn-info"></span>
@@ -101,7 +81,9 @@
 							<span class="btn btn-danger"></span>
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
-@include('admin/left')
+
+			@include('admin/left')
+
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
 						<script type="text/javascript">
@@ -114,10 +96,10 @@
 								<a href="#">管理中心</a>
 							</li>
 
-							<!-- <li>
-								<a href="#">Other Pages</a>
-							</li> -->
-							<li class="active">欢迎页</li>
+							<li>
+								<a href="#">地区管理</a>
+							</li>
+							<li class="active">地区管理列表</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -131,16 +113,48 @@
 					</div>
 
 					<div class="page-content">
+						<div class="page-header">
+							<h1>
+								地区管理列表
+							</h1>
+						</div><!-- /.page-header -->
 						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
+									<div class="col-xs-12">
+										<div class="table-responsive">
 
-								<!-- PAGE CONTENT ENDS -->
-							</div><!-- /.col -->
-						</div><!-- /.row -->
-					</div><!-- /.page-content -->
-				</div><!-- /.main-content -->
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">编号</th>
+														<th>地区名</th>
+														<th>上级地区名</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody id="tbody">
+												 @foreach($data as $v)
+													<tr>
+														<td class="center">{{$v->region_id}}</td>
+                                                        <td>{{$v->region_name}}</td>
+                                                        <td>{{$v->parent}}</td>
+														<td>
+															<!--    <button class="btn btn-xs btn-info">
+																	<i class="icon-edit bigger-120"></i>
+																</button> -->
 
+																<button class="btn btn-xs btn-danger" onclick="Del({{$v->region_id}})">
+																	<i class="icon-trash bigger-120"></i>
+																</button>
+                                                        </td>
+                                                        </tr>
+                                                        @endforeach
+													</tbody>
+											       </table>
+											       <?php echo $data->render(); ?>
+										        </div><!-- /.table-responsive -->
+									   </div><!-- /span -->
+								 </div><!-- /row -->
+               </div>
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
 						<i class="icon-cog bigger-150"></i>
@@ -198,12 +212,12 @@
 
 		<!--[if !IE]> -->
 
-		<script src="js/admin/jquery1.js"></script>
+		<script src="http://www.zhang.com/assets/js/jquery-2.0.3.min.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="js/admin/jquery1.js"></script>
+<script src="http://www.zhang.com/assets/js/jquery-2.0.3.min.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->
@@ -235,5 +249,23 @@
 
 		<!-- inline scripts related to this page -->
 	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
+<script src="js/admin/jquery1.js"></script>
 </body>
 </html>
+<script>
+	function Del(id)
+	{
+		// alert(id);
+		$.get("AreaDel",{'id':id},function(i){
+			if(i == 1){
+				if(confirm('该分类下面有子类存在，如果删除也会删除所有的子类')){
+					location.href='AreaDelall?id='+id;
+				}else{
+					return false;
+				}
+			}else if(i == 2){
+				location.href='Areadelete?id='+id;
+			}
+		});
+	}
+</script>
