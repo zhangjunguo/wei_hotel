@@ -55,11 +55,7 @@
 	</head>
 
 	<body>
-
-
-		@include('admin/header')
-
-
+@include('admin/header')
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -85,13 +81,7 @@
 							<span class="btn btn-danger"></span>
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
-
-
-
-			@include('admin/left')
-
-
-
+@include('admin/left')
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
 						<script type="text/javascript">
@@ -105,9 +95,9 @@
 							</li>
 
 							<li>
-								<a href="#">管理员管理</a>
+								<a href="#">文章管理</a>
 							</li>
-							<li class="active">管理信息列表</li>
+							<li class="active">文章列表</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -123,43 +113,77 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								管理员信息列表
+								文章列表
 							</h1>
 						</div><!-- /.page-header -->
-						<div class="row">
+
+						<!-- 搜索 -->
+						添加人:<select id="adm_id">
+								<option value="">--请选择--</option>
+								@foreach($admin as $v)
+								
+									<option value="{{$v->adm_id}}">{{$v->adm_name}}</option>
+								
+								@endforeach
+								</select>
+						 标题：<input type="text" id="ar_title"  >
+						<!--时间范围:<input type="text" id="time_start"> - <input type="text" id="time_end"> -->
+						<button class="btn" id="but">
+							查询
+						</button>
+
+						<div class="row" >
 									<div class="col-xs-12">
-										<div class="table-responsive">
+										<div class="table-responsive" id="div1">
 
 											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
 												<thead>
 													<tr>
 														<th class="center">编号</th>
-														<th>用户名</th>
-														<th>邮箱</th>
-														<th>手机号</th>
+														<th>添加人</th>
+														<th>标题</th>
+														<th>时间</th>
+														<th>图片</th>
 														<th>操作</th>
 													</tr>
 												</thead>
-                                            @foreach($results as $v)
 												<tbody>
+                                           		@foreach($data as $v)
+												
 													<tr>
-														<td class="center">{{$v->adm_id}}</td>
-                                                        <td>{{$v->adm_name}}</td>
-														<td>{{$v->adm_email}}</td>
-														<td>{{$v->adm_phone}}</td>
+														<td class="center">{{$v->ar_id}}</td>
+														<td>{{$v->adm_name}}</td>
+
+													<!-- 文章标题的即点即改 -->
+
+                                                        <td onclick="fun1({{$v->ar_id}})">
+
+                                      <input type="text" value="{{$v->ar_title}}" id="i{{$v->ar_id}}" onblur="fun2({{$v->ar_id}})" style="display:none"  /> 
+                                       <span id="s{{$v->ar_id}}">{{$v->ar_title}}</span>
+
+                                                        </td>
+
+													<!-- 结束 -->
+														<td>{{ date('Y-m-d H-i-s',$v->ar_time)}}</td>
+														<td><img src="{{$v->ar_img}}" alt="image" width="80px" height="50px"></td>
 														<td>
+															<a href="articlesave?id={{$v->ar_id}}">
 															   <button class="btn btn-xs btn-info">
 																	<i class="icon-edit bigger-120"></i>
 																</button>
-
+															</a>
+															<a href="articledel?id={{$v->ar_id}}">	
 																<button class="btn btn-xs btn-danger">
 																	<i class="icon-trash bigger-120"></i>
 																</button>
+															</a>
                                                         </td>
-                                                        </tr>
-													</tbody>
-													 @endforeach
+                                                       </tr>
+                                               	@endforeach	
+												</tbody>
+											
 											       </table>
+											      <?php echo $data->render(); ?>
 										        </div><!-- /.table-responsive -->
 									   </div><!-- /span -->
 								 </div><!-- /row -->
@@ -221,12 +245,12 @@
 
 		<!--[if !IE]> -->
 
-		<script src="assets/js/jquery-2.0.3.min.js"></script>
+		<script src="js/admin/jquery1.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="assets/js/jquery-2.0.3.min.jsjs/admin/jquery1.js"></script>
+<script src="js/admin/jquery1.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->
@@ -260,3 +284,42 @@
 	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
+<script type="text/javascript" src="js/jq.js"></script>
+<script type="text/javascript">
+/**
+ * 即点即改
+ * @param  {[type]} id [description]
+ * @return {[type]}    [description]
+ */
+	function fun1(id)
+	{
+		document.getElementById('i'+id).style.display='block';
+        document.getElementById('i'+id).focus();
+        document.getElementById('s'+id).innerHTML="";
+	}
+	function fun2(id){
+		var ar_title =$("#i"+id).val();
+		$.get('articleedit',{'ar_title':ar_title,'id':id},function(msg){
+			if(msg==1){
+				document.getElementById('i'+id).style.display='none';
+				$("#s"+id).html(ar_title);
+			}
+		})
+	}
+</script>
+<script type="text/javascript">
+/**
+ *搜索
+ * 
+ */
+ 	$("#but").click(function(){
+ 		
+ 		var adm_id = $("#adm_id").val();
+ 		var ar_title = $("#ar_title").val();
+ 		var time_start = $("#time_start").val();
+ 		var time_end = $("#time_end").val();
+ 		$.get('articlesearch',{'adm_id':adm_id,'ar_title':ar_title,'time_start':time_start,'time_end':time_end},function(msg){
+ 			$("#div1").html(msg)
+ 		})
+  	})
+</script>
