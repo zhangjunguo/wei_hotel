@@ -7,40 +7,40 @@
 
 		<!-- basic styles -->
 
-		<link href="http://www.zhang.com/assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/font-awesome.min.css" />
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 
 		<!--[if IE 7]>
-		  <link rel="stylesheet" href="http://www.zhang.com/assets/css/font-awesome-ie7.min.css" />
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
 
 		<!-- page specific plugin styles -->
 
 		<!-- fonts -->
 
-		<link rel="stylesheet" href="http://www.zhang.com/js/admin/fonts.googleapis.js" />
+		<link rel="stylesheet" href="js/admin/fonts.googleapis.js" />
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/ace.min.css" />
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/ace-rtl.min.css" />
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="assets/css/ace.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
 
 		<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="http://www.zhang.com/assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
 
 		<!-- inline styles related to this page -->
 
 		<!-- ace settings handler -->
 
-		<script src="http://www.zhang.com/assets/js/ace-extra.min.js"></script>
+		<script src="assets/js/ace-extra.min.js"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
 		<!--[if lt IE 9]>
-		<script src="http://www.zhang.com/assets/js/html5shiv.js"></script>
-		<script src="http://www.zhang.com/assets/js/respond.min.js"></script>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
 		<script>
         setInterval('fun()',1000);
@@ -237,42 +237,42 @@
 
 		<!--[if !IE]> -->
 
-		<script src="http://www.zhang.com/assets/js/jquery-2.0.3.min.js"></script>
+		<script src="assets/js/jquery-2.0.3.min.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="http://www.zhang.com/assets/js/jquery-2.0.3.min.js"></script>
+<script src="assets/js/jquery-2.0.3.min.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='http://www.zhang.com/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
 <script type="text/javascript">
- window.jQuery || document.write("<script src='http://www.zhang.com/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
 </script>
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='http://www.zhang.com/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-		<script src="http://www.zhang.com/assets/js/bootstrap.min.js"></script>
-		<script src="http://www.zhang.com/assets/js/typeahead-bs2.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/typeahead-bs2.min.js"></script>
 
 		<!-- page specific plugin scripts -->
 
 		<!-- ace scripts -->
 
-		<script src="http://www.zhang.com/assets/js/ace-elements.min.js"></script>
-		<script src="http://www.zhang.com/assets/js/ace.min.js"></script>
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
-	<div style="display:none"><script src='http://www.zhang.com/js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
+	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
