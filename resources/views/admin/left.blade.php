@@ -1,5 +1,5 @@
 					<ul class="nav nav-list">
-						<li class="active">
+						<li class="active1">
 							<a href="admin" target="_top">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text">管理列表</span>
@@ -88,6 +88,27 @@
 							</ul>
 						</li>
 						<!-- 地区管理////////end -->
+
+						<!-- 订单管理////////start -->
+							<li>
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-desktop"></i>
+								<span class="menu-text">订单管理</span>
+
+								<b class="arrow icon-angle-down"></b>
+							</a>
+
+							<ul class="submenu">
+								<li>
+									<a href="OrderList" target="_top">
+										<i class="icon-double-angle-right"></i>
+										订单列表
+									</a>
+								</li>
+							</ul>
+						</li>
+						<!-- 订单管理////////end -->
+
 					</ul><!-- /.nav-list -->
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
@@ -98,3 +119,27 @@
 						try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
 					</script>
 				</div>
+
+
+<script src="js/admin/jquery1.js"></script>
+<script>
+// alert(1);
+var pathname = window.location.pathname;
+// alert(pathname);
+pathname = pathname.substr(1);
+// alert(pathname);
+$("li a").each(function() {
+
+var href = $(this).attr("href");
+// alert(href);
+if(pathname == href){
+
+$(this).parent().parent().parent().addClass("active");
+
+$(this).parent().addClass("active");
+
+}
+
+});
+
+</script>
