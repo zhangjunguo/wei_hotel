@@ -55,7 +55,10 @@
 	</head>
 
 	<body>
-@include('admin/header')
+
+		@include('admin/header')
+
+
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}

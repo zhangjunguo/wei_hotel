@@ -109,3 +109,32 @@ route::post('activityupdate','Admin\ActivityController@ActivityUpdate');
 route::get('activityedit','Admin\ActivityController@ActivityEdit');
 //多条件搜索
 route::get('activitysearch','Admin\ActivityController@ActivitySearch');
+
+// 后台地区管理列表
+Route::get('AreaList',  'Admin\AreaListController@AreaList');
+// 后台地区管理展示添加页面
+Route::get('AreaAdd',  'Admin\AreaListController@AreaAdd');
+// 后台地区管理执行添加
+Route::post('DoAreaAdd',  'Admin\AreaListController@DoAreaAdd');
+// 后台地区管理验证唯一性
+Route::get('CheckName',  'Admin\AreaListController@CheckName');
+// 后台地区管理删除
+Route::get('AreaDel',  'Admin\AreaListController@AreaDel');
+Route::get('AreaDelall',  'Admin\AreaListController@AreaDelall');
+Route::get('Areadelete',  'Admin\AreaListController@Areadelete');
+
+// 后台订单管理
+Route::get('OrderList',  'Admin\OrderController@OrderList');
+// 后台订单管理 删除
+Route::get('OrderDel',  'Admin\OrderController@OrderDel');
+// 后台订单修改价格
+Route::get('OrderUpdate',  'Admin\OrderController@OrderUpdate');
+// 后台订单搜索
+Route::get('OrderSearch',  'Admin\OrderController@OrderSearch');
+// 订单详情
+Route::get('OrderXiang',  'Admin\OrderController@OrderXiang');
+// 鼠标划过详情
+Route::get('OrderXiangqing',  'Admin\OrderController@OrderXiangqing');
+
+
+

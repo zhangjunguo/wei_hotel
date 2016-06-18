@@ -1,5 +1,7 @@
-<ul class="nav nav-list">
+
+					<ul class="nav nav-list">
 						<li class="active">
+
 							<a href="admin" target="_top">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text" >管理列表</span>
@@ -88,6 +90,7 @@
 							</ul>
 						</li>
 						<!-- 地区管理////////end -->
+<<<<<<< HEAD
 					
 					
 					<!-- 文章管理 start -->
@@ -145,6 +148,26 @@
 						</li>
 						<!-- 活动管理 end -->
 
+						<!-- 订单管理////////start -->
+							<li>
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-desktop"></i>
+								<span class="menu-text">订单管理</span>
+
+								<b class="arrow icon-angle-down"></b>
+							</a>
+
+							<ul class="submenu">
+								<li>
+									<a href="OrderList" target="_top">
+										<i class="icon-double-angle-right"></i>
+										订单列表
+
+									</a>
+								</li>
+							</ul>
+						</li>
+						<!-- 订单管理////////end -->
 
 					</ul><!-- /.nav-list -->
 
@@ -157,7 +180,9 @@
 					</script>
 				</div>
 
+
 <script type="text/javascript" src="js/jq.js"></script>
+<script src="js/admin/jquery1.js"></script>
 <script>
 // alert(1);
 var pathname = window.location.pathname;

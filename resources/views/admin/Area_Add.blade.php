@@ -7,40 +7,40 @@
 
 		<!-- basic styles -->
 
-		<link href="http://www.zhang.com/assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/font-awesome.min.css" />
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 
 		<!--[if IE 7]>
-		  <link rel="stylesheet" href="http://www.zhang.com/assets/css/font-awesome-ie7.min.css" />
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
 
 		<!-- page specific plugin styles -->
 
 		<!-- fonts -->
 
-		<link rel="stylesheet" href="http://www.zhang.com/js/admin/fonts.googleapis.js" />
+		<link rel="stylesheet" href="js/admin/fonts.googleapis.js" />
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/ace.min.css" />
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/ace-rtl.min.css" />
-		<link rel="stylesheet" href="http://www.zhang.com/assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="assets/css/ace.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
 
 		<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="http://www.zhang.com/assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
 
 		<!-- inline styles related to this page -->
 
 		<!-- ace settings handler -->
 
-		<script src="http://www.zhang.com/assets/js/ace-extra.min.js"></script>
+		<script src="assets/js/ace-extra.min.js"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
 		<!--[if lt IE 9]>
-		<script src="http://www.zhang.com/assets/js/html5shiv.js"></script>
-		<script src="http://www.zhang.com/assets/js/respond.min.js"></script>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
 		<script>
         setInterval('fun()',1000);
@@ -55,9 +55,7 @@
 	</head>
 
 	<body>
-
-@include('admin/header')
-
+		@include('admin/header')
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -99,9 +97,9 @@
 							</li>
 
 							<li>
-								<a href="#">管理员管理</a>
+								<a href="#">地区管理</a>
 							</li>
-							<li class="active">管理信息列表</li>
+							<li class="active">地区管理添加</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -117,53 +115,36 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								管理员信息添加
+								地区管理添加
 							</h1>
 						</div><!-- /.page-header -->
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-                            <form class="form-horizontal" role="form" action="admininsert" method="post">
+                            <form class="form-horizontal" role="form" action="DoAreaAdd" method="post" onsubmit="return test()">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">管理员名称</label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">地区名称</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-1" name="username" placeholder="Username" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-1" name="region_name" placeholder="地区名称" class="col-xs-10 col-sm-5" onblur="checkName()" />
+											<span id="check_name"></span>
 										</div>
 									</div>
 
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">管理员密码</label>
-
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">请选择</label>
 										<div class="col-sm-9">
-											<input type="password" id="form-field-2" placeholder="Password" name="pwd" class="col-xs-10 col-sm-5" />
+											<select name="parent_id" id="parent_id">
+												<option value="0">顶级地区(省份)</option>
+												<?php foreach($data as $k => $v){$str=str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$v->level); ?>
+													<option value="{{$v->region_id}}">{{$str}}{{$v->region_name}}</option>
+												<?php } ?>
+											</select>
 										</div>
 									</div>
-
-									<div class="space-4"></div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-3">邮箱</label>
-
-										<div class="col-sm-9">
-											<input type="text" id="form-field-3" placeholder="email" name="email" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-									<div class="space-4"></div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">手机号</label>
-
-										<div class="col-sm-9">
-											<input type="text" id="form-field-4" placeholder="Password" name="phone" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-									<div class="space-4"></div>
-									<div class="form-group">
-								     <div class="col-sm-9">
-											<input type="hidden" class="form-control" name="_token" value="<?php echo csrf_token(); ?>" />
-									 </div>
-									</div>
+									<input type="hidden" class="form-control" name="_token" value="<?php echo csrf_token(); ?>" />
                                     <div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
 											<button class="btn btn-info" type="submit">
@@ -178,7 +159,6 @@
 											</button>
 										</div>
 									</div>
-
                </div>
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
@@ -248,31 +228,61 @@
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='http://www.zhang.com/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
 <script type="text/javascript">
- window.jQuery || document.write("<script src='http://www.zhang.com/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
 </script>
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='http://www.zhang.com/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-		<script src="http://www.zhang.com/assets/js/bootstrap.min.js"></script>
-		<script src="http://www.zhang.com/assets/js/typeahead-bs2.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/typeahead-bs2.min.js"></script>
 
 		<!-- page specific plugin scripts -->
 
 		<!-- ace scripts -->
 
-		<script src="http://www.zhang.com/assets/js/ace-elements.min.js"></script>
-		<script src="http://www.zhang.com/assets/js/ace.min.js"></script>
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
-	<div style="display:none"><script src='http://www.zhang.com/js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
+	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
+<script src="js/admin/jquery1.js"></script>
 </body>
 </html>
+<script>
+	var flag = false;
+	function checkName(){
+		var name = $("#form-field-1").val();
+		if(name == ''){
+			$("#check_name").html("<font color=red>地区名称不能为空</font>");
+			return false;
+		}else{
+			$.get('CheckName',{'name':name},function(i){
+				// alert(i)
+				if(i == 0){
+					$("#check_name").html("<font color=red>该地区已经存在</font>");
+					flag=false;
+				}else if(i == 1){
+					$("#check_name").html("<font color=red>OK</font>");
+					flag=true;
+				}
+			});
+			return flag;
+		}
+	}
+	function test(){
+		if(checkName()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+</script>
