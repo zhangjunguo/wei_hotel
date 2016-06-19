@@ -26,7 +26,7 @@
 
         
     <div class="container width80 pt20">
- <form name="aspnetForm" method="post" action="login.aspx?ReturnUrl=%2fMember%2fDefault.aspx" id="aspnetForm" class="form-horizontal">
+ <form name="aspnetForm" method="post" action="Logingo" id="aspnetForm" class="form-horizontal">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
@@ -51,19 +51,20 @@ function __doPostBack(eventTarget, eventArgument) {
 
 
 <div>
+<div>
 
 	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBQLZmqilDgLJ4fq4BwL90KKTCAKqkJ77CQKI+JrmBdPJophKZ3je4aKMtEkXL+P8oASc" />
 </div>
   <div class="control-group">
-      <input name="ctl00$ContentPlaceHolder1$txtUserName" type="text" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入手机号/身份证/会员卡号" />
+      <input name="user_name" type="text" id="" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入手机号" />
   </div>
   <div class="control-group">
-      <input name="ctl00$ContentPlaceHolder1$txtPassword" type="password" id="ctl00_ContentPlaceHolder1_txtPassword" class="width100 input" style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="默认密码为证件号后4位" />
+      <input name="user_pwd" type="password" id="" class="width100 input" style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入密码" />
   </div>
   <div class="control-group">
    
       <label class="checkbox fl">
-          <input name="ctl00$ContentPlaceHolder1$cbSaveCookie" type="checkbox" id="ctl00_ContentPlaceHolder1_cbSaveCookie" style="float: none;margin-left: 0px;" /> 记住账号
+          <input name="remember" value="7" type="checkbox" id="" style="float: none;margin-left: 0px;" /> 记住账号
       </label>
      <a class="fr" href="GetPassword.aspx">忘记密码？</a>
  
@@ -82,9 +83,10 @@ function __doPostBack(eventTarget, eventArgument) {
         <a class="servIco ico_qq" href="qlogin.aspx"></a>
         <a class="servIco ico_sina" href="default.htm"></a>
   </div>
-</form>
-  </div>
+  <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
+  </div>
+</form>
 
   <div class="footer">
   <div class="gezifooter">

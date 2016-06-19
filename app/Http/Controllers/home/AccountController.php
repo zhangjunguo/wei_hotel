@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\home;
 
 use App\Http\Controllers\Controller;
+use DB,Session;
+if(!empty($user_name)){
+
+};
 
 class AccountController extends Controller
 {	
@@ -10,8 +14,15 @@ class AccountController extends Controller
 	 * 展示我的格子
 	 */
     public function Index()
-    {
-    	return view('home/user_account');
+    {   
+        $user_name = Session::get('user_name');
+        
+        if(!empty($user_name)){
+            return view('home/user_account');
+        }else{
+            return redirect('home/Login');
+        }
+    	
     }
 
     /**

@@ -28,7 +28,7 @@
                 </div>
                 <div class="control-group">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input name="id_card" type="text" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入身份证号码" />
+                    <input name="id_card" type="text" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入密码" />
                 </div>
                 <div class="control-group">
                     <button onclick="__doPostBack('ctl00$ContentPlaceHolder1$btnOK','')" id="ctl00_ContentPlaceHolder1_btnOK" class="btn-large green button width100">立即注册</button></div>
