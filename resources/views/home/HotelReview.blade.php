@@ -33,11 +33,11 @@
 <div class="container">
 <ul class="unstyled hotel-bar">
 	<li class="first">
-    <a href="HotelInfo">房型</a>
+    <a href="HotelInfo?id={{Session::get('h_id')}}">房型</a>
 	</li>
-	<li><a href="HotelDesc">简介</a></li>
+	<li><a href="HotelDesc?id={{Session::get('h_id')}}">简介</a></li>
 	<li><a href="#">地图</a></li>
-	<li><a href="HotelReview"  class="active">评论</a></li>
+	<li><a href="HotelReview?id={{Session::get('h_id')}}"  class="active">评论</a></li>
 </ul>
 <script type="text/javascript">
     $('#titleString').text($(document)[0].title);

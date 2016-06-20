@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="calendar/calendar.default.css" />
 	
        <div class="container width90 pt20">
- <form class="form-horizontal" action="HotelList.aspx" method="GET" id="form1">
+ <form class="form-horizontal" action="{{URL('home/HotelList')}}" method="post" id="form1">
 <ul class="search-group unstyled">
 	  <style>
         .section {
@@ -116,9 +116,11 @@
 					</div>
                    <div class="citybox">
                       <span cityId="0">全部</span> 
-                      <span cityId="771">南宁</span> 
-                      <span cityId="773">桂林</span> 
- <span cityId="371">郑州</span> 
+                        @foreach($data as $k => $v)
+                           
+                                <span cityId="{{$v['id']}}">{{$v['name']}}</span>
+                            
+                        @endforeach
                    </div>
 				</li>
 			<li>
@@ -132,6 +134,8 @@
                      </div>
 				</li>
                   <li>
+                  <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+
 					<div class="coupon-nav coupon-nav-style">
 						<span class="search-icon time-icon"></span>
 						<span class="coupon-label">离店日期：</span>
@@ -211,7 +215,7 @@
 </script>
      <div class="control-group tc">
          <!-- <button class="btn-large green button width80" style="padding-left:0px;padding-right: 0px;" ID="btnOK" ><a href="HotelList">立即查找</a></button> -->
-    <a href="HotelList" class="btn-large green button width80" style="padding-left:0px;padding-right: 0px;" ID="btnOK">立即查找</a>
+    <input type="submit" class="btn-large green button width80" style="padding-left:0px;padding-right: 0px; width:345px;" ID="btnOK" value="立即查找" />
   </div>
   <div class="control-group tc">
          <a href="NearHotel.aspx" style="padding-left:0px;padding-right: 0px;"  class="btn-large green button width80">附近酒店</a>

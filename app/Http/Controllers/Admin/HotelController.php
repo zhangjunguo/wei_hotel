@@ -62,6 +62,7 @@ class HotelController extends Controller
 
 			//echo $area;die;
 			$data['h_city'] = $data['sheng'].','.$data['shi'].','.$data['xian'];
+			$data['city_id'] = $data['shi'];
 			unset($data['sheng']);
 			unset($data['shi']);
 			unset($data['xian']);
