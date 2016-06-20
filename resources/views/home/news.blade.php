@@ -15,7 +15,7 @@
             <span class="header-icon header-icon-home"></span>
             <span class="header-name">主页</span>
 </a>
-<div class="title" id="titleString">选出您最喜欢的格子微分店</div>
+<div class="title" id="titleString">{{$data->act_name}}</div>
 <a href="javascript:history.go(-1);" class="back">
             <span class="header-icon header-icon-return"></span>
             <span class="header-name">返回</span>
@@ -24,8 +24,8 @@
 
         
     <div class="container width90">
-        <p class="newstitle">选出您最喜欢的格子微分店</p>
-        <div style="font-size:11pt">哪家格子微分店是您最喜欢的呢？即日起至4月30日，在微信发送您最喜欢的分店与喜欢的理由即有机会获得免费房（共100间）</div>
+        <p class="newstitle">{{$data->act_name}}</p>
+        <div style="font-size:11pt">{{$data->act_desc}}</div>
     </div>
 
 
