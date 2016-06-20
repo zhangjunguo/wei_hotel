@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\home;
 
+use DB,Session,Request;
 use App\Http\Controllers\Controller;
 
 class AccountController extends Controller
@@ -11,7 +12,13 @@ class AccountController extends Controller
 	 */
     public function Index()
     {
-    	return view('home/user_account');
+        Session::put('user_id', 3);
+        $user_id = Session::get('user_id');
+
+        //查询用户资料
+        $data = DB::table('users')->where('u_id', $user_id)->first();
+
+    	return view('home/user_account')->with('data', $data);
     }
 
     /**
@@ -35,7 +42,11 @@ class AccountController extends Controller
      */
     public function MyInfo()
     {
-    	return view('home/my_list');
+        $u_id = Session::get('user_id');
+
+        $data = DB::table('users')->where('u_id', $u_id)->first();
+
+    	return view('home/my_list')->with('data', $data);
     }
 
     /**
