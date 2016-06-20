@@ -43,9 +43,13 @@ Route::get('home/Help',"home\HelpController@Index");
 
 // 前台登录
 Route::get('home/Login',"home\LoginController@Index");
+// 登录
+Route::post('home/Logingo',"home\LoginController@Login");
 
 // 前台注册
 Route::get('home/Register',"home\LoginController@Register");
+// 注册
+Route::post('home/enroll',"home\LoginController@Enroll");
 
 // 前台预订酒店
 Route::get('home/Hotel',"home\HotelController@Index");
