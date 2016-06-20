@@ -93,7 +93,7 @@
 
 
 						<!-- 订单管理////////start -->
-							<li>
+						<li>
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-desktop"></i>
 								<span class="menu-text">订单管理</span>
@@ -139,7 +139,7 @@
 								</li>
 							</ul>
 						</li>
-<<<<<<< HEAD
+
 						
 					<!-- 酒店管理 start -->
 						<li>
@@ -193,27 +193,6 @@
 								</li>
 							</ul>
 						</li>
-
-							<li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-desktop"></i>
-								<span class="menu-text">订单管理</span>
-
-								<b class="arrow icon-angle-down"></b>
-							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="OrderList" target="_top">
-										<i class="icon-double-angle-right"></i>
-										订单列表
-
-									</a>
-								</li>
-							</ul>
-						</li>
-						<!-- 订单管理////////end -->
-
 
 					</ul><!-- /.nav-list -->
 
