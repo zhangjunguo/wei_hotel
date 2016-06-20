@@ -4,7 +4,7 @@ namespace App\Http\Controllers\home;
 
 use DB,Session,Request;
 use App\Http\Controllers\Controller;
-use DB,Session;
+
 
 class AccountController extends Controller
 {	
