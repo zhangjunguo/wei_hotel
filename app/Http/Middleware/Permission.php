@@ -27,10 +27,10 @@ class Permission {
             ->get();
         // $data= $this->dg($data,$parent_id=0);
         
-        $data= $this->selall_level($data,$pid=0,$level=0);
-        //print_r($data);die;
-        if(!empty($data)){
-           view()->share('data',$data);
+        $left= $this->selall_level($data,$pid=0,$level=0);
+        // print_r($left);die;
+        if(!empty($left)){
+           view()->share('left',$left);
            return $next($request);
          }else{
             echo "没有权限，请联系管理员";exit;

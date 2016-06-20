@@ -55,9 +55,7 @@
 	</head>
 
 	<body>
-
 		@include('admin/header')
-
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -102,11 +100,7 @@
 
 							<span class="btn btn-danger"></span>
 						</div>
-
 					</div><!-- #sidebar-shortcuts -->
-
-					<!-- </div> --><!-- #sidebar-shortcuts -->
-
 @include('admin/left')
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">

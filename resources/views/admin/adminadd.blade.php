@@ -55,9 +55,7 @@
 	</head>
 
 	<body>
-
 		@include('admin/header')
-
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -240,12 +238,12 @@
 
 		<!--[if !IE]> -->
 
-		<script src="assets/js/jquery-2.0.3.min.js"></script>
+		<script src="js/admin/jquery1.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="assets/js/jquery-2.0.3.min.js"></script>
+<script src="js/admin/jquery1.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->

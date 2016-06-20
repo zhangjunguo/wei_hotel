@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\home;
 
 use App\Http\Controllers\Controller;
+
 use Request,DB,Session;
+
 
 class LoginController extends Controller
 {	
@@ -47,6 +49,7 @@ class LoginController extends Controller
     	return view('home/register');
     }
 
+
     /**
      * 注册
      */
@@ -61,4 +64,5 @@ class LoginController extends Controller
             echo "<script>alert('注册失败');location.href='Register'</script>";
         }
     }
+
 }
