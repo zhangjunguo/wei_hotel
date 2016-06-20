@@ -4,9 +4,6 @@ namespace App\Http\Controllers\home;
 
 use App\Http\Controllers\Controller;
 use DB,Session;
-if(!empty($user_name)){
-
-};
 
 class AccountController extends Controller
 {	
@@ -30,15 +27,23 @@ class AccountController extends Controller
      */
     public function MyGift()
     {
-    	return view('home/my_gift');
+    	$user_name = Session::get('user_name');
+
+        return view('home/my_gift');
     }
 
     /**
      * 展示我的订单
      */
     public function MyOrder()
-    {
-    	return view('home/my_order');
+    {   
+        $user_name = Session::get('user_name');
+        if(!empty($user_name)){
+            return view('home/my_order');
+        }else{
+            return redirect('home/Login');
+        }
+    	
     }
 
      /**
