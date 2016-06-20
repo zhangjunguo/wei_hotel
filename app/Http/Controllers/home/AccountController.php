@@ -15,12 +15,12 @@ class AccountController extends Controller
 
     {
 
-        $user_name = Session::get('user_name');
+        $user_name = Session::get('user_id');
         
         if(!empty($user_name)){
 
             //查询用户资料
-            $data = DB::table('users')->where('u_id', $user_id)->first();
+            $data = DB::table('users')->where('u_id', $user_name)->first();
             return view('home/user_account')->with('data', $data);
         }else{
             return redirect('home/Login');
