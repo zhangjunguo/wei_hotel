@@ -75,6 +75,12 @@ Route::get('login',  'Admin\LoginController@login');
 Route::post('PostLogin', 'Admin\LoginController@PostLogin');
 // 实现登出
 Route::any('Logout', 'Admin\LoginController@Logout');
+//后台忘记密码
+route::post('forgotPass','Admin\LoginController@forgotPass');
+//重置密码页面
+route::get('resetPass','Admin\LoginController@resetPass');
+//密码重置
+route::post('passReset','Admin\LoginController@passReset');
 // 权限验证
 Route::group(['middleware' => 'permission'], function(){
   	//后台主页
@@ -204,6 +210,24 @@ Route::group(['middleware' => 'permission'], function(){
     //系统管理
 	Route::get('updatePass',  'Admin\SystemController@updatePass');//密码修改页面
 	Route::post('passUpdate',  'Admin\SystemController@passUpdate');//密码修改
+    // 评价管理
+    route::get('commentList','Admin\CommentController@commentList');
+    // 礼物管理
+	//礼物列表
+	route::get('giftList','Admin\GiftController@giftList');
+	//礼物添加页面
+	route::get('giftAdd','Admin\GiftController@giftAdd');
+	//礼物添加
+	route::post('addGift','Admin\GiftController@addGift');
+	//礼物删除
+	route::get('giftDel','Admin\GiftController@giftDel');
+	//礼物编辑页面
+	route::get('giftEdit','Admin\GiftController@giftEdit');
+	//礼物编辑
+	route::post('editGift','Admin\GiftController@editGift');
+	//礼物名字验证唯一
+	route::get('uniqueGift','Admin\GiftController@uniqueGift');
+
 
 });
 
