@@ -1,10 +1,8 @@
 <?php 
-
 namespace App\Http\Controllers\Admin;
-
+header('content-type:text/html;charset=utf8');
 use DB,Request,Session;
 use App\Http\Controllers\Controller;
-
 class LoginController extends Controller {
 
      // 登录页面
@@ -18,13 +16,8 @@ class LoginController extends Controller {
      {    
               $ip=Request::getClientIp();
           $username=Request::input('username');
-
           $pwd=md5(Request::input('pwd'));
           $user= DB::table('admin')->where('adm_name',$username)->where('adm_pass',$pwd)->first();
-
-          // $pwd=Request::input('pwd');
-          // $user= DB::table('admin')->where('adm_name',$username)->where('adm_pass',md5($pwd))->first();;
-
           // print_r($user);die;
           if ($user){
             Session::put('username',$username);

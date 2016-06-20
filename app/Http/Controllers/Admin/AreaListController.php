@@ -245,13 +245,4 @@ class AreaListController extends Controller
 		}
 		return $child;
 	}
-		
-		
-			
-		
-		
-
-
-		
-
 }
