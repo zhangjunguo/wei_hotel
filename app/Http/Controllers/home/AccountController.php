@@ -5,6 +5,7 @@ namespace App\Http\Controllers\home;
 use DB,Session,Request;
 use App\Http\Controllers\Controller;
 
+
 class AccountController extends Controller
 {	
 	/**
