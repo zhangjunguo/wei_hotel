@@ -22,12 +22,11 @@
                 <span class="header-name">返回</span></a>
         </div>
         <div class="container width80 pt20">
-            <form name="aspnetForm" method="post" action="enroll" id="aspnetForm" class="form-horizontal">
+            <form name="aspnetForm" method="post" action="login.aspx?ReturnUrl=%2fMember%2fDefault.aspx" id="aspnetForm" class="form-horizontal">
                 <div class="control-group">
                     <input name="mobile_phone" type="text" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入手机号" />
                 </div>
                 <div class="control-group">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input name="id_card" type="text" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入身份证号码" />
                 </div>
                 <div class="control-group">

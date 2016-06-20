@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\home;
 
 use App\Http\Controllers\Controller;
-use Request,DB;
+
 class LoginController extends Controller
 {	
 	/**
@@ -20,15 +20,5 @@ class LoginController extends Controller
     public function Register()
     {
     	return view('home/register');
-    }
-
-    /**
-     * 注册
-     */
-    public function Enroll()
-    {
-        $mobile_phone = Request::input('mobile_phone');
-        $id_card = Request::input('id_card');
-        echo $mobile_phone;
     }
 }
