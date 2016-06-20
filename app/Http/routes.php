@@ -64,7 +64,8 @@ Route::get('home/HotelDesc',"home\HotelController@HotelDesc");
 // 前台修改注入时间
 Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
 
-
+//前台礼物兑换
+route::post('exchangeGift','home\GiftController@exchangeGift');
 
 
 
@@ -228,6 +229,9 @@ Route::group(['middleware' => 'permission'], function(){
 	route::post('editGift','Admin\GiftController@editGift');
 	//礼物名字验证唯一
 	route::get('uniqueGift','Admin\GiftController@uniqueGift');
+
+
+
 
 
 });
