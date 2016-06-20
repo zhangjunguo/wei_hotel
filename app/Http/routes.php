@@ -50,14 +50,15 @@ Route::get('home/Register',"home\LoginController@Register");
 // 前台预订酒店
 Route::get('home/Hotel',"home\HotelController@Index");
 // 前台酒店列表
-Route::get('home/HotelList',"home\HotelController@HotelList");
+Route::post('home/HotelList',"home\HotelController@HotelList");
 // 前台酒店详情
-Route::get('home/HotelInfo',"home\HotelController@HotelInfo");
+Route::any('home/HotelInfo',"home\HotelController@HotelInfo");
 // 前台酒店评论
 Route::get('home/HotelReview',"home\HotelController@HotelReview");
 // 前台酒店简介
 Route::get('home/HotelDesc',"home\HotelController@HotelDesc");
-
+// 前台修改注入时间
+Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
 
 
 
