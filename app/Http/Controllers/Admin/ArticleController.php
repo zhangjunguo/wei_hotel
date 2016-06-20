@@ -47,9 +47,10 @@ class ArticleController extends Controller
 	 * 文章的列表展示
 	 */
 	public function ArticleList()
-	{
+	{   
 		$data = DB::table('article')->join('admin', 'article.adm_id', '=', 'admin.adm_id')->paginate(5);
 		$admin = DB::table('admin')->get();
+		// print_r($data);die;
 		return view('admin/articlelist')->with('data',$data)->with('admin',$admin);
 	}
 

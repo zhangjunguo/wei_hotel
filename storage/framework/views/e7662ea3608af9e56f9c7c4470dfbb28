@@ -1,0 +1,41 @@
+					<ul class="nav nav-list">
+
+						<li class="active">
+							<a href="admin" target="_top">
+								<i class="icon-dashboard"></i>
+								<span class="menu-text">管理列表</span>
+							</a>
+						</li>  
+					
+                        <li>	
+                        <?php foreach($left as $v): ?>
+                           <a href="#" class="dropdown-toggle">
+								<i class="icon-desktop"></i>
+								<span class="menu-text"><?php echo e($v->p_name); ?></span>
+
+								<b class="arrow icon-angle-down"></b>
+							</a>
+                            <ul class="submenu"  >
+                              	<?php foreach($v->data as $data_val): ?>
+                               <li>
+									<a href="<?php echo e($data_val->p_routes); ?>" target="_top">
+										<i class="icon-double-angle-right"></i>
+										<?php echo e($data_val->p_name); ?>
+
+									</a>
+								</li>
+								<?php endforeach; ?>
+							</ul>
+						<?php endforeach; ?>
+						</li>
+                       
+					</ul><!-- /.nav-list -->
+
+					<div class="sidebar-collapse" id="sidebar-collapse">
+						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+					</div>
+
+					<script type="text/javascript">
+						try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+					</script>
+				</div>

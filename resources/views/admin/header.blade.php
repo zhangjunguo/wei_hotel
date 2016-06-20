@@ -9,7 +9,7 @@
 					<small>
 						<i class="icon-leaf"></i>
 						后台管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现在时刻
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现在时刻:
 						<time><font id="time" color="orange"></font></time>
 		             </small>
 					</a><!-- /.brand -->
@@ -121,8 +121,14 @@
 
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
-								<span class="user-info">
+							  <?php if (Session::get('rname')=='管理员'): ?>
+							  	 <img class="nav-user-photo" src="assets/avatars/avatar4.png" alt="Administrator's Photo" />
+							  <?php elseif(Session::get('rname')=='店主'): ?> 
+							  	 <img class="nav-user-photo" src="assets/avatars/avatar3.png" alt="Shopkeeper's Photo" />
+							  <?php else: ?>
+							  	 <img class="nav-user-photo" src="assets/avatars/avatar2.png" alt="SuperAdministrator's Photo" />
+							  <?php endif ?>
+                               <span class="user-info">
 									<small>欢迎,</small>
 								    <font color="red">{{Session::get('username')}}</font>
 								</span>
@@ -132,26 +138,19 @@
 
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
-									<a href="#">
+									<a href="/" target="_top">
 										<i class="icon-cog"></i>
-									    权限
+									    主页
 									</a>
 								</li>
 
 								<li>
 									<a href="#">
 										<i class="icon-user"></i>
-										信息
+										个人信息
 									</a>
 								</li>
-
-								<li class="divider">
-									<a href="">
-										主页
-									</a>
-								</li>
-
-								<li>
+                                <li>
 									<a href="Logout" target="_top" >
 										<i class="icon-off"></i>
 										退出

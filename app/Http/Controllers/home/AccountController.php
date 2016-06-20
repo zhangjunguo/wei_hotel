@@ -4,6 +4,7 @@ namespace App\Http\Controllers\home;
 
 use DB,Session,Request;
 use App\Http\Controllers\Controller;
+use DB,Session;
 
 class AccountController extends Controller
 {	
@@ -11,14 +12,20 @@ class AccountController extends Controller
 	 * 展示我的格子
 	 */
     public function Index()
+
     {
-        Session::put('user_id', 3);
-        $user_id = Session::get('user_id');
 
-        //查询用户资料
-        $data = DB::table('users')->where('u_id', $user_id)->first();
+        $user_name = Session::get('user_name');
+        
+        if(!empty($user_name)){
 
-    	return view('home/user_account')->with('data', $data);
+            //查询用户资料
+            $data = DB::table('users')->where('u_id', $user_id)->first();
+            return view('home/user_account')->with('data', $data);
+        }else{
+            return redirect('home/Login');
+        }
+
     }
 
     /**
@@ -26,15 +33,23 @@ class AccountController extends Controller
      */
     public function MyGift()
     {
-    	return view('home/my_gift');
+    	$user_name = Session::get('user_name');
+
+        return view('home/my_gift');
     }
 
     /**
      * 展示我的订单
      */
     public function MyOrder()
-    {
-    	return view('home/my_order');
+    {   
+        $user_name = Session::get('user_name');
+        if(!empty($user_name)){
+            return view('home/my_order');
+        }else{
+            return redirect('home/Login');
+        }
+    	
     }
 
      /**

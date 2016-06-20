@@ -1,1 +1,1 @@
-var json={"province":{"86":"\u5c71\u897f\u7701","92":"\u5929\u6d25"},"city":{"86":{"87":"\u5ffb\u5dde\u5e02"}},"area":{"87":{"88":"\u548c\u5e73\u533a"}}}
+var json=[]

@@ -37,40 +37,15 @@
    <div id="ctl00_ContentPlaceHolder1_Panel1">
 	
         <div class="container width90">
-        <h3><span id="ctl00_ContentPlaceHolder1_txtGiftName">萨摩充电宝</span></h3>
-        <p>所需积分：<span id="ctl00_ContentPlaceHolder1_txtGiftCost">9600</span></p>
-        <p><img style="display: block;" src="http://www.gridinn.com/photos/gift/13.jpg" height="300" width="300"></p>
+        <h3><span id="ctl00_ContentPlaceHolder1_txtGiftName">{{$onegift_data->g_name}}</span></h3>
+        <p>所需积分：<span id="ctl00_ContentPlaceHolder1_txtGiftCost">{{$onegift_data->g_score}}</span></p>
+        <p><img style="display: block;" src="../storage/uploads/{{$onegift_data->g_img}}" height="300" width="300"></p>
         <p><p style="text-indent:0px;color:#999999;">
-	<em><strong>产品参数：</strong></em>
+	<em><strong>产品描述：</strong></em>
 </p>
-<ul style="text-indent:0px;color:#404040;">
-	<li style="color:#666666;vertical-align:top;">
-		品牌:&nbsp;emie/亿觅。
-	</li>
-	<li style="color:#666666;vertical-align:top;">
-		型号:&nbsp;emie萨摩移动电源
-	</li>
-	<li style="color:#666666;vertical-align:top;">
-		颜色分类:&nbsp;黄色萨摩&nbsp;白色萨摩+香港潮集充电头&nbsp;黄色萨摩+香港潮集充电头&nbsp;白色萨摩
-	</li>
-	<li style="color:#666666;vertical-align:top;">
-		电池容量:&nbsp;5001MAh(含)-6000MAh(含)
-	</li>
-	<li style="color:#666666;vertical-align:top;">
-		是否支持太阳能:&nbsp;否
-	</li>
-	<li style="color:#666666;vertical-align:top;">
-		适用类型:&nbsp;通用
-	</li>
-	<li style="color:#666666;vertical-align:top;">
-		LED灯照明:&nbsp;否
-	</li>
-	<li style="color:#666666;vertical-align:top;">
-		电池类型:&nbsp;锂电池
-	</li>
-</ul>
+
 <p>&nbsp;
-	
+	{{$onegift_data->g_text}}
 </p></p>
 
             

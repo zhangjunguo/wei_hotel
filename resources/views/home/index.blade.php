@@ -24,7 +24,7 @@
      <ul class="unstyled defaultlist pt20">
          <li class="f">
              <a href="home/Hotel">
-             <h3>奥特曼</h3>
+             <h3>皮卡丘</h3>
              <figure class="jp_icon"></figure>
              </a>
          </li>
@@ -37,14 +37,14 @@
      </ul>
      <ul class="unstyled defaultlist">
          <li class="a">
-             <a href="home/Login">
+             <a href="home/MyOrder">
                   <h3>我的订单</h3>
               <figure class="hb_icon"></figure>
              </a>
              
          </li>
          <li class="p">
-            <a href="home/Login">
+            <a href="home/MyAccount">
             <h3> 我的格子</h3>
             <figure class="mp_icon"></figure>
             </a>
