@@ -24,13 +24,13 @@
         <div class="container width80 pt20">
             <form name="aspnetForm" method="post" action="login.aspx?ReturnUrl=%2fMember%2fDefault.aspx" id="aspnetForm" class="form-horizontal">
                 <div class="control-group">
-                    <input name="user_name" type="text" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入昵称" value="楓殤月" />
+                    <input name="user_name" type="text" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入昵称" value="" />
                 </div>
                 <div class="control-group">
-                    <input name="mobile_phone" type="text" id="ctl00_ContentPlaceHolder1_txtPassword" class="width100 input" style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入手机号码" value="18601934304" />
+                    <input name="mobile_phone" type="text" id="ctl00_ContentPlaceHolder1_txtPassword" class="width100 input" style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入手机号码" value="" />
                 </div>
                 <div class="control-group">
-                    <input name="mobile_phone" type="text" id="ctl00_ContentPlaceHolder1_txtPassword" class="width100 input" style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入身份证号" value="111023199111264030" />
+                    <input name="mobile_phone" type="text" id="ctl00_ContentPlaceHolder1_txtPassword" class="width100 input" style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入身份证号" value="" />
                 </div>
                 <div class="control-group">
                     <input type="button" class="submit-button" value="提交" style="width: 100%; height: 45px; background: #6ac134; color: #fff; border: 1px solid #6ac134" />
@@ -42,7 +42,7 @@
         </div>
         <div class="footer">
             <div class="gezifooter">
-                <p style="color:#bbb;">格子微酒店连锁 &copy; 版权所有 2012-2014</p></div>
+                <p style="color:#bbb;">1408phpF4组 &copy; 版权所有 2012-2016</p></div>
         </div>
     </body>
 

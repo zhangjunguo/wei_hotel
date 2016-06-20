@@ -57,6 +57,7 @@ class LoginController extends Controller
     {
         $data['user_phone'] = Request::input('mobile_phone');
         $data['user_pass'] = md5(Request::input('id_card'));
+        // dd($data);die;
         $res = DB::table('users')->insert($data);
         if($res){
             return redirect('/');
