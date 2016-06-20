@@ -44,7 +44,7 @@
              
          </li>
          <li class="p">
-            <a href="home/Login">
+            <a href="home/MyAccount">
             <h3> 我的格子</h3>
             <figure class="mp_icon"></figure>
             </a>
