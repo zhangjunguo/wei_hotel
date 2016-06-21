@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\home;
 
+header('content-type:text/html;charset=utf8');
+
 use DB,Session,Request;
 use App\Http\Controllers\Controller;
 
@@ -34,8 +36,11 @@ class AccountController extends Controller
     public function MyGift()
     {
     	$user_name = Session::get('user_name');
+    	$u_id = Session::get('user_id');
 
-        return view('home/my_gift');
+    	$data = DB::table('gift_order')->join('gift', 'gift.g_id', '=', 'gift_order.g_id')->where('u_id', $u_id)->paginate(3);
+
+        return view('home/my_gift')->with('data', $data);
     }
 
     /**
@@ -69,6 +74,11 @@ class AccountController extends Controller
      */
     public function MyCollection()
     {
-        return view('home/my_Collection');
+        $user_id = Session::get('user_id');
+        $results = DB::table('collect')
+        ->join('hotel','collect.h_id', '=', 'hotel.h_id')
+        ->where('u_id',$user_id)
+        ->get();
+        return view('home/my_Collection')->with('results',$results);
     }
 }
