@@ -23,7 +23,7 @@
                 <span class="header-name">返回</span></a>
         </div>
         <div class="container width80 pt20">
-            <div class="order-nav" style="text-align:center;">
+            <div class="order-nav" style="text-align:left;">
                 <!-- <a class="selected" href="">全部</a> -->
                 <span style="color:#999999">已收藏</span>
                 <!-- <a class="last-a" href="">已完成</a> -->
@@ -31,18 +31,12 @@
 
             <div class="order-list">
                 <ul>
+                   @foreach($results as $v)
                     <li>
-                        <span class="order-hotel-name">玩具熊</span>
-                        <span class="order-time">2016-05-20 12:23:34</span>
+                        <span class="order-hotel-name">{{$v->h_name}}</span>
+                        <span class="order-time">{{$v->col_time}}</span>
                     </li>
-                    <li>
-                        <span class="order-hotel-name">玩具熊</span>
-                        <span class="order-time">2016-05-20 12:23:34</span>
-                    </li>
-                    <li>
-                        <span class="order-hotel-name">玩具熊</span>
-                        <span class="order-time">2016-05-20 12:23:34</span>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>

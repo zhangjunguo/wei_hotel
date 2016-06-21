@@ -121,7 +121,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-                            <form class="form-horizontal" role="form" action="addGift" method="post" enctype="multipart/form-data" id="submitInfo" >
+                            <form class="form-horizontal" role="form" action="addGift" method="post" enctype="multipart/form-data" onsubmit="return check()">
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">礼物名称</label>
 
@@ -137,7 +137,8 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">礼物积分</label>
 
 										<div class="col-sm-9">
-											<input type="text"   name="g_score" class="col-xs-10 col-sm-5" />
+											<input type="text"   name="g_score" class="col-xs-10 col-sm-5" onblur="check_score()" id="g_score"/>
+                                            <span id="show_score"></span>
 										</div>
 									</div>
 
@@ -147,7 +148,8 @@
                                         <label class="col-sm-3 control-label no-padding-right" for="form-field-2">礼物个数</label>
 
                                         <div class="col-sm-9">
-                                            <input type="text"   name="g_num" class="col-xs-10 col-sm-5" />
+                                            <input type="text"   name="g_num" class="col-xs-10 col-sm-5" onblur="check_num()" id="g_num" />
+                                            <span id="show_num"></span>
                                         </div>
                                     </div>
 
@@ -179,7 +181,7 @@
 												<i class="icon-ok bigger-110"></i>
 												提交
 											</button>--}}
-                                            <input type="button" value="提交"/>
+                                            <td align="center"><input type="submit"  class="btn btn-success btn-large"  value="提交"/></td>
 
 											&nbsp; &nbsp; &nbsp;
 											<button class="btn" type="reset">
@@ -264,6 +266,8 @@
 
 		<!-- <![endif]-->
 
+
+
 		<!--[if IE]>
 <script type="text/javascript">
  window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
@@ -290,6 +294,8 @@
 
 <script src="js/jq.js"></script>
 <script>
+    var flag = false;
+    //验证用户名唯一性
     function uniqueGift(obj){
        /* var g_name = $(obj).val();
         $.ajax({
@@ -309,18 +315,61 @@
         });*/
 
         var g_name = $(obj).val();
+        if(g_name==''){
+            flag = false;
+            return false;
+        }
         var ajax = new XMLHttpRequest();
-        ajax.open('get', 'uniqueGift?g_name=' + g_name,"true");
+        ajax.open('get', 'uniqueGift?g_name=' + g_name,false);
         ajax.send();
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 if (ajax.responseText == 1) {
                     $('#showInfo').html('礼物名已存在');
+                    flag = false;
                     /*document.getElementById('submitInfo').submit();*/
                 }else if(ajax.responseText == 0){
                    $('#submitInfo').submit();
+                    flag = true;
                 }
             }
+        }
+        return flag;
+    }
+
+    //验证个数
+    function check_num(){
+        var num = $("#show_num").val();
+        if(num==''){
+            return false;
+        }
+        var reg = /^[1-9]+$/;
+        if(reg.test(num)){
+            $('#show_num').html("用数字,打死你");
+            return false;
+        }
+    }
+    //验证积分
+    function check_score(){
+        var score = $("#show_score").val();
+        if(score==''){
+            return false;
+        }
+        var reg = /^[1-9]+$/;
+        if(reg.test(score)){
+            $('#show_score').html("用数字,打死你");
+            return false;
+        }
+    }
+
+  function check(){
+        if(flag && check_num() && check_score()){
+            return true;
+        }else{
+            if(flag==false){
+                alert('礼物名没成功验证');
+            }
+            return false;
         }
     }
 </script>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" id="asd">
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<title>首页后台管理系统</title>
@@ -55,7 +55,7 @@
 	</head>
 
 	<body>
-@include('admin/header')
+		@include('admin/header')
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -82,7 +82,7 @@
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
 
-			@include('admin/left')
+@include('admin/left')
 
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
@@ -99,7 +99,7 @@
 							<li>
 								<a href="#">酒店管理</a>
 							</li>
-							<li class="active">管理信息列表</li>
+							<li class="active">图片添加</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -115,82 +115,41 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								酒店信息列表
+								图片添加
 							</h1>
-							<input type="text" id="keyword" placeholder="酒店名称" class="nav-search-input"  autocomplete="off" />
-							酒店类型：<select name="h_type" id="h_type"> 
-								<option value="">请选择...</option>
-								<option value="商务型酒店">商务型酒店</option>
-								<option value="度假型酒店">度假型酒店</option>
-								<option value="长住型酒店">长住型酒店</option>
-								<option value="会议型酒店">会议型酒店</option>
-								<option value="观光型酒店">观光型酒店</option>
-								<option value="经济型酒店">经济型酒店</option>
-								<option value="连锁酒店">连锁酒店</option>
-								<option value="公寓式酒店">公寓式酒店</option>
-							</select>
-							<button class="btn btn-xs btn-danger" id="button">搜索</button>
+							<button class="btn btn-xs btn-danger" id="button" style="float:right;">返回列表</button>
+							
 						</div><!-- /.page-header -->
 						<div class="row">
-									<div class="col-xs-12">
-										<div class="table-responsive" id="div">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+                            <form class="form-horizontal" role="form" action="HotelImg" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="h_id" id="hid" value="{{$h_id}}">
+                            <input type="hidden" class="form-control" name="_token" value="<?php echo csrf_token(); ?>" />
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">酒店图</label>
 
-											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
-												<thead>
-													<tr>
-														<th class="center">编号</th>
-														<th>酒店名称</th>
-														<th>酒店备注</th>
-														<th>酒店图</th>
-														<th>酒店类型</th>
-														<th>酒店地址</th>
-														<th>酒店描述</th>
-														<th>酒店电话</th>
-														<th>操作</th>
-													</tr>
-												</thead>
-                                            @foreach($data['data'] as $k => $v)
-												<tbody>
-													<tr>
-														<td class="center" id="h_id">{{$v->h_id}}</td>
-                                                        <td class="input" id="{{$v->h_id}}">{{$v->h_name}}</td>
-														<td>{{$v->h_beizhu}}</td>
-														<td><img src="uploads/{{$v->h_img}}" alt="" width="150px" height="100px"></td>
-														<td>{{$v->h_type}}</td>
-														<td>
-														@foreach($data['area'][$k] as $vv)  
-															{{$vv->region_name}}
-														@endforeach	
-														{{$v->h_address}}
-														</td>
-														<td>{{$v->h_desc}}</td>
-														<td>{{$v->h_tel}}</td>
-														<td>
-																<button class="btn btn-xs btn-info" title="查看户型" onclick="roomlist({{$v->h_id}})">
-																	<i class="icon-pencil bigger-120"></i>
-																</button>
-																
-																<button class="btn btn-xs btn-info" title="添加图片" onclick="imglist({{$v->h_id}})">
-																	<i class="icon-camera bigger-120"></i>
-																</button>
+										<div class="col-sm-9">
+											<input type="file" id="form-field-4" placeholder="" name="img[]" multiple class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
 
-															   <button class="btn btn-xs btn-info" title="编辑" onclick="edit({{$v->h_id}})">
-																	<i class="icon-edit bigger-120"></i>
-																</button>
+                                    <div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="icon-ok bigger-110"></i>
+												提交
+											</button>
 
-																<button class="btn btn-xs btn-danger" title="删除" onclick="del({{$v->h_id}},<?php echo $data['data']->currentPage();?>)">
-																	<i class="icon-trash bigger-120"></i>
-																</button>
-                                                        </td>
-                                                        </tr>
-													</tbody>
-													 @endforeach
-											       </table>
-											       <?php echo $data['data']->render(); ?>
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="icon-undo bigger-110"></i>
+												重置
+											</button>
+										</div>
+									</div>
 
-										        </div><!-- /.table-responsive -->
-									   </div><!-- /span -->
-								 </div><!-- /row -->
                </div>
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
@@ -285,65 +244,11 @@
 		<script src="assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
-	
+	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
-
+</html>
 <script>
-	function roomlist(h_id) {
-		window.location.href = "RoomShow?h_id="+h_id;
-	}
-
-	function imglist(h_id) {
-		window.location.href = "HotelImg?h_id="+h_id;
-	}
-
-	function edit(h_id) {
-		//alert(h_id);
-		window.location.href="HotelEdit?h_id="+h_id;
-	}
-
-	function del(h_id,page) {
-		if (page == '') {
-			page = 1;
-		}
-		if(window.confirm('您确定要删除吗')){
-			window.location.href="HotelDel?h_id="+h_id+'&&page='+page;
-		}		
-	}
-
 	$('#button').click(function(){
-		var keyword = $('#keyword').val();
-		var h_type = $('#h_type').val();
-		//alert(keyword);
-		//alert(h_type);
-		$.get('HotelShow', {'keyword':keyword, 'h_type':h_type}, function(msg){
-			console.log(msg);
-			$('#asd').html(msg);
-		})
-	})
-
-	$('.input').click(function(){
-		var zhi = $(this).html();
-		var id = $(this).attr('id');
-		//alert(id);
-		var input = $("<input type='text' />");
-		//alert(input);
-		$(this).html(input);
-		$(input).val(zhi);
-		$(input).click(function(){
-			return false;
-		})
-		$(input).blur(function(){
-			var that = $(this);
-			var new_zhi = that.val();
-			//alert(new_zhi);
-			$.get('HotelQup',{'h_name':new_zhi,'h_id':id},function(msg){
-				//if (msg=='1') {
-					//window.location.reload();
-					that.parent().text(new_zhi);
-				//}
-			})
-		})
+		window.location.href='HotelShow';
 	})
 </script>
-</html>

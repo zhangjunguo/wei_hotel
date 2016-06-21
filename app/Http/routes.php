@@ -63,6 +63,7 @@ Route::get('home/HotelReview',"home\HotelController@HotelReview");
 Route::get('home/HotelDesc',"home\HotelController@HotelDesc");
 // 前台修改注入时间
 Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
+
 // 前台酒店预定
 Route::get('home/HotelYU',"home\HotelController@HotelYU");
 // 前台酒店收藏
@@ -77,6 +78,13 @@ Route::get('home/HotelGps',"home\HotelController@HotelGps");
 Route::get('home/HotelCollect',"home\HotelController@HotelCollect");
 Route::get('home/HotelCollectDel',"home\HotelController@HotelCollectDel");
 
+
+
+
+//前台礼物兑换
+route::post('exchangeGift','home\GiftController@exchangeGift');
+//前台礼物下单
+route::post('exchangeOrder','home\GiftController@exchangeOrder');
 
 
 
@@ -173,6 +181,9 @@ Route::group(['middleware' => 'permission'], function(){
 	Route::get('HotelSearch', 'Admin\HotelController@search');
 	Route::get('HotelQup', 'Admin\HotelController@qup');
 
+	//酒店图片管理
+	Route::any('HotelImg', 'Admin\HotelController@imgadd');
+
 	//后台户型管理
 	Route::get('RoomShow', 'Admin\HotelController@roomlist');
 	Route::any('RoomAdd', 'Admin\HotelController@roomadd');
@@ -240,6 +251,9 @@ Route::group(['middleware' => 'permission'], function(){
 	route::post('editGift','Admin\GiftController@editGift');
 	//礼物名字验证唯一
 	route::get('uniqueGift','Admin\GiftController@uniqueGift');
+
+
+
 
 
 });
