@@ -24,13 +24,16 @@
         </a>
  </div>
 
-        
-   <form  method="post" action="../exchangeGift" >
+<center>
+   <form  method="post" action="../exchangeOrder" onsubmit="return check()" >
        <h1>{{$order_data['g_name']}}</h1>
+       <input type="hidden" name="g_name" value="{{$order_data['g_name']}}"/>
        <table>
            <tr>
                <th>所需积分</th>
-               <td width="100px" style="text-align: center">{{$order_data['go_score']}}积分</td>
+               <td width="100px" style="text-align: center; color: #339900;font-size: xx-large">{{$order_data['go_score']}}积分</td>
+               <input type="hidden" name="go_score" value="{{$order_data['go_score']}}"/>
+               <input type="hidden" name="g_id" value="{{$order_data['g_id']}}"/>
            </tr>
            <tr>
                <th>收货地址</th>
@@ -48,14 +51,70 @@
            </tr>
            <tr>
                <th>详细地址</th>
-               <td width="100px" style="text-align: center"><input type="text" name="addre"/></td>
+               <td width="100px" style="text-align: center">
+                   <input type="text" name="addre" id="addre" onblur="check_addre()"/>
+                   <span id="show_addre"></span>
+               </td>
            </tr>
            <tr>
                <th>手机号</th>
-               <td width="100px" style="text-align: center"><input type="text" name="phone"/></td>
+               <td width="100px" style="text-align: center">
+                   <input type="text" name="phone" id="phone" onblur="check_phone()"/>
+                   <span id="show_phone"></span>
+               </td>
+           </tr>
+           <input type="hidden" name="_token" value="{{ csrf_token() }}">
+           <tr>
+               <td align="center"><input type="submit"  class="btn btn-success btn-large"  value="下单"/></td>
            </tr>
        </table>
     </form>
+</center>
+ <script src="js/jq.js"></script>
+ <script>
+     function check_phone(){
+        var phone =  $("#phone").val();
+         if(phone == ''){
+             alert("你好,手机号没填哦");
+             return false;
+         }
+
+         var preg = /^0{0,1}(13[0-9]|15[0-9]|153|156|18[5-9])[0-9]{8}$/;
+         if(preg.test(phone)){
+            $('#show_phone').html('ok');
+             return true;
+         }else{
+             $('#show_phone').html("手机号格式不对");
+             return false;
+         }
+     }
+
+     function check_addre(){
+         var addre =  $("#addre").val();
+         if(addre == ''){
+             alert("你好,地址没填哦");
+             return false;
+         }
+
+         var preg = /^[\u4E00-\u9FA5]{5,10}$/;
+         if(preg.test(addre)){
+             $('#show_addre').html('ok');
+             return true;
+         }else{
+             $('#show_addre').html("5-10个汉字");
+             return false;
+         }
+     }
+
+     //验收
+     function check(){
+         if(check_addre() && check_phone()){
+              return true;
+         }else{
+             return false;
+         }
+     }
+ </script>
 
 
   <div class="footer">

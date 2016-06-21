@@ -61,7 +61,8 @@ class LoginController extends Controller {
     {
         $email = Request::input('email');
         //echo $email;die;
-        $url = 'http://www.hotel.com/resetPass?'.md5('email')."=".urlencode($email);
+        $now_time = time();
+        $url = 'http://www.hotel.com/resetPass?'.md5('email')."=".urlencode($email)."&".md5('now_time')."=".urlencode($now_time);
         $bool =  Mail::send('admin.email', ['data' => $url], function($message)
         {
             $email = Request::input('email');
@@ -70,6 +71,8 @@ class LoginController extends Controller {
 
         if($bool){
             echo "<script>alert('发送成功');location.href='https://mail.qq.com/'</script>";
+        }else{
+            echo "<script>alert('发送失败');location.href='login'</script>";
         }
         /* Mail::raw('这是一封测试邮件', function ($message) {
              $to = '1244426046@qq.com';
@@ -83,6 +86,10 @@ class LoginController extends Controller {
      */
     public function resetPass()
     {
+        $now_time = $_GET[md5('now_time')];
+        if(time() - $now_time > 60*5){
+            echo "<script>alert('邮件已过期');location.href='login'</script>";
+        }
         $email = $_GET[md5('email')];
         return view('admin.resetPass',['email'=>$email]);
     }
@@ -112,6 +119,5 @@ class LoginController extends Controller {
         Session::forget('username');
         return redirect('/login');
     }
-
 }
 

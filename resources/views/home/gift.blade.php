@@ -48,8 +48,9 @@
                 <em><strong>产品描述：</strong></em>
 </p>
 
-<p>&nbsp;
-	{{$onegift_data->g_text}}
+<p style="display: block; height: 70px; font-size: medium">&nbsp;
+    {{$onegift_data->g_text}}
+
 </p></p>
 
             
