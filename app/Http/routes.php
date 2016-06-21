@@ -54,7 +54,7 @@ Route::post('home/enroll',"home\LoginController@Enroll");
 // 前台预订酒店
 Route::get('home/Hotel',"home\HotelController@Index");
 // 前台酒店列表
-Route::post('home/HotelList',"home\HotelController@HotelList");
+Route::any('home/HotelList',"home\HotelController@HotelList");
 // 前台酒店详情
 Route::any('home/HotelInfo',"home\HotelController@HotelInfo");
 // 前台酒店评论
@@ -63,7 +63,19 @@ Route::get('home/HotelReview',"home\HotelController@HotelReview");
 Route::get('home/HotelDesc',"home\HotelController@HotelDesc");
 // 前台修改注入时间
 Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
-
+// 前台酒店预定
+Route::get('home/HotelYU',"home\HotelController@HotelYU");
+// 前台酒店收藏
+Route::get('home/HotelColl',"home\HotelController@HotelColl");
+// 酒店实景
+Route::get('home/HoteReality',"home\HotelController@HoteReality");
+// 酒店地图
+Route::get('home/HotelMap',"home\HotelController@HotelMap");
+// 酒店导航
+Route::get('home/HotelGps',"home\HotelController@HotelGps");
+// 酒店收藏
+Route::get('home/HotelCollect',"home\HotelController@HotelCollect");
+Route::get('home/HotelCollectDel',"home\HotelController@HotelCollectDel");
 
 
 
