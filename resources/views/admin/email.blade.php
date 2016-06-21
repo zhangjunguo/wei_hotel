@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-<h1>点击以下链接进行修改密码</h1>
+<h1>点击以下链接进行修改密码.5分钟后过期</h1>
 {{$data}}
 </body>
 </html>

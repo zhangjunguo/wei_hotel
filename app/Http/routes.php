@@ -66,6 +66,8 @@ Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
 
 //前台礼物兑换
 route::post('exchangeGift','home\GiftController@exchangeGift');
+//前台礼物下单
+route::post('exchangeOrder','home\GiftController@exchangeOrder');
 
 
 

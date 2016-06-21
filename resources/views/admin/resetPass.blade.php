@@ -64,23 +64,23 @@
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
 												<i class="icon-coffee green"></i>
-												请输入你的信息
+                                                诶  ,密码忘了  ,再来一遍
 											</h4>
 
 											<div class="space-6"></div>
 
-											<form action="PostLogin" method="post">
+											<form action="passReset" method="post" onsubmit="return check()">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" name="username" />
+															<input type="text" class="form-control" placeholder="密码" name="adm_pass" id="adm_pass" onblur="check_pass()" />
 															<i class="icon-user"></i>
 														</span>
 													</label>
-
+                                                    <input type="hidden" name="email" value="{{$email}}"/>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" name="pwd" />
+															<input type="password" class="form-control" placeholder="确认密码" id="check_adm_pass" name="check_adm_pass" onblur="check_pass1()"/>
 															<i class="icon-lock"></i>
 														</span>
 													</label>
@@ -93,14 +93,10 @@
 													<div class="space"></div>
 
 													<div class="clearfix">
-														<label class="inline">
-															<input type="checkbox" class="ace" />
-															<span class="lbl"> 记住我</span>
-														</label>
 
 														<button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
 															<i class="icon-key"></i>
-															登陆
+															修改
 														</button>
 													</div>
 
@@ -158,17 +154,17 @@
 												输入您的电子邮件和接受指令
 											</p>
 
-											<form action="forgotPass" method="post">
+											<form>
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email"  name="email"/>
+															<input type="email" class="form-control" placeholder="Email" />
 															<i class="icon-envelope"></i>
 														</span>
 													</label>
-                                                    <input type="hidden" class="form-control" name="_token" value="<?php echo csrf_token(); ?>" />
+
 													<div class="clearfix">
-														<button type="submit" class="width-35 pull-right btn btn-sm btn-danger">
+														<button type="button" class="width-35 pull-right btn btn-sm btn-danger">
 															<i class="icon-lightbulb"></i>
 															发送!
 														</button>
@@ -308,3 +304,38 @@
 	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
+<script src="js/jq.js"></script>
+<script>
+    //验证密码
+    function check_pass(){
+       var check_pass =  $("#adm_pass").val();
+        if(check_pass==''){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    //验证确认密码
+    function check_pass1(){
+        var check_pass =  $("#check_adm_pass").val();
+        var check_pass1 =  $("#adm_pass").val();
+        if(check_pass==''){
+            return false;
+        }
+        if(check_pass!=check_pass1){
+            alert('是不是傻.密码不一致');
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    //验收
+    function check(){
+        if(check_pass() && check_pass1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>

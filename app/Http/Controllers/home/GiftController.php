@@ -58,7 +58,51 @@ class GiftController extends Controller
         $data['go_score'] = $g_score;
 
         return view('home/orderGift',['order_data'=>$data]);
+    }
 
+    /*
+     * 入单
+     */
+    public function exchangeOrder()
+    {
+        $data = Request::all();
+
+        $region_data = DB::table('region')->get();
+        // print_r($region_data);die;
+        $str = "";
+        foreach ($region_data as $k => $v) {
+            if ($data['province'] == $v->region_id) {
+                $str .= $v->region_name;
+            }
+            if ($data['city'] == $v->region_id) {
+                $str .= $v->region_name;
+            }
+            if ($data['county'] == $v->region_id) {
+                $str .= $v->region_name;
+            }
+        }
+        $str .= $data['addre'];
+        $arr['addre'] = $str;
+        $arr['u_id'] = Session::get('user_id');
+        $arr['go_score'] = $data['go_score'];
+        $arr['phone'] = $data['phone'];
+        $arr['g_id'] = $data['g_id'];
+        $arr['go_time'] = time();
+        $arr['go_number'] = uniqid('E');
+        // print_r($arr);
+        $bool = DB::table('gift_order')->insert($arr);
+        if ($bool) {
+            $content = "尊敬的用户" . Session::get('user_name') . "你已经下单成功(" . $data['g_name'] . ")，我们会以火箭的速度发货,记得给好评啊【一路狂奔】";
+            $result = file_get_contents("http://api.jisuapi.com/sms/send?mobile=" . $arr['phone'] . "&content=" . $content . "&appkey=49f049d351201fa6 ");
+            $jsonarr = json_decode($result, true);
+            if ($jsonarr['status'] == 0) {
+                $user_score = ceil(DB::table('users') -> where('u_id',$arr['u_id']) -> pluck('user_score')) -  ceil($arr['go_score']);
+                DB::table('users') -> where('u_id',$arr['u_id']) -> update(['user_score'=>$user_score]);
+                echo "<script>alert('下单成功');location.href='home/Gift'</script>";
+            }
+        }else{
+            echo "<script>alert('手机号有问题');location.href='home/Gift'</script>";
+        }
     }
 }
 
