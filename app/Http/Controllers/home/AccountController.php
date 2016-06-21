@@ -33,8 +33,11 @@ class AccountController extends Controller
     public function MyGift()
     {
     	$user_name = Session::get('user_name');
+    	$u_id = Session::get('user_id');
 
-        return view('home/my_gift');
+    	$data = DB::table('gift_order')->join('gift', 'gift.g_id', '=', 'gift_order.g_id')->where('u_id', $u_id)->paginate(3);
+
+        return view('home/my_gift')->with('data', $data);
     }
 
     /**
