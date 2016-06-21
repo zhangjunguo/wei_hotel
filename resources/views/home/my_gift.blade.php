@@ -31,24 +31,19 @@
 
             <div class="order-list">
                 <ul>
+                    @foreach ($data as $v)
                     <li>
-                        <span class="order-hotel-name">玩具熊</span>
-                        <span class="order-time">2016-05-20 12:23:34</span>
+                        <span class="order-hotel-name">{{$v->g_name}}</span>
+                        <span class="order-time">{{date('Y-m-d H:i:s', $v->go_time)}}</span>
                     </li>
-                    <li>
-                        <span class="order-hotel-name">玩具熊</span>
-                        <span class="order-time">2016-05-20 12:23:34</span>
-                    </li>
-                    <li>
-                        <span class="order-hotel-name">玩具熊</span>
-                        <span class="order-time">2016-05-20 12:23:34</span>
-                    </li>
+                    @endforeach
                 </ul>
+                <?php echo $data->render();?>
             </div>
         </div>
         <div class="footer">
             <div class="gezifooter">
-                <p style="color:#bbb;">格子微酒店连锁 &copy; 版权所有 2012-2014</p>
+                <p style="color:#bbb;">1408phpF4组 &copy; 版权所有 2012-2016</p>
             </div>
         </div>
     </body>

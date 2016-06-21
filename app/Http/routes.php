@@ -68,7 +68,6 @@ Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
 route::post('exchangeGift','home\GiftController@exchangeGift');
 
 
-
 // 后台管理
 
 // 登陆页面
@@ -161,6 +160,9 @@ Route::group(['middleware' => 'permission'], function(){
 	Route::get('HotelDel', 'Admin\HotelController@del');
 	Route::get('HotelSearch', 'Admin\HotelController@search');
 	Route::get('HotelQup', 'Admin\HotelController@qup');
+
+	//酒店图片管理
+	Route::any('HotelImg', 'Admin\HotelController@imgadd');
 
 	//后台户型管理
 	Route::get('RoomShow', 'Admin\HotelController@roomlist');

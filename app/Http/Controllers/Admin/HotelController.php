@@ -342,4 +342,38 @@ class HotelController extends Controller
 
 		return redirect('RoomShow?h_id='.$h_id.'&&page='.$page);
 	}
+
+	/**
+	 * 酒店图片添加
+	 */
+	public function imgadd()
+	{
+		$token = Request::input('_token');
+
+		if (!$token) {
+			//接值
+			$h_id = Request::get('h_id');
+
+			return view('admin.hotelimg')->with('h_id', $h_id);
+		} else {
+			$h_id = Request::input('h_id');
+			$img = Request::file('img');
+			//print_r($img);
+		
+			foreach ($img as $v) {
+				//文件上传
+				$type = $v->getClientOriginalExtension();
+				//echo $type;die;
+				$newName = md5(time().rand(1000,9999)).'.'.$type;
+				$path = $v->move('uploads/hotel',$newName);
+				//echo $path;die;
+
+				DB::table('hotel_img')->insert(['h_id'=>$h_id, 'img'=>$newName]);
+			}
+			return redirect('HotelShow');
+		}
+
+
+		
+	}
 }
