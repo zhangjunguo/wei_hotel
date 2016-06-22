@@ -38,7 +38,7 @@ Route::get('home/my_order_yes',"home\AccountController@my_order_yes");
 route::get('home/order_info',"home\AccountController@Order_Info");
 
 // 前台我的信息
-Route::get('home/MyInfo',"home\AccountController@MyInfo");
+Route::any('home/MyInfo',"home\AccountController@MyInfo");
 // 前台我的收藏
 Route::get('home/MyCollection',"home\AccountController@MyCollection");
 
