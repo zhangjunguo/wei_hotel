@@ -24,9 +24,9 @@
         </div>
         <div class="container width80 pt20">
             <div class="order-nav">
-                <a class="selected" href="">全部</a>
-                <a href="my_order_no">未完成</a>
-                <a class="last-a" href="my_order_yes">已完成</a>
+                <a  href="MyOrder">全部</a>
+                <a class="last-a" href="my_order_no">未完成</a>
+                <a class="selected" href="my_order_yes">已完成</a>
             </div>
             
             <div class="order-list">
@@ -58,7 +58,7 @@
 <script type="text/javascript">
     function page(page)
     {
-        $.get('MyOrder',{'page':page},function(msg){
+        $.get('my_order_yes',{'page':page},function(msg){
             $("#div1").html(msg);
         })
     }
