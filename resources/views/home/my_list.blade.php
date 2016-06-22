@@ -23,13 +23,21 @@
                 <span class="header-name">返回</span></a>
         </div>
         <div class="container width80 pt20">
-            <form name="aspnetForm" method="post" action="login.aspx?ReturnUrl=%2fMember%2fDefault.aspx" id="aspnetForm" class="form-horizontal">
+            <form name="aspnetForm" method="post" action="MyInfo" id="aspnetForm" class="form-horizontal" onsubmit="return sub()">
                 <ul class="user-function-list">
-                    <li style="text-align:left">昵称：{{$data->user_name}}</li>
+                    <li style="text-align:left">昵称：<input type="text" name="user_name" value="{{$data->user_name}}" onblur="sp1()" /><span id="sp1"></span></li>
+                    
                     <li style="text-align:left">手机号：{{$data->user_phone}}</li>
                     <li style="text-align:left">邮箱：{{$data->user_email}}</li>
-                    <li style="text-align:left">身份证号：{{$data->user_card}}</li>
+                    @if($data->user_card == '')
+                        <li style="text-align:left">身份证号：<input type="text" name="user_card" value="{{$data->user_card}}" onclick="sp2()" /></li>
+                        <span id="sp2"></span>
+                    @else
+                        <li style="text-align:left">身份证号：{{$data->user_card}}</li>
+                    @endif
                 </ul>
+                <input type="hidden" class="form-control" name="_token" value="<?php echo csrf_token(); ?>" />
+                <input type="submit" class="submit-button" value="提交" style="width: 100%; height: 45px; background: #6ac134; color: #fff; border: 1px solid #6ac134" />
             </form>
         </div>
         <div class="footer">
@@ -39,3 +47,51 @@
     </body>
 
 </html>
+<script>
+    function sp1()
+    {
+        var uname = document.getElementsByName('user_name')[0].value;
+        //alert(uname);
+        var sp = document.getElementById('sp1');
+        if (uname == '') {
+            sp.style.color = 'red';
+            //alert('123');
+            sp.innerHTML = '不能为空';
+            return false;
+        } else {
+            sp.innerHTML = '';
+            return true;
+        }
+    }
+
+    function sp2()
+    {
+        var card = document.getElementsByName('user_card')[0].value;
+        var sp = document.getElementById('sp2');
+
+        if(card == ''){
+            sp.style.color = 'red';
+            sp.innerHTML = '不能为空';
+            return false;
+        }else{
+            var reg = /^(\d{18})|(\d{17}x)$/;
+            if(reg.test(card)){
+                sp.innerHTML = '';
+                return true;
+            }else{
+                sp.style.color = 'red';
+                sp.innerHTML = '格式不对';
+                return false;
+            }
+        }
+    }
+
+    function sub()
+    {
+        if(sp1()&sp2()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>

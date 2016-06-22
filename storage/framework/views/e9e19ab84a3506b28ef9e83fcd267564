@@ -27,7 +27,7 @@
             <?php foreach($data as $v): ?>
             <li>
                 <a href="ActivityInfo?act_id=<?php echo e($v->act_id); ?>">
-                <img src="http://www.gridinn.com/photos/201404/3.jpg"/>
+                <img src="/<?php echo e($v->act_img); ?>"/>
                 <p><?php echo e($v->act_name); ?> (<?php echo e(date('Y-m-d', $v->act_start_time)); ?>—<?php echo e(date('Y-m-d', $v->act_end_time)); ?>)</p>
                 </a>
             </li> 

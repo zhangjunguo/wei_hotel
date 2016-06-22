@@ -32,7 +32,7 @@
     <a href="HotelInfo?id=<?php echo e(Session::get('h_id')); ?>">房型</a>
 	</li>
 	<li><a href="home/HotelDesc?id=<?php echo e(Session::get('h_id')); ?>"  class="active">简介</a></li>
-	<li><a href="#">地图</a></li>
+	<li><a href="HotelMap?id=<?php echo e(Session::get('h_id')); ?>">地图</a></li>
 	<li><a href="HotelReview?id=<?php echo e(Session::get('h_id')); ?>">评论</a></li>
 </ul>
 <script type="text/javascript">
@@ -51,9 +51,9 @@
 </div>
 <div id="hotelinfo" class="hotel-prompt ">
 			<span class="hotel-prompt-title">酒店简介</span>
-			<p>格子微酒店南宁南宁秀灵路店位于广西最著名大学广西大学东门旁，紧邻邕江边，周边超市、餐饮、银行等配套设施完善，出行便利。 酒店倡导低碳环保，客房内配有24小时热水、wifi网络、电视等设施，客房虽小，设施齐全。酒店服务周到细致，是您出行的不错选择。 酒店开业时间2012年12月。</p>
-            <p>地址：秀灵路55号（出入境管理局旁）</p>
-            <p>电话：0771-3391588</p>
+			<p><?php echo e($res->h_desc); ?></p>
+            <p>地址：<?php echo e($res->h_address); ?></p>
+            <p>电话：<?php echo e($res->h_tel); ?></p>
 		</div>
 </div>
 <script>

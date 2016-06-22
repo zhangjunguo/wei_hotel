@@ -7,7 +7,6 @@
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <link href="../home/css/bootstrap.min.css" rel="stylesheet" />
 <link href="../home/css/NewGlobal.css" rel="stylesheet" />
-
 <script type="text/javascript" src="../home/js/zepto.js"></script>
 
 </head>
@@ -267,10 +266,20 @@
           
         <div class="fr">
           <em class="orange roomprice">
-              ￥<?php echo e($v->r_price); ?> 起
+          <?php if($data->user_grade == 0){ ?>
+              普通价：<span>￥<?php echo e($v->r_price); ?></span> 起 <br />
+              VIP：<span style="text-decoration:line-through">￥<?php echo e($v->r_vip_price); ?></span> 起
+          <?php }elseif($data->user_grade == 1){ ?>
+              普通价：<span style="text-decoration:line-through">￥<?php echo e($v->r_price); ?></span> 起 <br />
+              VIP：<span>￥<?php echo e($v->r_vip_price); ?></span> 起
+          <?php }elseif($data->user_grade == 2){ ?>
+              普通价：<span>￥<?php echo e($v->r_price); ?></span> 起 <br />
+              <!-- VIP：<span>￥<?php echo e($v->r_vip_price); ?></span> 起 -->
+          <?php } ?>
+              
          </em>
        <?php if($v->r_state == 1){ ?>
-    <a href='HotelYU?h_id=<?php echo e($h_id); ?>&r_id=<?php echo e($v->r_id); ?>&price=<?php echo e($v->r_price); ?>' title='立即预定' class='btn btn-success iframe'>预定</a>
+    <a href='HotelYU?h_id=<?php echo e($h_id); ?>&r_id=<?php echo e($v->r_id); ?>&price=<?php echo e($v->r_price); ?>&vip_price=<?php echo e($v->r_vip_price); ?>' title='立即预定' class='btn btn-success iframe'>预定</a>
     <?php }elseif($v->r_state == 0){ ?>
         <span class='btn'>满房</span>
     <?php } ?>
