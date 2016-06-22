@@ -1,7 +1,7 @@
 <?php 
 namespace App\Http\Controllers\Admin;
 header('content-type:text/html;charset=utf8');
-use DB,Request;
+use DB,Request,Session;
 use App\Http\Controllers\Controller;
 class AreaListController extends Controller 
 {
@@ -73,9 +73,13 @@ class AreaListController extends Controller
 		// print_R($arr);die;
 		$re = DB::table('region1')->insert($arr);
 		if($re){
-
+           
 			$this->AreaJson();
-
+            $username=Session::get('username');
+		      $date=date("Y-H-d m:i:s");
+		      $ip=Session::get('ip');
+		      $content="添加地区";
+              $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
 			return redirect('AreaList');
 
 		}

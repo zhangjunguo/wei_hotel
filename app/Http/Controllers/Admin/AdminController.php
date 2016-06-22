@@ -1,7 +1,7 @@
 <?php 
 namespace App\Http\Controllers\Admin;
 header('content-type:text/html;charset=utf8');
-use DB,Request;
+use DB,Request,Session;
 use App\Http\Controllers\Controller;
 class AdminController extends Controller {
 	// 管理中心页面
@@ -29,8 +29,13 @@ class AdminController extends Controller {
 		  $pwd = md5(Request::input('pwd'));
 		  $email = Request::input('email');
 		  $phone = Request::input('phone');
-          $re = DB::table('admin')->insert(['adm_name'=>$username,'adm_pass'=>$pwd,'adm_email'=>$email,'adm_phone'=>$phone]);
+      $re = DB::table('admin')->insert(['adm_name'=>$username,'adm_pass'=>$pwd,'adm_email'=>$email,'adm_phone'=>$phone]);
 		  if($re){ 
+       $username=Session::get('username');
+       $date=date("Y-H-d m:i:s");
+       $ip=Session::get('ip');
+       $content="添加一条管理员信息";
+       $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
 			  return redirect('adminlist');
 		  }
     }
@@ -39,7 +44,12 @@ class AdminController extends Controller {
     {
         $id = Request::input('id');
         $re = DB::table('admin')->where('adm_id',$id)->delete();
-        if($re){ 
+        if($re){
+           $username=Session::get('username');
+       $date=date("Y-H-d m:i:s");
+       $ip=Session::get('ip');
+       $content="删除一条管理员信息";
+       $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]); 
         	return redirect('adminlist');
         }
 	}
@@ -61,9 +71,14 @@ class AdminController extends Controller {
       $phone = Request::input('phone');
       $id = Request::input('id');
       $re = DB::table('admin')->where('adm_id',$id)->update(['adm_name'=>$username,'adm_email'=>$email,'adm_phone'=>$phone]);
-           if($re){
-              return redirect('adminlist');
-           } 
+      if($re){
+       $username=Session::get('username');
+       $date=date("Y-H-d m:i:s");
+       $ip=Session::get('ip');
+       $content="修改管理员信息";
+       $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
+        return redirect('adminlist');
+       } 
       }
     } 
     // 管理员名即点即改
@@ -75,6 +90,11 @@ class AdminController extends Controller {
      // print_r($data);die;
      if ($re) {
       echo 1;
+       $username=Session::get('username');
+       $date=date("Y-H-d m:i:s");
+       $ip=Session::get('ip');
+       $content="修改管理员姓名";
+       $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
      }else{
       echo -1;    
      }
@@ -97,7 +117,13 @@ class AdminController extends Controller {
         if($res){
             echo "该管理员已经存在该角色";die;
         }else{
+          // 添加到管理员日志
           $re = DB::table('adm_role')->insert($data);
+          $username=Session::get('username');
+          $date=date("Y-H-d m:i:s");
+          $ip=Session::get('ip');
+          $content="分配角色";
+          $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
           return redirect('rolelist');
         }
     }
@@ -115,5 +141,14 @@ class AdminController extends Controller {
     {
        $results = DB::table('log')->simplePaginate(5);
        return view('admin.log')->with('results',$results);
+    }
+    //管理员个人信息
+    public function information()
+    {
+      $uid=Session::get('uid');
+      $results=DB::table('admin')
+            ->where('adm_id',$uid)
+            ->get();
+      return view('admin.information')->with('results',$results);
     }
 }

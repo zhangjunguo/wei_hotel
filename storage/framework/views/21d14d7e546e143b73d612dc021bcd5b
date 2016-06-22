@@ -29,11 +29,11 @@
 <div class="container">
 <ul class="unstyled hotel-bar">
 	<li class="first">
-    <a href="HotelInfo">房型</a>
+    <a href="HotelInfo?id=<?php echo e(Session::get('h_id')); ?>">房型</a>
 	</li>
-	<li><a href="home/HotelDesc"  class="active">简介</a></li>
+	<li><a href="home/HotelDesc?id=<?php echo e(Session::get('h_id')); ?>"  class="active">简介</a></li>
 	<li><a href="#">地图</a></li>
-	<li><a href="HotelReview">评论</a></li>
+	<li><a href="HotelReview?id=<?php echo e(Session::get('h_id')); ?>">评论</a></li>
 </ul>
 <script type="text/javascript">
     $('#titleString').text($(document)[0].title);
@@ -41,22 +41,12 @@
 <div class="hotel-prompt ">
     <span class="hotel-prompt-title">酒店图片</span>
 <div id="slider" style="margin-top: 10px;">
-    
+    <?php foreach($arr as $k => $v): ?>
  <div>
-        <img src="http://www.gridinn.com/photos/201212/20121231113309m.jpg">
-        <p>酒店外观</p>
+        <img src="../uploads/hotel/<?php echo e($v->img); ?>">
+        <!-- <p>酒店外观</p> -->
  </div>             
-       
- <div>
-        <img src="http://www.gridinn.com/photos/201212/20121231113406m.jpg">
-        <p>大堂</p>
- </div>             
-       
- <div>
-        <img src="http://www.gridinn.com/photos/201212/20121231113520m.jpg">
-        <p>阳光大床房</p>
- </div>             
-        
+    <?php endforeach; ?>
 </div>
 </div>
 <div id="hotelinfo" class="hotel-prompt ">

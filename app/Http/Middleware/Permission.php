@@ -18,6 +18,9 @@ class Permission {
 
         //权限验证
         $uid=Session::get('uid');
+        if (empty($uid)) {
+          return redirect('login');
+        }
         $data=DB::table('adm_role')
             ->join('role','adm_role.ro_id', '=', 'role.ro_id')
             ->join('role_power','role.ro_id', '=', 'role_power.ro_id')

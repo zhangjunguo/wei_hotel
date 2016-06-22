@@ -161,6 +161,8 @@ Route::group(['middleware' => 'permission'], function(){
 	Route::get('rolelist',  'Admin\AdminController@rolelist');
 	// 管理员日志页
 	Route::get('adminlog',  'Admin\AdminController@log');
+	//管理员个人信息页
+	Route::get('information',  'Admin\AdminController@information');
 	// 权限管理
 	// 权限添加页
 	Route::get('poweradd',  'Admin\PowerController@add');
