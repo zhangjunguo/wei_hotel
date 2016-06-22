@@ -162,6 +162,17 @@
 											<input type="file" name="g_img">
 										</div>
 									</div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-4">是否需要送货到家</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="radio" name="is_post" value="1">是
+                                        <input type="radio" name="is_post" value="0">否
+                                        <span id="show_is"></span>
+                                    </div>
+                                </div>
+
+
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">礼物描述</label>
 
@@ -317,10 +328,9 @@
         var g_name = $(obj).val();
         if(g_name==''){
             flag = false;
-            return false;
         }
         var ajax = new XMLHttpRequest();
-        ajax.open('get', 'uniqueGift?g_name=' + g_name,false);
+        ajax.open('get', 'uniqueGift?g_name=' + g_name);
         ajax.send();
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200) {
@@ -329,7 +339,7 @@
                     flag = false;
                     /*document.getElementById('submitInfo').submit();*/
                 }else if(ajax.responseText == 0){
-                   $('#submitInfo').submit();
+                    $('#showInfo').html('ok');
                     flag = true;
                 }
             }
@@ -339,30 +349,44 @@
 
     //验证个数
     function check_num(){
-        var num = $("#show_num").val();
+        var num = $("#g_num").val();
+        alert(num);
         if(num==''){
             return false;
         }
-        var reg = /^[1-9]+$/;
-        if(reg.test(num)){
+        var reg = /^[1-9]\d*$/;
+        if(!reg.test(num)){
             $('#show_num').html("用数字,打死你");
             return false;
+        }else{
+            $('#show_num').html("ok");
+            return true;
         }
     }
     //验证积分
     function check_score(){
-        var score = $("#show_score").val();
+        var score = $("#g_score").val();
         if(score==''){
             return false;
         }
-        var reg = /^[1-9]+$/;
-        if(reg.test(score)){
+        var reg = /^[1-9]\d*$/;
+        if(!reg.test(score)){
             $('#show_score').html("用数字,打死你");
             return false;
+        }else{
+            $('#show_score').html("ok");
+            return true;
         }
     }
 
   function check(){
+          if($("[type='radio']:checked").length==0){
+              $("#show_is").html("<font color=red>至少选择一项</font>");
+              return false;
+          }else{
+              $("#show_is").html("<font color=blue>ok</font>");
+          }
+
         if(flag && check_num() && check_score()){
             return true;
         }else{

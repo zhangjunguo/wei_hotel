@@ -39,6 +39,7 @@ class GiftController extends Controller
             $gift_data['g_score'] = Request::input('g_score');
             $gift_data['g_text'] = Request::input('g_text');
             $gift_data['g_num'] = Request::input('g_num');
+            $gift_data['is_post'] = Request::input('is_post');
             $gift_data['g_img'] = $newName;
             $bool = DB::table('gift') -> insert($gift_data);
             if($bool){
@@ -103,7 +104,7 @@ class GiftController extends Controller
     }
 
     /**
-     * 礼物添加
+     * 礼物编辑
      */
     public function editGift()
     {
@@ -114,6 +115,7 @@ class GiftController extends Controller
             $gift_data['g_score'] = Request::input('g_score');
             $gift_data['g_text'] = Request::input('g_text');
             $gift_data['g_num'] = Request::input('g_num');
+            $gift_data['is_post'] = Request::input('is_post');
             $bool = DB::table('gift')
                 ->where('g_id',$g_id)
                 -> update($gift_data);
@@ -130,6 +132,7 @@ class GiftController extends Controller
                 $gift_data['g_score'] = Request::input('g_score');
                 $gift_data['g_text'] = Request::input('g_text');
                 $gift_data['g_num'] = Request::input('g_num');
+                $gift_data['is_post'] = Request::input('is_post');
                 $gift_data['g_img'] = $newName;
                 $bool = DB::table('gift')
                     ->where('g_id',$g_id)
