@@ -27,7 +27,7 @@
             @foreach($data as $v)
             <li>
                 <a href="ActivityInfo?act_id={{$v->act_id}}">
-                <img src="http://www.gridinn.com/photos/201404/3.jpg"/>
+                <img src="/{{$v->act_img}}"/>
                 <p>{{$v->act_name}} ({{date('Y-m-d', $v->act_start_time)}}—{{date('Y-m-d', $v->act_end_time)}})</p>
                 </a>
             </li> 
