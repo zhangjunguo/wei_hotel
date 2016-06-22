@@ -1,7 +1,7 @@
 <?php 
 namespace App\Http\Controllers\Admin;
 header('content-type:text/html;charset=utf8');
-use DB,Request;
+use DB,Request,Session;
 use App\Http\Controllers\Controller;
 class PowerController extends Controller {
 	// 权限添加页面

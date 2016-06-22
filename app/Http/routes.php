@@ -88,6 +88,8 @@ Route::get('home/HotelDesc',"home\HotelController@HotelDesc");
 // 前台修改注入时间
 Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
 
+// 前台添加评论页面
+Route::get('home/comment',"home\CommentController@comment");
 
 //用户上传头像
 Route::any('home/UserImg', "home\AccountController@MyImg");
@@ -268,6 +270,8 @@ Route::group(['middleware' => 'permission'], function(){
     //系统管理
 	Route::get('updatePass',  'Admin\SystemController@updatePass');//密码修改页面
 	Route::post('passUpdate',  'Admin\SystemController@passUpdate');//密码修改
+	Route::get('gallery',  'Admin\SystemController@gallery');//画廊
+	Route::get('calendar',  'Admin\SystemController@calendar');//日历
     // 评价管理
     route::get('commentList','Admin\CommentController@commentList');
     // 礼物管理

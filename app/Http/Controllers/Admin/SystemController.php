@@ -19,8 +19,8 @@ class SystemController extends Controller {
       修改密码
     */
    
-   public function passUpdate()
-   {
+  public function passUpdate()
+  {
    	  $data = Request::all();
  		$user_data = DB::table('admin') -> where('adm_id',$data['adm_id']) ->first();
  		//print_r($user_data);die;
@@ -36,5 +36,15 @@ class SystemController extends Controller {
  				echo "<script>alert('修改成功');location.href='login'</script>";
  			}
  		}
-   	}
+  }
+  // 画廊页
+  public function gallery()
+  {   
+     return view('admin.gallery');
+  }
+  //日历页
+   public function calendar()
+  {   
+     return view('admin.calendar');
+  }
 }
