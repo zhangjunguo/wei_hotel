@@ -41,11 +41,13 @@
                   <p>地址：{{$v->h_address}}</p>
                   <p>评分：4.6 （{{$v->num}}人已评）</p>
               <!-- </a> -->
-                  <?php if(isset($v->collect)){ ?>
-                    <span class="collect" style="color:#666666; float:right;" h_id="{{$v->h_id}}" h_state="1" cityid="{{$v->city_id}}">取消收藏</span>
-              <?php }else{ ?>
-        <span class="collect" style="color:#666666; float:right;" h_id="{{$v->h_id}}" h_state="0" cityid="{{$v->city_id}}">收藏</span>
-              <?php } ?></div>
+                 <span style="margin-left:400px" id="shou_{{$v->h_id}}">
+                @if(!isset($v->collect))
+                  <a href="javascript:collection({{$v->h_id}})"><img src="../home/qu.jpg" alt="收藏" width="25" /></a>
+                @else
+                  <a href="javascript:cancel({{$v->h_id}})"><img src="../home/shou.jpg" alt="取消收藏" width="25" /></a>
+                @endif
+                </span></div>
               <div class="clear"></div>  
                
                
@@ -84,34 +86,19 @@
 </body>
 </html>
 <script>
-  $(function(){
-    $(".collect").click(function(){
-      // alert(h_id);
-      // alert(text);
-      var h_id = $(this).attr('h_id');
-      var text = $(this).attr('h_state');
-      var city_id = $(this).attr('cityid');
-      // alert(city_id);
-      if(text == 0){
-          $.get("HotelCollect",{"h_id":h_id},function(e){
-            if(e == 1){
-              alert('请先登录');
-              location.href='Login';
-            }else if(e == 2){
-              // $(this).html('取消收藏');
-              // $(this).css('h_state',1);
-              location.href="{{URL('home/HotelList')}}?cityID="+city_id+'&checkInDate='+"{{Session::get('checkInDate')}}"+'&checkOutDate='+"{{Session::get('checkOutDate')}}";
-            }
-          });
-        }else if(text == 1){
-           $.get("HotelCollectDel",{"h_id":h_id},function(e){
-                    if(e == 1){
-                      // $(this).html('收藏');
-                      location.href="{{URL('home/HotelList')}}?cityID="+city_id+'&checkInDate='+"{{Session::get('checkInDate')}}"+'&checkOutDate='+"{{Session::get('checkOutDate')}}";
-                      // $(this).css('h_state',0);
-                    }
-            });
-        }
-    });
-  });
+     function collection(hotel_id){
+        
+        //alert(hotel_id);
+        $.get('HotelCollect',{h_id:hotel_id},function(msg){
+          $('#shou_'+hotel_id).html(msg);
+        });
+      }
+
+      function cancel(hotel_id){
+        
+        //alert(hotel_id);
+        $.get('HotelCollectDel',{h_id:hotel_id},function(msg){
+          $('#shou_'+hotel_id).html(msg);
+        });
+      }
 </script>

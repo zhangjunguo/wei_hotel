@@ -96,6 +96,8 @@ Route::any('home/UserImg', "home\AccountController@MyImg");
 
 // 前台酒店预定
 Route::get('home/HotelYU',"home\HotelController@HotelYU");
+// 确认订单
+Route::any('home/HotelOk',"home\HotelController@HotelOk");
 // 前台酒店收藏
 Route::get('home/HotelColl',"home\HotelController@HotelColl");
 // 酒店实景
@@ -105,8 +107,8 @@ Route::get('home/HotelMap',"home\HotelController@HotelMap");
 // 酒店导航
 Route::get('home/HotelGps',"home\HotelController@HotelGps");
 // 酒店收藏
-Route::get('home/HotelCollect',"home\HotelController@HotelCollect");
-Route::get('home/HotelCollectDel',"home\HotelController@HotelCollectDel");
+Route::get('home/HotelCollect',"home\HotelController@Collection");
+Route::get('home/HotelCollectDel',"home\HotelController@Cancel");
 // 支付
 Route::get('home/PAY',"home\PAYController@pay");
 Route::get('home/return_url',"home\PAYController@return_url");
