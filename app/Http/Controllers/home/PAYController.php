@@ -41,9 +41,9 @@ class PAYController extends Controller
 			"notify_url"	=> "http://bw.com133.com/notify_url.php", // 服务器异步通知页面路径
 			"return_url"	=> redirect('return_url'), // 页面跳转同步通知页面路径
 			"out_trade_no"	=> Request::input('o_num'), // 商户网站订单系统中唯一订单号
-			"subject"	=> "测试订单", // 订单名称
+			"subject"	=> Request::input('o_num'), // 订单名称
 			"total_fee"	=> "0.02", // 付款金额
-			"body"	=> "", // 订单描述 可选
+			"body"	=> "微格子酒店订单", // 订单描述 可选
 			"show_url"	=> "", // 商品展示地址 可选
 			"anti_phishing_key"	=> "", // 防钓鱼时间戳  若要使用请调用类文件submit中的query_timestamp函数
 			"exter_invoke_ip"	=> "", // 客户端的IP地址
