@@ -30,10 +30,11 @@
         </div>
         <div class="container width80 pt20">
             <div class="order-nav">
-                <a class="selected" href="MyGift">全部</a>
-                <a class="last-a" href="MyGiftNo">未完成</a>
+               <a class="last-a" href="MyGift">全部</a>
+                <a class="selected" href="MyGiftNo">未完成</a>
                 <a class="last-a" href="MyGiftYes">已完成</a>
             </div>
+           
             <div class="order-list">
                 <ul>
                     @foreach ($data['data'] as $v)
@@ -57,7 +58,8 @@
 <script>
     function page(page) {
         var ajax = new XMLHttpRequest;
-        ajax.open('get', 'MyGift?page='+page);
+        var state = $('#no').attr('id');
+        ajax.open('get', 'MyGift?page='+page+'&&state='+state);
         ajax.send();
         ajax.onreadystatechange = function() {
             if(ajax.readyState == 4 && ajax.status == 200) {

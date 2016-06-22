@@ -24,7 +24,7 @@
         </div>
         <div class="container width80 pt20">
             <div class="user-face" onclick="alertWin('头像上传','内容',300,200)" style="z-index:100">
-                <img src="http://www.gridinn.com/photos/201404/3.jpg" alt="" />
+                <img src="/uploads/User/{{$data->user_img}}" alt="" />
             </div>
 
             <div class="user-list">
@@ -49,9 +49,10 @@
 </html>
 <script language="javascript">  
 function alertWin(title, msg, w, h){
-var content ="<form action='' method='post'>";
+var content ="<form action='UserImg' method='post' enctype='multipart/form-data'>";
 content += "<br/><br/><input type='file' name='file' id='file' value='浏览'/>";  
 content += "<br/><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color='red'>*</font>上传头像</p>";  
+content += "<input type='hidden' class='form-control' name='_token' value='<?php echo csrf_token(); ?>' />";
 content += "<input type='submit' value='提交'/>";
 content += "</form>";  
 msg = content;  

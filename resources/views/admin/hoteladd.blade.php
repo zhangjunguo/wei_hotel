@@ -2,7 +2,20 @@
 <html lang="en">
 	<head>
 		<style>
-			#bg{background-color: #ccc;width: 546px;/*  margin-left: 200px */}
+			body,ul,li{margin: 0;padding: 0;font: 12px normal "宋体", Arial, Helvetica, sans-serif;list-style: none;}
+			a{text-decoration: none;color: #000;font-size: 14px;}
+
+			#tabbox{ width:600px; overflow:hidden; margin:0 auto;}
+			.tab_conbox{border: 1px solid #999;border-top: none;}
+			.tab_con{ display:none;}
+
+			.tabs{height: 32px;border-bottom:1px solid #999;border-left: 1px solid #999;width: 100%;}
+			.tabs li{height:31px;line-height:31px;float:left;border:1px solid #999;border-left:none;margin-bottom: -1px;background: #e0e0e0;overflow: hidden;position: relative;}
+			.tabs li a {display: block;padding: 0 20px;border: 1px solid #fff;outline: none;text-decoration: none}
+			.tabs li a:hover {background: #ccc;}    
+			.tabs .thistab,.tabs .thistab a:hover{background: #fff;border-bottom: 1px solid #fff;}
+
+			.tab_con {padding:12px;font-size: 14px; line-height:175%;}
 		</style>
 		<meta charset="utf-8" />
 		<title>首页后台管理系统</title>
@@ -116,10 +129,10 @@
 					<script src="/js/admin/jquery1.js"></script>
 					<script>
 						 $(function(){
-						     $("#bg span").click(function(i){
+						     $("#bg a").click(function(i){
 								 //标记出当前选中的选项卡
-								 $("#bg span").css("background","#ccc");
-								 $(this).css("background","#00f");
+								 $("#bg a").css("background","#e0e0e0");
+								 $(this).css("background","#fff");
 					             //下面的div显示隐藏控制
 								 var divid=$(this).attr("id").replace("menu_","tab_");
 								 $("#table table").css("display","none");
@@ -131,9 +144,11 @@
 					<div class="page-content">
 						<div class="page-header">
 							<div id="bg">
-								<span style="background:#00f" id='menu_a0'>通用信息</span>
-								<span id='menu_a1'>详细描述</span>
-								<span id='menu_a2'>坐标位置</span>
+								<ul class="tabs" id="tabs">
+									<li style="background-color:#fff"><a href="javascript:void(0)" id='menu_a0'>通用信息</a></li>
+									<li><a href="javascript:void(0)" id='menu_a1'>详细描述</a></li>
+									<li><a href="javascript:void(0)" id='menu_a2'>坐标位置</a></li>
+								</ul>
 							</div>
 						</div><!-- /.page-header -->
 						<div class="row">
