@@ -7,9 +7,11 @@
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <link href="../home/css/bootstrap.min.css" rel="stylesheet" />
 <link href="../home/css/NewGlobal.css" rel="stylesheet" />
-
+  <style type="text/css">
+    body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0 auto;font-family:"微软雅黑";}
+  </style>
 <script type="text/javascript" src="../home/js/zepto.js"></script>
-
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0Q4ukkWliKkZWZGl03OkKWCu5UUfPL5S"></script>
 </head>
 <body>
  <div class="header">
@@ -27,26 +29,13 @@
         
   <div class="container hotellistbg">
          <ul class="unstyled hotellist">
-        
-        <?php foreach($arr as $k => $v): ?>
-             <li>
-              <a href="home/HotelInfo">
-                 <img class="hotelimg fl" src="../uploads/<?php echo e($v->h_img); ?>" /> 
-              <div class="inline">
-                  <h3><?php echo e($v->h_name); ?></h3>
-                  <p>地址：<?php echo e($v->h_address); ?></p>
-                  <p>评分：4.6 （<?php echo e($v->num); ?>人已评）</p>
-              </div>
-              <div class="clear"></div>  
-               </a> 
-               <ul class="unstyled">
-                   <li><a href="HotelInfo?id=<?php echo e($v->h_id); ?>&address=<?php echo e($v->h_address); ?>" class="order">预订</a></li>
-                   <li><a href="Hotelmap.aspx@id=<?php echo e($v->h_id); ?>" class="gps">导航</a></li>
-                   <li><a href="Hotelinfo.aspx@id=<?php echo e($v->h_id); ?>" class="reality">实景</a></li>
-               </ul>
-             </li>
-        <?php endforeach; ?>  
-             
+
+        <div id="allmap"></div>
+  <div id="result">
+    <button id="hideNavigationControl">隐藏导航控件</button>
+    <button id="showNavigationControl">显示导航控件</button>
+  </div>
+          
            
          </ul>
   </div>
@@ -68,3 +57,12 @@
 
 </body>
 </html>
+<script type="text/javascript">
+  // 百度地图API功能
+  var map = new BMap.Map("allmap");
+  var point = new BMap.Point({{$arr->h_x}}, {{$arr->h_y}});
+  map.centerAndZoom(point, 15);
+  var marker = new BMap.Marker(point);  // 创建标注
+  map.addOverlay(marker);               // 将标注添加到地图中
+  marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+</script>

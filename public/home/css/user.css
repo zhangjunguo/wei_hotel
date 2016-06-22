@@ -9,11 +9,13 @@ ul{ list-style: none}
 .user-function-list{ font-size: 1.4em; color: #666; width: 100%; margin: 0; margin-top: 20px;}
 .user-function-list li{ height: 40px; line-height: 40px; border-bottom: 1px dotted #ddd; text-align: center; cursor: pointer;}
 
-.order-nav{ margin-top: 40px; padding: 1px;}
+.order-nav{  padding: 1px;margin-top: 20px;}
 .order-nav a{ padding: 4% 11%; border-right: 1px solid #ddd; color: #9a9a9a;}
 .order-nav .last-a{ border-right: none;}
 .order-nav .selected{ color: #6ac134;}
-.order-list{ color: #9a9a9a; margin-top: 50px;}
+.order-list{ color: #9a9a9a; margin-top: 20px;}
 .order-list li{  cursor: pointer; width: 100%; clear: both; height: 40px;}
+.order-list .collect_order{ display: block; float: left;}
 .order-list .order-hotel-name{ display: block; float: left;}
 .order-list .order-time{ display: block; float: right; color: #ccc}
+.order-list .order-state{ display: block; float: right; color:red;}

@@ -41,22 +41,12 @@
 <div class="hotel-prompt ">
     <span class="hotel-prompt-title">酒店图片</span>
 <div id="slider" style="margin-top: 10px;">
-    
+    @foreach($arr as $k => $v)
  <div>
-        <img src="http://www.gridinn.com/photos/201212/20121231113309m.jpg">
-        <p>酒店外观</p>
+        <img src="../uploads/hotel/{{$v->img}}">
+        <!-- <p>酒店外观</p> -->
  </div>             
-       
- <div>
-        <img src="http://www.gridinn.com/photos/201212/20121231113406m.jpg">
-        <p>大堂</p>
- </div>             
-       
- <div>
-        <img src="http://www.gridinn.com/photos/201212/20121231113520m.jpg">
-        <p>阳光大床房</p>
- </div>             
-        
+    @endforeach
 </div>
 </div>
 <div id="hotelinfo" class="hotel-prompt ">

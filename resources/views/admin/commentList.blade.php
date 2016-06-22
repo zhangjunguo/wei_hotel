@@ -55,7 +55,11 @@
 	</head>
 
 	<body>
-@include('admin/header')
+
+
+		@include('admin/header')
+
+
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -82,7 +86,11 @@
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
 
-@include('admin/left')
+
+
+			@include('admin/left')
+
+
 
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
@@ -97,9 +105,9 @@
 							</li>
 
 							<li>
-								<a href="#">活动管理</a>
+								<a href="#">管理员管理</a>
 							</li>
-							<li class="active">添加活动</li>
+							<li class="active">管理信息列表</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -115,84 +123,52 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								礼物信息添加
+								评论列表
 							</h1>
 						</div><!-- /.page-header -->
 						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
-                            <form class="form-horizontal" role="form" action="addGift" method="post" enctype="multipart/form-data" onsubmit="return check()">
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">礼物名称</label>
+									<div class="col-xs-12">
+										<div class="table-responsive">
 
-										<div class="col-sm-9">
-											<input type="text" name="g_name" placeholder="礼物名称" class="col-xs-10 col-sm-5"  onblur="uniqueGift(this)" />
-                                            <span id="showInfo" style="color: red"></span>
-										</div>
-									</div>
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">编号</th>
+														<th>酒店名称</th>
+														<th>类型</th>
+														<th>星级</th>
+														<th>品论内容</th>
+														<th>品论时间</th>
+														<th>评论人</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+                                                <tbody>
+                                            @foreach($comment_data as $k=>$v)
 
-									<div class="space-4"></div>
+													<tr>
+														<td class="center">{{$k+1}}</td>
+                                                        <td>{{$v->h_name}}</td>
+														<td>{{$v->h_type}}</td>
+														<td>{{$v->c_star}}</td>
+														<td>{{$v->c_content}}</td>
+														<td><?php echo date('Y-m-d H:i;s',$v->c_time)?></td>
+														<td>{{$v->user_name}}</td>
+														<td>
+															<span onclick="topMove(this)"><i class="icon-edit bigger-120">上移</i></span>
+                                                            <span onclick="underMove(this)"><i class="icon-edit bigger-120">下移</i></span>
+                                                            <span onclick="topTop(this)"><i class="icon-edit bigger-120">置顶</i></span>
+                                                        </td>
+                                                        </tr>
 
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">礼物积分</label>
-
-										<div class="col-sm-9">
-											<input type="text"   name="g_score" class="col-xs-10 col-sm-5" onblur="check_score()" id="g_score"/>
-                                            <span id="show_score"></span>
-										</div>
-									</div>
-
-                                    <div class="space-4"></div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-2">礼物个数</label>
-
-                                        <div class="col-sm-9">
-                                            <input type="text"   name="g_num" class="col-xs-10 col-sm-5" onblur="check_num()" id="g_num" />
-                                            <span id="show_num"></span>
-                                        </div>
-                                    </div>
-
-
-									<div class="space-4"></div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">礼物图片</label>
-
-										<div class="col-sm-9">
-											<input type="file" name="g_img">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">礼物描述</label>
-
-										<div class="col-sm-9">
-											<textarea name="g_text" cols="38" rows="5"></textarea>
-										</div>
-									</div>
-									<div class="space-4"></div>
-									<div class="form-group">
-								     <div class="col-sm-9">
-											<input type="hidden" class="form-control" name="_token" value="<?php echo csrf_token(); ?>" />
-									 </div>
-									</div>
-                                    <div class="clearfix form-actions">
-										<div class="col-md-offset-3 col-md-9">
-											{{--<button class="btn btn-info" type="button" id="submitInfo">
-												<i class="icon-ok bigger-110"></i>
-												提交
-											</button>--}}
-                                            <td align="center"><input type="submit"  class="btn btn-success btn-large"  value="提交"/></td>
-
-											&nbsp; &nbsp; &nbsp;
-											<button class="btn" type="reset">
-												<i class="icon-undo bigger-110"></i>
-												重置
-											</button>
-										</div>
-									</div>
-  				</form>
-                </div>
-
+													 @endforeach
+                                                </tbody>
+											       </table>
+										        </div><!-- /.table-responsive -->
+									   </div><!-- /span -->
+								 </div><!-- /row -->
+                        <?php echo $comment_data->render(); ?>
+               </div>
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
 						<i class="icon-cog bigger-150"></i>
@@ -250,12 +226,12 @@
 
 		<!--[if !IE]> -->
 
-		<script src="js/admin/jquery1.js"></script>
+		<script src="assets/js/jquery-2.0.3.min.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="js/admin/jquery1.js"></script>
+<script src="assets/js/jquery-2.0.3.min.jsjs/admin/jquery1.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->
@@ -265,8 +241,6 @@
 		</script>
 
 		<!-- <![endif]-->
-
-
 
 		<!--[if IE]>
 <script type="text/javascript">
@@ -291,85 +265,40 @@
 	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
-
 <script src="js/jq.js"></script>
 <script>
-    var flag = false;
-    //验证用户名唯一性
-    function uniqueGift(obj){
-       /* var g_name = $(obj).val();
-        $.ajax({
-            type: "GET",
-            async: true,
-            url: "uniqueGift",
-            data: "g_name="+g_name,
-            success: function(e){
-                if(e==1) {
-                    $('#showInfo').html('礼物名已存在');
-                }
-                if(e==0) {
-                    $('#showInfo').html('ok');
-                    $("#submitInfo").submit();
-                }
-            }
-        });*/
-
-        var g_name = $(obj).val();
-        if(g_name==''){
-            flag = false;
-            return false;
-        }
-        var ajax = new XMLHttpRequest();
-        ajax.open('get', 'uniqueGift?g_name=' + g_name,false);
-        ajax.send();
-        ajax.onreadystatechange = function () {
-            if (ajax.readyState == 4 && ajax.status == 200) {
-                if (ajax.responseText == 1) {
-                    $('#showInfo').html('礼物名已存在');
-                    flag = false;
-                    /*document.getElementById('submitInfo').submit();*/
-                }else if(ajax.responseText == 0){
-                   $('#submitInfo').submit();
-                    flag = true;
-                }
-            }
-        }
-        return flag;
-    }
-
-    //验证个数
-    function check_num(){
-        var num = $("#show_num").val();
-        if(num==''){
-            return false;
-        }
-        var reg = /^[1-9]+$/;
-        if(reg.test(num)){
-            $('#show_num').html("用数字,打死你");
-            return false;
-        }
-    }
-    //验证积分
-    function check_score(){
-        var score = $("#show_score").val();
-        if(score==''){
-            return false;
-        }
-        var reg = /^[1-9]+$/;
-        if(reg.test(score)){
-            $('#show_score').html("用数字,打死你");
-            return false;
+   // alert($);
+    function topMove(obj){
+        var objParentTR = $(obj).parent().parent();
+        var prev = objParentTR.prev();
+        var prevTR = prev;
+        if (prevTR.length > 0) {
+			prevTR.insertAfter(objParentTR);
+			var key = parseInt(objParentTR.children().first().html())-1;
+			alert(key)
+			    objParentTR.children().first().html(key);
+			var key1 = parseInt(prevTR.children().first().html())+1;
+			    prevTR.children().first().html(key1);
+ 
         }
     }
 
-  function check(){
-        if(flag && check_num() && check_score()){
-            return true;
-        }else{
-            if(flag==false){
-                alert('礼物名没成功验证');
-            }
-            return false;
-        }
+	 function underMove(obj){
+       var objParentTR = $(obj).parent().parent();
+		var nextTR = objParentTR.next();
+		if (nextTR.length > 0) {
+			nextTR.insertBefore(objParentTR);
+			var key = parseInt(objParentTR.children().first().html())+1;
+			    objParentTR.children().first().html(key);
+			var key1 = parseInt(nextTR.children().first().html())-1;
+			    nextTR.children().first().html(key1);
+		} 
+    }
+	function topTop(obj){
+        var objParentTR = $(obj).parent().parent();
+		var oneTR = objParentTR.parent().children().first();
+		if (oneTR.length > 0) {
+			objParentTR.insertBefore(oneTR);
+		} 
     }
 </script>

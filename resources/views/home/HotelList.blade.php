@@ -9,6 +9,7 @@
 <link href="../home/css/NewGlobal.css" rel="stylesheet" />
 
 <script type="text/javascript" src="../home/js/zepto.js"></script>
+<script src="../js/jq.js"></script>
 
 </head>
 <body>
@@ -30,19 +31,28 @@
         
         @foreach($arr as $k => $v)
              <li>
-              <a href="home/HotelInfo">
+              <a href="HotelInfo?id={{$v->h_id}}&address={{$v->h_address}}">
                  <img class="hotelimg fl" src="../uploads/{{$v->h_img}}" /> 
+              </a>
               <div class="inline">
+             <!--  <a href="HotelInfo?id={{$v->h_id}}&address={{$v->h_address}}"> -->
                   <h3>{{$v->h_name}}</h3>
                   <p>地址：{{$v->h_address}}</p>
                   <p>评分：4.6 （{{$v->num}}人已评）</p>
-              </div>
+              <!-- </a> -->
+                  <?php if(isset($v->collect)){ ?>
+                    <span class="collect" style="color:#666666; float:right;" h_id="{{$v->h_id}}" h_state="{{$v->collect}}" cityid="{{$v->city_id}}">取消收藏</span>
+              <?php }else{ ?>
+        <span class="collect" style="color:#666666; float:right;" h_id="{{$v->h_id}}" h_state="0" cityid="{{$v->city_id}}">收藏</span>
+              <?php } ?></div>
               <div class="clear"></div>  
-               </a> 
+               
+               
                <ul class="unstyled">
                    <li><a href="HotelInfo?id={{$v->h_id}}&address={{$v->h_address}}" class="order">预订</a></li>
-                   <li><a href="Hotelmap.aspx@id={{$v->h_id}}" class="gps">导航</a></li>
-                   <li><a href="Hotelinfo.aspx@id={{$v->h_id}}" class="reality">实景</a></li>
+                   <li><a href="HotelGps?id={{$v->h_id}}" class="gps">导航</a></li>
+                   <li><a href="HoteReality?id={{$v->h_id}}" class="reality">实景</a></li>
+                   <!-- <li><a href="HotelColl?id={{$v->h_id}}" class="collect">收藏</a></li> -->
                </ul>
              </li>
         @endforeach  
@@ -68,3 +78,32 @@
 
 </body>
 </html>
+<script>
+  $(function(){
+    $(".collect").click(function(){
+      // alert(h_id);
+      // alert(text);
+      var h_id = $(this).attr('h_id');
+      var text = $(this).attr('h_state');
+      var city_id = $(this).attr('cityid');
+      // alert(city_id);
+      if(text == 0){
+          $.get("HotelCollect",{"h_id":h_id},function(e){
+            if(e == 1){
+              alert('请先登录');
+            }else if(e == 2){
+              $(this).html('取消收藏');
+              location.href='HotelList?cityID='+city_id;
+            }
+          });
+        }else if(text == 1){
+           $.get("HotelCollectDel",{"h_id":h_id},function(e){
+                    if(e == 1){
+                      $(this).html('收藏');
+                      location.href='HotelList?cityID='+city_id;
+                    }
+            });
+        }
+    });
+  });
+</script>

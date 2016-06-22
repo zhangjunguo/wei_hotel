@@ -7,9 +7,13 @@
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <link href="../home/css/bootstrap.min.css" rel="stylesheet" />
 <link href="../home/css/NewGlobal.css" rel="stylesheet" />
-
+<style type="text/css">
+    body, html {width: 100%;height: 100%;margin:0 auto;font-family:"微软雅黑";}
+    #allmap{width:100%;height:500px;}
+    p{margin-left:5px; font-size:14px;}
+  </style>
 <script type="text/javascript" src="../home/js/zepto.js"></script>
-
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0Q4ukkWliKkZWZGl03OkKWCu5UUfPL5S"></script>
 </head>
 <body>
  <div class="header">
@@ -27,26 +31,9 @@
         
   <div class="container hotellistbg">
          <ul class="unstyled hotellist">
-        
-        <?php foreach($arr as $k => $v): ?>
-             <li>
-              <a href="home/HotelInfo">
-                 <img class="hotelimg fl" src="../uploads/<?php echo e($v->h_img); ?>" /> 
-              <div class="inline">
-                  <h3><?php echo e($v->h_name); ?></h3>
-                  <p>地址：<?php echo e($v->h_address); ?></p>
-                  <p>评分：4.6 （<?php echo e($v->num); ?>人已评）</p>
-              </div>
-              <div class="clear"></div>  
-               </a> 
-               <ul class="unstyled">
-                   <li><a href="HotelInfo?id=<?php echo e($v->h_id); ?>&address=<?php echo e($v->h_address); ?>" class="order">预订</a></li>
-                   <li><a href="Hotelmap.aspx@id=<?php echo e($v->h_id); ?>" class="gps">导航</a></li>
-                   <li><a href="Hotelinfo.aspx@id=<?php echo e($v->h_id); ?>" class="reality">实景</a></li>
-               </ul>
-             </li>
-        <?php endforeach; ?>  
-             
+
+            <div id="allmap"></div>
+          
            
          </ul>
   </div>
@@ -68,3 +55,44 @@
 
 </body>
 </html>
+<script type="text/javascript">
+    var sContent =
+
+"<h4 style='margin:0 0 5px 0;padding:0.2em 0'>{{$arr->h_name}}</h4>" +
+
+
+
+"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>{{$arr->h_beizhu}}</p>" +
+
+"</div>";
+
+    var map = new BMap.Map("allmap");
+
+    var point = new BMap.Point({{$arr->h_x}},{{$arr->h_y}});
+
+    var marker = new BMap.Marker(point);
+
+    var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+
+    map.centerAndZoom(point, 15);
+
+    map.addOverlay(marker);
+
+    marker.addEventListener("click", function(){
+
+        this.openInfoWindow(infoWindow);
+
+        //图片加载完毕重绘infowindow
+
+        document.getElementById('imgDemo').onload = function (){
+
+            infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+
+        }
+
+    });
+
+</script>
+
+</script>
+

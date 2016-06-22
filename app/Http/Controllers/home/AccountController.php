@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\home;
 
+header('content-type:text/html;charset=utf8');
+
 use DB,Session,Request;
 use App\Http\Controllers\Controller;
+
 
 class AccountController extends Controller
 {	
@@ -189,7 +192,12 @@ class AccountController extends Controller
      */
     public function MyCollection()
     {
-        return view('home/my_Collection');
+        $user_id = Session::get('user_id');
+        $results = DB::table('collect')
+        ->join('hotel','collect.h_id', '=', 'hotel.h_id')
+        ->where('u_id',$user_id)
+        ->get();
+        return view('home/my_Collection')->with('results',$results);
     }
 
     /**
