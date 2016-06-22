@@ -101,7 +101,7 @@
 							<span class="btn btn-danger"></span>
 						</div>
 					</div><!-- #sidebar-shortcuts -->
-@include('admin/left')
+                   @include('admin/left')
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
 						<script type="text/javascript">
@@ -328,7 +328,7 @@
 														<div class="grid3">
 															<span class="grey">
 																<i class="icon-facebook-sign icon-2x blue"></i>
-																&nbsp; 微信平台
+																&nbsp; 微信
 															</span>
 															<h4 class="bigger pull-right">1,255</h4>
 														</div>
@@ -544,7 +544,7 @@
 																<li class="item-orange clearfix">
 																	<label class="inline">
 																		<input type="checkbox" class="ace" />
-																		<span class="lbl"> 问答</span>
+																		<span class="lbl">调查</span>
 																	</label>
 
 																	<div class="pull-right easy-pie-chart percentage" data-size="30" data-color="#ECCB71" data-percent="42">
@@ -580,7 +580,7 @@
 																<li class="item-default clearfix">
 																	<label class="inline">
 																		<input type="checkbox" class="ace" />
-																		<span class="lbl">添加新的特征</span>
+																		<span class="lbl">添加新的功能</span>
 																	</label>
 
 																	<div class="inline pull-right position-relative dropdown-hover">
@@ -611,28 +611,28 @@
 																<li class="item-blue clearfix">
 																	<label class="inline">
 																		<input type="checkbox" class="ace" />
-																		<span class="lbl"> 更新模版脚本</span>
+																		<span class="lbl">网站更新</span>
 																	</label>
 																</li>
 
 																<li class="item-grey clearfix">
 																	<label class="inline">
 																		<input type="checkbox" class="ace" />
-																		<span class="lbl"> 添加新皮肤</span>
+																		<span class="lbl"> 更换皮肤</span>
 																	</label>
 																</li>
 
 																<li class="item-green clearfix">
 																	<label class="inline">
 																		<input type="checkbox" class="ace" />
-																		<span class="lbl"> 升级服务端</span>
+																		<span class="lbl"> 服务端升级</span>
 																	</label>
 																</li>
 
 																<li class="item-pink clearfix">
 																	<label class="inline">
 																		<input type="checkbox" class="ace" />
-																		<span class="lbl"> 清理垃圾</span>
+																		<span class="lbl">功能优化</span>
 																	</label>
 																</li>
 															</ul>
@@ -1079,7 +1079,7 @@
 																</div>
 															</div>
 
-															<div class="hr hr8"></div>
+															<!-- <div class="hr hr8"></div>
 
 															<div class="center">
 																<i class="icon-comments-alt icon-2x green"></i>
@@ -1089,7 +1089,7 @@
 																	See all comments &nbsp;
 																	<i class="icon-arrow-right"></i>
 																</a>
-															</div>
+															</div> -->
 
 															<div class="hr hr-double hr8"></div>
 														</div>

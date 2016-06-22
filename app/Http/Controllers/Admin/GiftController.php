@@ -42,7 +42,12 @@ class GiftController extends Controller
             $gift_data['g_img'] = $newName;
             $bool = DB::table('gift') -> insert($gift_data);
             if($bool){
-                return redirect('giftList');
+              $username=Session::get('username');
+              $date=date("Y-H-d m:i:s");
+              $ip=Session::get('ip');
+              $content="添加一条礼品信息";
+              $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
+              return redirect('giftList');
             }
         }
     }
@@ -75,6 +80,11 @@ class GiftController extends Controller
             ->where('g_id',$g_id)
             ->delete();
         if($bool){
+            $username=Session::get('username');
+              $date=date("Y-H-d m:i:s");
+              $ip=Session::get('ip');
+              $content="删除一条礼品信息";
+              $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
             return redirect('giftList');
         }
     }
@@ -125,6 +135,11 @@ class GiftController extends Controller
                     ->where('g_id',$g_id)
                     -> update($gift_data);
                 if($bool){
+                    $username=Session::get('username');
+                    $date=date("Y-H-d m:i:s");
+                    $ip=Session::get('ip');
+                    $content="修改一条礼品信息";
+                    $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
                     return redirect('giftList');
                 }
             }

@@ -34,6 +34,11 @@ class ArticleController extends Controller
 
 				$res = DB::table('article')->insert($data);	//入库
 				if($res){
+					$username=Session::get('username');
+			        $date=date("Y-H-d m:i:s");
+			        $ip=Session::get('ip');
+			        $content="添加一条文章";
+	                $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
 					return redirect('articlelist');
 				}else{
 					return redirect('articleadd');
@@ -81,6 +86,11 @@ class ArticleController extends Controller
 	 	$res = DB::table('article')->where('ar_id',$ar_id)->delete();
 	 	if($res){
 	 		unlink($img);
+	 		$username=Session::get('username');
+		      $date=date("Y-H-d m:i:s");
+		      $ip=Session::get('ip');
+		      $content="删除一条文章";
+              $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
 	 		echo "<script>alert('删除成功');location.href='articlelist'</script>";
 	 	}else{
 	 		echo "<script>alert('删除失败');location.href='articlelist'</script>";
@@ -120,6 +130,11 @@ class ArticleController extends Controller
 	 	$data['ar_text'] = Request::input('ar_text');
 	 	$result = DB::table('article')->where('ar_id',$ar_id)->update($data);
 	 	if($result){
+	 		$username=Session::get('username');
+		      $date=date("Y-H-d m:i:s");
+		      $ip=Session::get('ip');
+		      $content="修改一条文章信息";
+              $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
 	 		echo "<script>alert('修改成功');location.href='articlelist';</script>";
 	 	}else{
 	 		echo "<script>alert('修改成功');location.href='articlelist';</script>";
@@ -141,6 +156,11 @@ class ArticleController extends Controller
 	 	}else{
 	 		$result = DB::table('article')->where('ar_id',$ar_id)->update(['ar_title'=>$ar_title]);
 		 	if($result){
+		 		$username=Session::get('username');
+		      $date=date("Y-H-d m:i:s");
+		      $ip=Session::get('ip');
+		      $content="修改一条文章名称";
+              $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
 		 		echo 1;
 		 	}else{
 		 		echo 0;

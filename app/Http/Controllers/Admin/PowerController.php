@@ -17,7 +17,12 @@ class PowerController extends Controller {
 		$pid=Request::input('pid');
 		$routes=Request::input('p_routes');
 		$re = DB::table('power')->insert(['p_name'=>$name,'pid'=>$pid,'p_routes'=>$routes]);
-		if($re){ 
+		if($re){
+        $username=Session::get('username');
+          $date=date("Y-H-d m:i:s");
+          $ip=Session::get('ip');
+          $content="添加一条权限";
+              $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]); 
 			  return redirect('powerlist');
 		}
 	}
@@ -32,7 +37,12 @@ class PowerController extends Controller {
         $id=Request::input('id');
         $re = DB::table('power')->where('p_id',$id)->delete();
         if($re){ 
-            return redirect('powerlist');
+          $username=Session::get('username');
+          $date=date("Y-H-d m:i:s");
+          $ip=Session::get('ip');
+          $content="删除一条权限信息";
+          $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
+          return redirect('powerlist');
         }
     }
     public function sel()
@@ -54,6 +64,11 @@ class PowerController extends Controller {
       $id = Request::input('id');
       $re = DB::table('power')->where('p_id',$id)->update(['p_name'=>$name,'pid'=>$pid,'p_routes'=>$routes]);
            if($re){
+            $username=Session::get('username');
+            $date=date("Y-H-d m:i:s");
+            $ip=Session::get('ip');
+            $content="编辑一条权限信息";
+              $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
               return redirect('powerlist');
            } 
       }
@@ -99,6 +114,11 @@ class PowerController extends Controller {
 		       $re = DB::table('role_power')->insert($arr);
 		      }
          if ($re){
+          $username=Session::get('username');
+          $date=date("Y-H-d m:i:s");
+          $ip=Session::get('ip');
+          $content="分配权限";
+          $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
          	 return redirect('powerlist');
          }
         }

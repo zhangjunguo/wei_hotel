@@ -38,7 +38,7 @@ Route::get('home/my_order_yes',"home\AccountController@my_order_yes");
 route::get('home/order_info',"home\AccountController@Order_Info");
 
 // 前台我的信息
-Route::get('home/MyInfo',"home\AccountController@MyInfo");
+Route::any('home/MyInfo',"home\AccountController@MyInfo");
 // 前台我的收藏
 Route::get('home/MyCollection',"home\AccountController@MyCollection");
 
@@ -161,6 +161,8 @@ Route::group(['middleware' => 'permission'], function(){
 	Route::get('rolelist',  'Admin\AdminController@rolelist');
 	// 管理员日志页
 	Route::get('adminlog',  'Admin\AdminController@log');
+	//管理员个人信息页
+	Route::get('information',  'Admin\AdminController@information');
 	// 权限管理
 	// 权限添加页
 	Route::get('poweradd',  'Admin\PowerController@add');
