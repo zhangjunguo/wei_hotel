@@ -26,6 +26,9 @@ Route::get('home/Order',"home\OrderController@Index");
 Route::get('home/MyAccount',"home\AccountController@Index");
 // 前台我的礼物
 Route::get('home/MyGift',"home\AccountController@MyGift");
+Route::get('home/MyGiftNo',"home\AccountController@MyGiftNo");
+Route::get('home/MyGiftYes',"home\AccountController@MyGiftYes");
+Route::get('home/MyGiftX', "home\AccountController@MyGiftX");
 // 前台我的订单  
 Route::get('home/MyOrder',"home\AccountController@MyOrder");
 // Route::get('MyOrderpage',"home\AccountController@MyOrderPage");
@@ -75,7 +78,7 @@ route::get('home/send_code_email','home\LoginController@send_code_email');
 // 前台预订酒店
 Route::get('home/Hotel',"home\HotelController@Index");
 // 前台酒店列表
-Route::post('home/HotelList',"home\HotelController@HotelList");
+Route::any('home/HotelList',"home\HotelController@HotelList");
 // 前台酒店详情
 Route::any('home/HotelInfo',"home\HotelController@HotelInfo");
 // 前台酒店评论
@@ -85,6 +88,34 @@ Route::get('home/HotelDesc',"home\HotelController@HotelDesc");
 // 前台修改注入时间
 Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
 
+
+//用户上传头像
+Route::any('home/UserImg', "home\AccountController@MyImg");
+
+// 前台酒店预定
+Route::get('home/HotelYU',"home\HotelController@HotelYU");
+// 前台酒店收藏
+Route::get('home/HotelColl',"home\HotelController@HotelColl");
+// 酒店实景
+Route::get('home/HoteReality',"home\HotelController@HoteReality");
+// 酒店地图
+Route::get('home/HotelMap',"home\HotelController@HotelMap");
+// 酒店导航
+Route::get('home/HotelGps',"home\HotelController@HotelGps");
+// 酒店收藏
+Route::get('home/HotelCollect',"home\HotelController@HotelCollect");
+Route::get('home/HotelCollectDel',"home\HotelController@HotelCollectDel");
+// 支付
+Route::get('home/PAY',"home\PAYController@pay");
+Route::get('home/return_url',"home\PAYController@return_url");
+
+
+
+
+//前台礼物兑换
+route::post('exchangeGift','home\GiftController@exchangeGift');
+//前台礼物下单
+route::post('exchangeOrder','home\GiftController@exchangeOrder');
 
 
 
@@ -182,6 +213,9 @@ Route::group(['middleware' => 'permission'], function(){
 	Route::get('HotelSearch', 'Admin\HotelController@search');
 	Route::get('HotelQup', 'Admin\HotelController@qup');
 
+	//酒店图片管理
+	Route::any('HotelImg', 'Admin\HotelController@imgadd');
+
 	//后台户型管理
 	Route::get('RoomShow', 'Admin\HotelController@roomlist');
 	Route::any('RoomAdd', 'Admin\HotelController@roomadd');
@@ -249,6 +283,9 @@ Route::group(['middleware' => 'permission'], function(){
 	route::post('editGift','Admin\GiftController@editGift');
 	//礼物名字验证唯一
 	route::get('uniqueGift','Admin\GiftController@uniqueGift');
+
+
+
 
 
 });

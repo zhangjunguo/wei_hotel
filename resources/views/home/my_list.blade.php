@@ -8,6 +8,7 @@
         <meta content="yes" name="apple-mobile-web-app-capable" />
         <link href="../home/css/bootstrap.min.css" rel="stylesheet" />
         <link href="../home/css/NewGlobal.css" rel="stylesheet" />
+         <link href="../home/css/user.css" rel="stylesheet" />
         <script type="text/javascript" src="../home/js/zepto.js"></script>
     </head>
     
@@ -23,26 +24,17 @@
         </div>
         <div class="container width80 pt20">
             <form name="aspnetForm" method="post" action="login.aspx?ReturnUrl=%2fMember%2fDefault.aspx" id="aspnetForm" class="form-horizontal">
-                <div class="control-group">
-                    <input name="user_name" type="text" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入昵称" value="楓殤月" />
-                </div>
-                <div class="control-group">
-                    <input name="mobile_phone" type="text" id="ctl00_ContentPlaceHolder1_txtPassword" class="width100 input" style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入手机号码" value="18601934304" />
-                </div>
-                <div class="control-group">
-                    <input name="mobile_phone" type="text" id="ctl00_ContentPlaceHolder1_txtPassword" class="width100 input" style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入身份证号" value="111023199111264030" />
-                </div>
-                <div class="control-group">
-                    <input type="button" class="submit-button" value="提交" style="width: 100%; height: 45px; background: #6ac134; color: #fff; border: 1px solid #6ac134" />
-                </div>
-                <div class="control-group">
-                    <span class="red"></span>
-                </div>
+                <ul class="user-function-list">
+                    <li style="text-align:left">昵称：{{$data->user_name}}</li>
+                    <li style="text-align:left">手机号：{{$data->user_phone}}</li>
+                    <li style="text-align:left">邮箱：{{$data->user_email}}</li>
+                    <li style="text-align:left">身份证号：{{$data->user_card}}</li>
+                </ul>
             </form>
         </div>
         <div class="footer">
             <div class="gezifooter">
-                <p style="color:#bbb;">格子微酒店连锁 &copy; 版权所有 2012-2014</p></div>
+                <p style="color:#bbb;">1408phpF4组 &copy; 版权所有 2012-2016</p></div>
         </div>
     </body>
 

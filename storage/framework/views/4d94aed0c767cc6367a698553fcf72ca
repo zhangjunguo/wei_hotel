@@ -24,19 +24,19 @@
  </div>
 
         
-<div class="container">
+    <div class="container">
     <ul class="giftlist unstyled">
-      <?php foreach($arr as $v): ?>   
-        <li>
-            <div class="imgbox">
-   <a href="GiftInfo?id=<?php echo e($v->g_id); ?>"><img src="<?php echo e($v->g_img); ?>"> </a> 
-   </div>
-    <div class="desc">
-   <a href="GiftInfo?id=<?php echo e($v->g_id); ?>"><?php echo e($v->g_name); ?></a> <br/>
-     <a href="GiftInfo?id=<?php echo e($v->g_id); ?>"><em><?php echo e($v->g_score); ?>积分 </em></a> 
-  </div>
-        </li>
-        <?php endforeach; ?>
+         <?php foreach($gift_data as $k=>$v): ?>
+                <li>
+                    <div class="imgbox">
+           <a href="GiftInfo?g_id=<?php echo e($v->g_id); ?>"><img src="../storage/uploads/<?php echo e($v->g_img); ?>"> </a>
+           </div>
+            <div class="desc">
+           <a href="GiftInfo?g_id=<?php echo e($v->g_id); ?>"><?php echo e($v->g_name); ?></a> <br/>
+             <a href="GiftInfo?g_id=<?php echo e($v->g_id); ?>"><em><?php echo e($v->g_score); ?> 积分 </em></a>
+          </div>
+                </li>
+         <?php endforeach; ?>
     </ul>
     </div>
     <script type="text/javascript">
@@ -70,5 +70,5 @@
   </div>
   </div>
 
-</body>
 </html>
+</body>

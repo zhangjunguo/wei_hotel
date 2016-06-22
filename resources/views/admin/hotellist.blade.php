@@ -169,6 +169,10 @@
 																<button class="btn btn-xs btn-info" title="查看户型" onclick="roomlist({{$v->h_id}})">
 																	<i class="icon-pencil bigger-120"></i>
 																</button>
+																
+																<button class="btn btn-xs btn-info" title="添加图片" onclick="imglist({{$v->h_id}})">
+																	<i class="icon-camera bigger-120"></i>
+																</button>
 
 															   <button class="btn btn-xs btn-info" title="编辑" onclick="edit({{$v->h_id}})">
 																	<i class="icon-edit bigger-120"></i>
@@ -287,6 +291,10 @@
 <script>
 	function roomlist(h_id) {
 		window.location.href = "RoomShow?h_id="+h_id;
+	}
+
+	function imglist(h_id) {
+		window.location.href = "HotelImg?h_id="+h_id;
 	}
 
 	function edit(h_id) {

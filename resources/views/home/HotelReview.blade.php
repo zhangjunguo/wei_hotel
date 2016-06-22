@@ -36,7 +36,7 @@
     <a href="HotelInfo?id={{Session::get('h_id')}}">房型</a>
 	</li>
 	<li><a href="HotelDesc?id={{Session::get('h_id')}}">简介</a></li>
-	<li><a href="#">地图</a></li>
+	<li><a href="HotelMap?id={{Session::get('h_id')}}">地图</a></li>
 	<li><a href="HotelReview?id={{Session::get('h_id')}}"  class="active">评论</a></li>
 </ul>
 <script type="text/javascript">

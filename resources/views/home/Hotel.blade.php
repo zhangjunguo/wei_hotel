@@ -7,7 +7,6 @@
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <link href="../home/css/bootstrap.min.css" rel="stylesheet" />
 <link href="../home/css/NewGlobal.css" rel="stylesheet" />
-
 <script type="text/javascript" src="../home/js/zepto.js"></script>
 
 </head>
@@ -126,7 +125,7 @@
            <a href=""  class="active">房型</a>
       </li>
       <li><a href="HotelDesc?id={{Session::get('h_id')}}">简介</a></li>
-      <li><a href="#">地图</a></li>
+      <li><a href="HotelMap?id={{Session::get('h_id')}}">地图</a></li>
       <li><a href="HotelReview?id={{Session::get('h_id')}}">评论</a></li>
 </ul>
  <div id="BookRoom" class="tab-pane active fade in">   
@@ -267,10 +266,20 @@
           
         <div class="fr">
           <em class="orange roomprice">
-              ￥{{$v->r_price}} 起
+          <?php if($data->user_grade == 0){ ?>
+              普通价：<span>￥{{$v->r_price}}</span> 起 <br />
+              VIP：<span style="text-decoration:line-through">￥{{$v->r_vip_price}}</span> 起
+          <?php }elseif($data->user_grade == 1){ ?>
+              普通价：<span style="text-decoration:line-through">￥{{$v->r_price}}</span> 起 <br />
+              VIP：<span>￥{{$v->r_vip_price}}</span> 起
+          <?php }elseif($data->user_grade == 2){ ?>
+              普通价：<span>￥{{$v->r_price}}</span> 起 <br />
+              <!-- VIP：<span>￥{{$v->r_vip_price}}</span> 起 -->
+          <?php } ?>
+              
          </em>
        <?php if($v->r_state == 1){ ?>
-    <a href='login.aspx@page=_2Forderhotel.aspx&hotelid=5&roomtype=5&checkInDate=2014-4-11&checkOutDate=2014-4-12' title='立即预定' class='btn btn-success iframe'>预定</a>
+    <a href='HotelYU?h_id={{$h_id}}&r_id={{$v->r_id}}&price={{$v->r_price}}&vip_price={{$v->r_vip_price}}' title='立即预定' class='btn btn-success iframe'>预定</a>
     <?php }elseif($v->r_state == 0){ ?>
         <span class='btn'>满房</span>
     <?php } ?>

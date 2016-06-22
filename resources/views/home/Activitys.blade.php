@@ -24,64 +24,16 @@
         
     <div class="container width90">
         <ul class="unstyled activitylist">
-             
-                <li>
-                <a href="ActivityInfo">
-                <img src="http://www.gridinn.com/photos/201404/3.jpg"/>
-                <p>选出您最喜欢的格子微分店（2014-04-08）</p>
+            @foreach($data as $v)
+            <li>
+                <a href="ActivityInfo?act_id={{$v->act_id}}">
+                <img src="/{{$v->act_img}}"/>
+                <p>{{$v->act_name}} ({{date('Y-m-d', $v->act_start_time)}}—{{date('Y-m-d', $v->act_end_time)}})</p>
                 </a>
             </li> 
-            
-                <li>
-                <a href="News.aspx.html">
-                <img src="http://www.gridinn.com/photos/201404/20140408162944.jpg"/>
-                <p>做幸运之神，享受0元入住（2014-04-08）</p>
-                </a>
-            </li> 
-            
-                <li>
-                <a href="News.aspx@id=111">
-                <img src="http://www.gridinn.com/photos/201401/20140107151247.jpg"/>
-                <p>西大店1周年店庆，欢乐唱享格子微（2014-01-07）</p>
-                </a>
-            </li> 
-            
-                <li>
-                <a href="News.aspx@id=110">
-                <img src="http://www.gridinn.com/photos/201401/20140106153657.jpg"/>
-                <p>爱让全世界都知道（2014-01-06）</p>
-                </a>
-            </li> 
-            
-                <li>
-                <a href="News.aspx@id=109">
-                <img src="http://www.gridinn.com/photos/201401/20140106153533.jpg"/>
-                <p>本命年你最红（2014-01-06）</p>
-                </a>
-            </li> 
-            
-                <li>
-                <a href="News.aspx@id=100">
-                <img src="http://www.gridinn.com/photos/201311/20131126143411.jpg"/>
-                <p>寻找最美“微女郎”（2013-11-26）</p>
-                </a>
-            </li> 
-            
-                <li>
-                <a href="News.aspx@id=99">
-                <img src="http://www.gridinn.com/photos/201311/20131126140226.jpg"/>
-                <p>我也要上头条！参与活动赢汪峰演唱会门票（2013-11-26）</p>
-                </a>
-            </li> 
-            
-                <li>
-                <a href="News.aspx@id=98">
-                <img src="http://www.gridinn.com/photos/201311/20131126131759.jpg"/>
-                <p>周二会员尊享日，全部房型88-99（2013-11-26）</p>
-                </a>
-            </li> 
-              
+            @endforeach              
         </ul>
+        <?php echo $data->render();?>
       </div>
 
 

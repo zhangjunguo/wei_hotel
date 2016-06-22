@@ -10,9 +10,15 @@
         <link href="../home/css/NewGlobal.css" rel="stylesheet" />
         <link href="../home/css/user.css" rel="stylesheet" />
         <script type="text/javascript" src="../home/js/zepto.js"></script>
+        <style>
+           #div{
+            text-align: center;
+            text-decoration: none;
+           }
+        </style>
     </head>
     
-    <body>
+    <body id="html">
         <div class="header">
             <a href="/" class="home">
                 <span class="header-icon header-icon-home"></span>
@@ -24,33 +30,39 @@
         </div>
         <div class="container width80 pt20">
             <div class="order-nav">
-                <a class="selected" href="">全部</a>
-                <a href="">未完成</a>
-                <a class="last-a" href="">已完成</a>
+                <a class="selected" href="MyGift">全部</a>
+                <a class="last-a" href="MyGiftNo">未完成</a>
+                <a class="last-a" href="MyGiftYes">已完成</a>
             </div>
-
             <div class="order-list">
                 <ul>
+                    @foreach ($data['data'] as $v)
                     <li>
-                        <span class="order-hotel-name">玩具熊</span>
-                        <span class="order-time">2016-05-20 12:23:34</span>
+                        <a href="MyGiftX?go_id={{$v->go_id}}"><span class="order-hotel-name">{{$v->g_name}}</span></a>
+                        <span class="order-time">{{date('Y-m-d H:i:s', $v->go_time)}}</span>
                     </li>
-                    <li>
-                        <span class="order-hotel-name">玩具熊</span>
-                        <span class="order-time">2016-05-20 12:23:34</span>
-                    </li>
-                    <li>
-                        <span class="order-hotel-name">玩具熊</span>
-                        <span class="order-time">2016-05-20 12:23:34</span>
-                    </li>
+                    @endforeach
                 </ul>
+               <div id="div"> <?php echo $data['str'];?></div>
             </div>
         </div>
         <div class="footer">
             <div class="gezifooter">
-                <p style="color:#bbb;">格子微酒店连锁 &copy; 版权所有 2012-2014</p>
+                <p style="color:#bbb;">1408phpF4组 &copy; 版权所有 2012-2016</p>
             </div>
         </div>
     </body>
 
 </html>
+<script>
+    function page(page) {
+        var ajax = new XMLHttpRequest;
+        ajax.open('get', 'MyGift?page='+page);
+        ajax.send();
+        ajax.onreadystatechange = function() {
+            if(ajax.readyState == 4 && ajax.status == 200) {
+                document.getElementById('html').innerHTML = ajax.responseText;
+            }
+        }
+    }
+</script>

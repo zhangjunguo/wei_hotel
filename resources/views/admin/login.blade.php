@@ -158,17 +158,17 @@
 												输入您的电子邮件和接受指令
 											</p>
 
-											<form>
+											<form action="forgotPass" method="post">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email" />
+															<input type="email" class="form-control" placeholder="Email"  name="email"/>
 															<i class="icon-envelope"></i>
 														</span>
 													</label>
-
+                                                    <input type="hidden" class="form-control" name="_token" value="<?php echo csrf_token(); ?>" />
 													<div class="clearfix">
-														<button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+														<button type="submit" class="width-35 pull-right btn btn-sm btn-danger">
 															<i class="icon-lightbulb"></i>
 															发送!
 														</button>
