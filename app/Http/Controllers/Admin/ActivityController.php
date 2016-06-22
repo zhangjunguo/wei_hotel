@@ -52,6 +52,11 @@ class ActivityController extends Controller
 					//dd($data);die;
 					$res = DB::table('activity')->insert($data);
 					if($res){
+						 $username=Session::get('username');
+					     $date=date("Y-H-d m:i:s");
+					     $ip=Session::get('ip');
+					     $content="添加一条活动";
+					     $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
 						return redirect('activitylist');
 					}else{
 						return redirect('activitylist');
@@ -72,6 +77,11 @@ class ActivityController extends Controller
 		$res = DB::table('activity')->where('act_id',$act_id)->delete();
 		if($res){
 			unlink($img);
+		   $username=Session::get('username');
+	       $date=date("Y-H-d m:i:s");
+	       $ip=Session::get('ip');
+	       $content="删除一条活动";
+           $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
 			echo "<script>alert('删除成功');location.href='activitylist'</script>";
 		}else{
 			echo "<script>alert('删除失败');location.href='activitylist'</script>";
@@ -110,6 +120,11 @@ class ActivityController extends Controller
 		// print_r($data);die;
 		$res = DB::table('activity')->where('act_id',$act_id)->update($data);
 		if($res){
+			 $username=Session::get('username');
+		       $date=date("Y-H-d m:i:s");
+		       $ip=Session::get('ip');
+		       $content="修改一条活动信息";
+           $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
 			echo "<script>alert('修改成功');location.href='activitylist'</script>";
 		}else{
 			echo "<script>alert('修改失败');location.href='activitylist'</script>";
@@ -129,6 +144,11 @@ class ActivityController extends Controller
 	 	}else{
 	 		$result = DB::table('activity')->where('act_id',$act_id)->update(['act_name'=>$act_name]);
 		 	if($result){
+		 	  $username=Session::get('username');
+		      $date=date("Y-H-d m:i:s");
+		      $ip=Session::get('ip');
+		      $content="修改一条活动名称";
+              $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
 		 		echo 1;
 		 	}else{
 		 		echo 0;

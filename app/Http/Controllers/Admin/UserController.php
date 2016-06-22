@@ -12,6 +12,11 @@ class UserController extends Controller {
 	function del($u_id){
 		  $user=DB::delete('delete from wei_users where u_id = ?',[$u_id]);
       		if($user){
+            $username=Session::get('username');
+            $date=date("Y-H-d m:i:s");
+            $ip=Session::get('ip');
+            $content="删除一条用户信息";
+              $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
       			echo "<script>
                 alert('删除成功');
                 location.href = '".URL('userlist')."';
@@ -47,6 +52,11 @@ class UserController extends Controller {
      $update= DB::table('users')->where('u_id',$id)->update(['user_name'=>$name,'user_pass'=>$pass,'user_email'=>$email,'user_phone'=>$phone,'user_score'=>$score,'user_money'=>$money,'user_sex'=>$sex,'user_img'=>$img]);
      // print_r($update);die;	
       if($update){
+           $username=Session::get('username');
+          $date=date("Y-H-d m:i:s");
+          $ip=Session::get('ip');
+            $content="修改一条用户信息";
+              $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
       			echo "<script>
                 alert('修改成功');
                 location.href = '".URL('userlist')."';

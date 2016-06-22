@@ -54,33 +54,26 @@
 
     </script>
     <style>
-       th{
-          background:#00676B;
+       .information{
           color:#FF4500;
           line-height:20px;
           height:30px;
-          text-align: center;
+          text-align: left;
         }
-       td{
+       .list{
          padding 6px 11px;
          color: #FF0000;
-         border:1px solid #95bce2;
+         font-size: 24px;
+         line-height:30px;
+         height:30px;
          vertical-align:top;
-         text-align: center;
-       td * {
-          padding 6px 11px;
-       }
-       tr.alt td{
-          background: #ecf6fc;
-       }
-       tr.over td{
-          background: #bcd4ec;
-       }
+         text-align: left;
+      }
 </style>
 	</head>
 
 	<body id="div1">
-		<?php echo $__env->make('admin/header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		@include('admin/header')
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -107,7 +100,7 @@
 						</div>
 					<!-- </div> --><!-- #sidebar-shortcuts -->
 
-			<?php echo $__env->make('admin/left', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			@include('admin/left')
 
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
@@ -124,7 +117,7 @@
 							<li>
 								<a href="#">管理员管理</a>
 							</li>
-							<li class="active">管理日志列表</li>
+							<li class="active">管理员个人信息</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -140,38 +133,21 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								管理员日志列表
+								管理员个人信息
 							</h1>
 						</div><!-- /.page-header -->
 						<div class="row">
-									<div class="col-xs-12">
-										<div class="table-responsive">
-                                        <table id="sample-table-1" class="table table-striped table-bordered table-hover" width="364" border="1" cellspacing="0" cellpadding="0" >
-												<thead>
-													<tr>
-														<th class="center">编号</th>
-														<th>管理员名</th>
-														<th>日志内容</th>
-														<th>添加时间</th>
-														<th>管理员ip</th>
-													</tr>
-												</thead>
-                                            <?php foreach($results as $v): ?>
-												<tbody>
-													<tr>
-														<td class="center"><?php echo e($v->l_id); ?></td>
-                                                        <td><?php echo e($v->adm_name); ?></td>
-														<td><?php echo e($v->l_content); ?></td>
-														<td><?php echo e($v->l_time); ?></td>
-														<td><?php echo e($v->l_ip); ?></td>
-													 </tr>
-													</tbody>
-													 <?php endforeach; ?>
-											       </table>
-											         <?php echo $results->render(); ?>
-										        </div><!-- /.table-responsive -->
-									   </div><!-- /span -->
-								 </div><!-- /row -->
+								<ul class="information">
+								 @foreach($results as $v)
+									<li class="list" ><small>管理员名字:{{$v->adm_name}}</small></li>
+								    <li class="list"><small>邮箱:{{$v->adm_email}}</small></li>
+								    <li class="list"><small>手机号:{{$v->adm_phone}}</small></li>
+								 @endforeach
+								    <li class="list"><small>所处角色:{{Session::get('rname')}}</small></li>
+								    <li class="list"><small>登录人IP：{{Session::get('ip')}}</small></li>
+								</ul>
+						</div><!-- /row -->
+					</div>
                </div>
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
@@ -269,4 +245,3 @@
 	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
-
