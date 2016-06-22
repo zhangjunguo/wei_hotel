@@ -52,7 +52,7 @@ class HotelController extends Controller
         if(!empty(Session::get('user_id'))){
             // 判断是不是会员
             $res = DB::table('users')->where('u_id',Session::get('user_id'))->first();
-            if($res->user_score >= 4000){
+            if($res->user_score >= 4000 || $res->user_grade == 1){
                 $data->user_grade = 1;
             }else{
                 $data->user_grade = 0;
@@ -152,28 +152,41 @@ class HotelController extends Controller
         // 判断是不是会员
         $res = DB::table('users')->where('u_id',Session::get('user_id'))->first();
 
+        $h_id = Request::input('h_id');
+        $r_id = Request::input('r_id');
+        $arr = DB::table('hotel')->where('h_id',$h_id)->first();
+        $data = DB::table('room')->where('r_id',$r_id)->first();
+        return view('home/HotelYu')->with(['arr'=>$arr,'data'=>$data,'res'=>$res]);
+    }
 
-        $data['o_num'] = "H".time().rand(10000,99999);
-        $data['h_id'] = Request::input('h_id');
-        $data['u_id'] = Session::get('user_id');
-        $data['o_addtime'] = time();
-        if($res->user_score >= 4000){
-            $data['o_price'] = Request::input('vip_price');
-        }else{
-            $data['o_price'] = Request::input('price'); 
-        }
-        $data['o_state'] = 1;
+    /**
+     * 确定预定酒店
+     */
+    public function HotelOk()
+    {
+        // echo 123;
+        $arr['o_num'] = "H".time().rand(1000,9999);
+        $arr['h_id'] = Request::input('h_id');
+        $arr['u_id'] = Session::get('user_id');
+        $arr['o_addtime'] = time();
+        $price = Request::input('price');
+        $nums = Request::input('nums');
+        $arr['o_price'] = $price*$nums;
+        $arr['o_state'] = 1;
 
-        $arr['o_id'] = DB::table('hotel_order')->insertGetId($data);
-        $arr['r_id'] = Request::input('r_id');
-        $arr['od_count'] = 1;
-        $arr['od_xiaoji'] = $data['o_price'];
-        $arr['od_start_time'] = strtotime(Session::get('checkInDate'));
-        $arr['od_end_time'] = strtotime(Session::get('checkOutDate'));
+        $o_id = DB::table('hotel_order')->insertGetId($arr);
+        if($o_id){
+            $data['o_id'] = $o_id;
+            $data['r_id'] = Request::input('r_id');
+            $data['od_count'] = $nums;
+            $data['od_xiaoji'] = $nums*$price;
+            $data['od_start_time'] = strtotime(Request::input('od_start_time'));
+            $data['od_end_time'] = strtotime(Request::input('od_end_time'));
 
-        $re = DB::table('hotel_order_details')->insert($arr);
-        if($re){
-            echo "<script>if(confirm('马上去支付')){location.href='PAY?o_num=".$data['o_num']."'}else{location.href='HotelInfo?id=".$data['h_id']."'}</script>";
+            $re = DB::table('hotel_order_details')->insert($data);
+            if($re){
+                echo $arr['o_num'];
+            }
         }
     }
 
@@ -211,36 +224,31 @@ class HotelController extends Controller
         return view('home/HotelGps')->with(['arr'=>$arr]);
     }
 
-    /**
-     * 酒店收藏
-     */
-    public function HotelCollect()
+// 酒店收藏
+    public function Collection()
     {
-        if(empty(Session::get('user_id'))){
-            echo 1;die;
-        }
-        $data['h_id'] = Request::input('h_id');
-        $data['col_time'] = date("Y-m-d H:i:s");
-        $data['u_id'] = Session::get('user_id');
-        // $data['is_attention'] = 0;
-
-        $re = DB::table('collect')->insert($data);
-        if($re){
-            echo 2;
+        // $arr['user_id'] = 21;
+        $arr['u_id'] = Session::get('user_id');
+        if(!empty($arr['u_id'])){
+            $arr['h_id'] = Request::input('h_id');
+            $arr['col_time'] = date('Y-m-d H:i:s',time());
+            $res = DB::table('collect')->insert($arr);
+            if($res){
+                return "<a href='javascript:cancel(".$arr['h_id'].")'><img src='../home/shou.jpg' alt='取消收藏' width='25' /></a>";
+            }
+        }else{
+            return "<script>alert('请先登录');location.href='Login'</script>";  
         }
     }
 
-    /**
-     * 取消收藏
-     */
-    public function HotelCollectDel()
+    // 取消收藏
+    public function Cancel()
     {
-        $h_id = Request::input('h_id');
-        // echo $h_id;die;
-        $u_id = Session::get('user_id');
-        $re = DB::table('collect')->where('h_id',$h_id)->where('u_id',$u_id)->delete();
-        if($re){
-            echo 1;
+        $user_id = Session::get('user_id');
+        $hotel_id = Request::input('h_id');
+        $res = DB::table('collect')->where('u_id',$user_id)->where('h_id',$hotel_id)->delete();
+        if($res){
+            return "<a href='javascript:collection(".$hotel_id.")'><img src='../home/qu.jpg' alt='收藏本店' width='25' /></a>";
         }
     }
 }
@@ -326,4 +334,44 @@ class HotelController extends Controller
       
         // print_r($arss);die;
         return view('home/CityList')->with(['data'=>$arss]);
+    }*/
+
+
+
+    /**
+     * 预定酒店
+     */
+/*    public function HotelYU()
+    {
+        if(empty(Session::get('user_id'))){
+            echo "<script>alert('请先登录');location.href='Login'</script>";die;
+        }
+        // echo 111;
+        // 判断是不是会员
+        $res = DB::table('users')->where('u_id',Session::get('user_id'))->first();
+
+
+        $data['o_num'] = "H".time().rand(10000,99999);
+        $data['h_id'] = Request::input('h_id');
+        $data['u_id'] = Session::get('user_id');
+        $data['o_addtime'] = time();
+        if($res->user_score >= 4000 || $res->user_grade == 1){
+            $data['o_price'] = Request::input('vip_price');
+        }else{
+            $data['o_price'] = Request::input('price'); 
+        }
+        $data['o_state'] = 1;
+
+        // $arr['o_id'] = DB::table('hotel_order')->insertGetId($data);
+        $arr['r_id'] = Request::input('r_id');
+        $arr['od_count'] = 1;
+        $arr['od_xiaoji'] = $data['o_price'];
+        $arr['od_start_time'] = strtotime(Session::get('checkInDate'));
+        $arr['od_end_time'] = strtotime(Session::get('checkOutDate'));
+
+        // $re = DB::table('hotel_order_details')->insert($arr);
+        // if($re){
+            // echo "<script>if(confirm('马上去支付')){location.href='PAY?o_num=".$data['o_num']."'}else{location.href='HotelInfo?id=".$data['h_id']."'}</script>";
+            return view('home/HotelYu')->with(['arr'=>$arr]);
+        // }
     }*/
