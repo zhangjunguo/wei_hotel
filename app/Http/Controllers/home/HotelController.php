@@ -40,6 +40,7 @@ class HotelController extends Controller
 	 */
     public function HotelInfo()
     {
+        // 酒店id
         $id = Request::input('id');
         Session::put('h_id',$id);
         $address = Request::input('address');
@@ -47,6 +48,21 @@ class HotelController extends Controller
         $arr = DB::table('room')->join('hotel',"room.h_id","=","hotel.h_id")->where("room.h_id",$id)->get();
         // print_r($arr);die;
     	$data = DB::table('hotel')->where("h_id",$id)->first();
+
+        if(!empty(Session::get('user_id'))){
+            // 判断是不是会员
+            $res = DB::table('users')->where('u_id',Session::get('user_id'))->first();
+            if($res->user_score >= 4000){
+                $data->user_grade = 1;
+            }else{
+                $data->user_grade = 0;
+            }
+            // $data->user_grade = $res->user_grade;
+        }else{
+            $data->user_grade = 2;
+        }
+        
+
         return view('home/Hotel')->with(['arr'=>$arr,'data'=>$data,'h_id'=>$id]);
     }
 
@@ -66,7 +82,8 @@ class HotelController extends Controller
         $h_id = Request::input('id');
         $arr = DB::table('hotel_img')->where("h_id",$h_id)->get();
         // print_R($arr);die;
-        return view('home/HotelInfo')->with(['arr'=>$arr]);
+        $res = DB::table('hotel')->where('h_id',$h_id)->first();
+        return view('home/HotelInfo')->with(['arr'=>$arr,'res'=>$res]);
     }
 
     /**
@@ -79,6 +96,7 @@ class HotelController extends Controller
         $cityID = Request::input('cityID');
         $checkInDate = Request::input('checkInDate');
         $checkOutDate = Request::input('checkOutDate');
+        // echo $checkOutDate.'---'.$checkInDate;
         Session::put('checkInDate',$checkInDate);
         Session::put('checkOutDate',$checkOutDate);
         if($cityID){
@@ -131,11 +149,19 @@ class HotelController extends Controller
             echo "<script>alert('请先登录');location.href='Login'</script>";die;
         }
         // echo 111;
+        // 判断是不是会员
+        $res = DB::table('users')->where('u_id',Session::get('user_id'))->first();
+
+
         $data['o_num'] = "H".time().rand(10000,99999);
         $data['h_id'] = Request::input('h_id');
         $data['u_id'] = Session::get('user_id');
         $data['o_addtime'] = time();
-        $data['o_price'] = Request::input('price');
+        if($res->user_score >= 4000){
+            $data['o_price'] = Request::input('vip_price');
+        }else{
+            $data['o_price'] = Request::input('price'); 
+        }
         $data['o_state'] = 1;
 
         $arr['o_id'] = DB::table('hotel_order')->insertGetId($data);
@@ -147,7 +173,7 @@ class HotelController extends Controller
 
         $re = DB::table('hotel_order_details')->insert($arr);
         if($re){
-            echo "<script>alert('预定成功，请及时付款');location.href='HotelInfo?id=".$data['h_id']."'</script>";
+            echo "<script>if(confirm('马上去支付')){location.href='PAY?o_num=".$data['o_num']."'}else{location.href='HotelInfo?id=".$data['h_id']."'}</script>";
         }
     }
 
@@ -180,6 +206,8 @@ class HotelController extends Controller
     {
         $id = Request::input('id');
         $arr = DB::table('hotel')->where("h_id",$id)->first();
+        $arr->h_desc = str_replace("\n", "", $arr->h_desc);
+        $arr->h_desc = str_replace("\r", "", $arr->h_desc); 
         return view('home/HotelGps')->with(['arr'=>$arr]);
     }
 
@@ -198,7 +226,7 @@ class HotelController extends Controller
 
         $re = DB::table('collect')->insert($data);
         if($re){
-            echo 2;die;
+            echo 2;
         }
     }
 
