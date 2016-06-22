@@ -50,5 +50,4 @@ class Permission {
         }
         return json_decode(json_encode($arr, true));
     }
-    
 }
