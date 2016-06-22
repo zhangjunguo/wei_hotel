@@ -84,6 +84,9 @@ Route::get('home/HotelGps',"home\HotelController@HotelGps");
 // 酒店收藏
 Route::get('home/HotelCollect',"home\HotelController@HotelCollect");
 Route::get('home/HotelCollectDel',"home\HotelController@HotelCollectDel");
+// 支付
+Route::get('home/PAY',"home\PAYController@pay");
+Route::get('home/return_url',"home\PAYController@return_url");
 
 
 
