@@ -26,8 +26,17 @@ Route::get('home/Order',"home\OrderController@Index");
 Route::get('home/MyAccount',"home\AccountController@Index");
 // 前台我的礼物
 Route::get('home/MyGift',"home\AccountController@MyGift");
+Route::get('home/MyGiftNo',"home\AccountController@MyGiftNo");
+Route::get('home/MyGiftYes',"home\AccountController@MyGiftYes");
+Route::get('home/MyGiftX', "home\AccountController@MyGiftX");
 // 前台我的订单  
 Route::get('home/MyOrder',"home\AccountController@MyOrder");
+// Route::get('MyOrderpage',"home\AccountController@MyOrderPage");
+Route::get('home/my_order_no',"home\AccountController@my_order_no");
+Route::get('home/my_order_yes',"home\AccountController@my_order_yes");
+//订单详情
+route::get('home/order_info',"home\AccountController@Order_Info");
+
 // 前台我的信息
 Route::get('home/MyInfo',"home\AccountController@MyInfo");
 // 前台我的收藏
@@ -50,7 +59,22 @@ Route::post('home/Logingo',"home\LoginController@Login");
 Route::get('home/Register',"home\LoginController@Register");
 // 注册
 Route::post('home/enroll',"home\LoginController@Enroll");
-
+//退出
+route::get('home/loginout','home\LoginController@Loginout');
+//忘记密码
+Route::get('home/password','home\LoginController@Pwd');
+//手机找回页面
+Route::get('home/pwd_phone','home\LoginController@Pwd_phone');
+//手机找回
+route::post('home/pwd_phone_method','home\LoginController@pwd_phone_method');
+//邮箱找回页面
+route::any('home/pwd_email','home\LoginController@pwd_email');
+//邮箱找回
+route::any('home/pwd_email_method','home\LoginController@pwd_email_method');
+//发送手机验证码
+Route::get('home/send_code','home\LoginController@send_code');
+//发送邮箱验证码
+route::get('home/send_code_email','home\LoginController@send_code_email');
 // 前台预订酒店
 Route::get('home/Hotel',"home\HotelController@Index");
 // 前台酒店列表
@@ -63,6 +87,10 @@ Route::get('home/HotelReview',"home\HotelController@HotelReview");
 Route::get('home/HotelDesc',"home\HotelController@HotelDesc");
 // 前台修改注入时间
 Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
+
+
+//用户上传头像
+Route::any('home/UserImg', "home\AccountController@MyImg");
 
 // 前台酒店预定
 Route::get('home/HotelYU',"home\HotelController@HotelYU");
@@ -77,6 +105,9 @@ Route::get('home/HotelGps',"home\HotelController@HotelGps");
 // 酒店收藏
 Route::get('home/HotelCollect',"home\HotelController@HotelCollect");
 Route::get('home/HotelCollectDel',"home\HotelController@HotelCollectDel");
+// 支付
+Route::get('home/PAY',"home\PAYController@pay");
+Route::get('home/return_url',"home\PAYController@return_url");
 
 
 
@@ -85,6 +116,7 @@ Route::get('home/HotelCollectDel',"home\HotelController@HotelCollectDel");
 route::post('exchangeGift','home\GiftController@exchangeGift');
 //前台礼物下单
 route::post('exchangeOrder','home\GiftController@exchangeOrder');
+
 
 
 
@@ -129,6 +161,8 @@ Route::group(['middleware' => 'permission'], function(){
 	Route::get('rolelist',  'Admin\AdminController@rolelist');
 	// 管理员日志页
 	Route::get('adminlog',  'Admin\AdminController@log');
+	//管理员个人信息页
+	Route::get('information',  'Admin\AdminController@information');
 	// 权限管理
 	// 权限添加页
 	Route::get('poweradd',  'Admin\PowerController@add');

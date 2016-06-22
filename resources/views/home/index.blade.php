@@ -64,13 +64,16 @@
             <figure class="wdxc_icon"></figure>
               </a>
          </li>
-       
      </ul>
      </div>
  </div>    
 <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >免费模板</a></div>
   <div class="footer">
-  <div class="gezifooter"> <a href="home/Hotel" class="ui-link">酒店预订</a> <font color="#878787">|</font> <a href="home/Login" class="ui-link">我的订单</a> <font color="#878787">|</font> <a href="home/Login" class="ui-link">我的格子</a> <font color="#878787">|</font> <a href="http://www.cssmoban.com/" title="网站模板" target="_blank">网站模板</a></div>
+  <div class="gezifooter"> <a href="home/Hotel" class="ui-link">酒店预订</a> <font color="#878787">|</font> <a href="home/Login" class="ui-link">我的订单</a> <font color="#878787">|</font> <a href="home/Login" class="ui-link">我的格子</a> <font color="#878787">|</font> <a href="http://www.cssmoban.com/" title="网站模板" target="_blank">网站模板</a>
+  <?php if(Session::get('user_name')){ ?>
+  <font color="#878787">|</font> <a href="home/loginout" title="退出" >退出</a>
+  <?php } ?>
+  </div>
   <div class="gezifooter">
     <p style="color:#bbb;">格子微酒店连锁 &copy; 版权所有 2012-2013</p>
   </div>

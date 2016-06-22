@@ -24,27 +24,13 @@
         </div>
         <div class="container width80 pt20">
             <div class="order-nav">
-                <a class="selected" href="">全部</a>
-                <a href="my_order_no">未完成</a>
-                <a class="last-a" href="my_order_yes">已完成</a>
-            </div>
-            
-            <div class="order-list">
-            @foreach($data['data'] as $v)
-                <ul>
-                    <li>
-                        <a href="order_info?id={{$v->o_id}}"><span class="order-hotel-name">{{$v->h_name}}</span></a>
-                        <span class="order-time">{{date('Y-m-d H:i:s',$v->o_addtime)}}</span>
-                    </li>
-                </ul>
-            
-            @endforeach
-            <div class="container width80 pt20">
-                <a href="javascript:page(1)">首页</a>
-                <a href="javascript:page({{$data['last']}})">上一页</a>
-                <a href="javascript:page({{$data['next']}})">下一页</a>
-                <a href="javascript:page({{$data['pages']}})">尾页</a>
-            </div>
+                
+            <ul class="user-function-list">
+                <li style="text-align:left">找回方式:</li>
+                <li style="text-align:center"><a href="pwd_phone">手机找回</a></li>
+                <li style="text-align:center"><a href="pwd_email">邮箱找回</a></li>
+            </ul>
+
             </div>
         </div>
         <div class="footer">

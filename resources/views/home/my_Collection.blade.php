@@ -10,10 +10,11 @@
         <link href="css/NewGlobal.css" rel="stylesheet" />
         <link href="css/user.css" rel="stylesheet" />
         <script type="text/javascript" src="js/zepto.js"></script>
+        <script type="text/javascript" src="js/jq.js"></script>
     </head>
     
     <body>
-        <div class="header">
+        <div class="header" >
             <a href="index.html" class="home">
                 <span class="header-icon header-icon-home"></span>
                 <span class="header-name">主页</span></a>
@@ -22,23 +23,28 @@
                 <span class="header-icon header-icon-return"></span>
                 <span class="header-name">返回</span></a>
         </div>
-        <div class="container width80 pt20">
+        <div class="container width80 pt20" id="div1">
             <div class="order-nav" style="text-align:left;">
                 <!-- <a class="selected" href="">全部</a> -->
-                <span style="color:#999999">已收藏</span>
+                <span style="color:#367517">已收藏的酒店:</span>
                 <!-- <a class="last-a" href="">已完成</a> -->
             </div>
 
             <div class="order-list">
+            
                 <ul>
                    @foreach($results as $v)
                     <li>
-                        <span class="order-hotel-name">{{$v->h_name}}</span>
+                        <span class="collect_order">{{$v->col_id}}  &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span class="order-hotel-name">
+                        <img src="../uploads/{{$v->h_img}}" alt="无法显示" width="50px" height="50px"/>
+                        <a href="home/HotelInfo?id={{$v->h_id}}">{{$v->h_name}}</a>
+                        </span>
                         <span class="order-time">{{$v->col_time}}</span>
                     </li>
                     @endforeach
                 </ul>
-            </div>
+           </div>
         </div>
         <div class="footer">
             <div class="gezifooter">
@@ -46,5 +52,5 @@
             </div>
         </div>
     </body>
-
+     
 </html>

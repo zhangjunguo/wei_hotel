@@ -145,7 +145,7 @@
 								</li>
 
 								<li>
-									<a href="#">
+									<a href="information" target="_top">
 										<i class="icon-user"></i>
 										个人信息
 									</a>

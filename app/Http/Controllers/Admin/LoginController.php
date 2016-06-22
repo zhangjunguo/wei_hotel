@@ -16,17 +16,26 @@ class LoginController extends Controller {
 
     // 登录操作
     public function PostLogin()
-    {
+    {   
+        $ip=Request::getClientIp();
         $adm_time = time();
         $username = Request::input('username');
         $pwd = md5(Request::input('pwd'));
         $user= DB::table('admin')->where('adm_name',$username)->where('adm_pass',$pwd)->first();
-        // print_r($user);die;
+                Session::put('username',$username);
+                Session::put('uid',$user->adm_id);
+                Session::put('ip',$ip);
+                $uid=Session::get('uid');
+                $arr=DB::table('admin')
+                ->join('adm_role', 'adm_role.adm_id', '=', 'admin.adm_id')
+                ->join('role', 'adm_role.ro_id', '=', 'role.ro_id')
+                ->where('admin.adm_id',$uid)
+                ->first();
+                 Session::put('rname',$arr->ro_name);// print_r($user);die;
         if ($user){
             if($adm_time - $user->adm_time>10){
                 DB::table('admin') -> where('adm_name',$username) -> update(['adm_update_num'=>0]);
-                Session::put('username',$username);
-                Session::put('uid',$user->adm_id);
+              
                 return redirect('admin')->with('message', '成功登录');
             }else{
                 echo '<script>alert("客官再等会,10秒不够呢");location.href="login"</script>';
@@ -116,7 +125,7 @@ class LoginController extends Controller {
     // 登出
     public function Logout()
     {
-        Session::forget('username');
+        Session::flush();
         return redirect('/login');
     }
 }

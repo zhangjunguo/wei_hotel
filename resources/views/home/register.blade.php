@@ -23,14 +23,20 @@
         </div>
         <div class="container width80 pt20">
             <form name="aspnetForm" method="post" action="enroll" id="aspnetForm" class="form-horizontal">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                 <div class="control-group">
-                    <input name="mobile_phone" type="text" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入手机号" />
+                    <input name="mobile_phone" type="text" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入手机号" /><font size="2" color="red" style="float:left"><?php echo $errors->first('user_phone'); ?></font>
                 </div>
                 <div class="control-group">
-
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input name="id_card" type="password" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入密码" />
-
+                    <input name="mobile_email" type="text" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入邮箱号码" /><font size="2" color="red" style="float:left"><?php echo $errors->first('user_email'); ?></font>
+                </div>
+                <div class="control-group">
+                    
+                    <input name="id_card" type="password" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入密码" /><font size="2" color="red" style="float:left"><?php echo $errors->first('user_pass'); ?></font>
+                </div>
+                <div class="control-group">
+                    <input name="pass" type="password" id="ctl00_ContentPlaceHolder1_txtUserName" class="input width100 " style="background: none repeat scroll 0 0 #F9F9F9;padding: 8px 0px 8px 4px" placeholder="请输入确认密码" />
                 </div>
                 <div class="control-group">
                     <button onclick="__doPostBack('ctl00$ContentPlaceHolder1$btnOK','')" id="ctl00_ContentPlaceHolder1_btnOK" class="btn-large green button width100">立即注册</button></div>

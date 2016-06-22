@@ -13,6 +13,7 @@
 
 </head>
 <body>
+
  <div class="header">
  <a href="/" class="home">
             <span class="header-icon header-icon-home"></span>
@@ -41,7 +42,7 @@
                   <p>评分：4.6 （{{$v->num}}人已评）</p>
               <!-- </a> -->
                   <?php if(isset($v->collect)){ ?>
-                    <span class="collect" style="color:#666666; float:right;" h_id="{{$v->h_id}}" h_state="{{$v->collect}}" cityid="{{$v->city_id}}">取消收藏</span>
+                    <span class="collect" style="color:#666666; float:right;" h_id="{{$v->h_id}}" h_state="1" cityid="{{$v->city_id}}">取消收藏</span>
               <?php }else{ ?>
         <span class="collect" style="color:#666666; float:right;" h_id="{{$v->h_id}}" h_state="0" cityid="{{$v->city_id}}">收藏</span>
               <?php } ?></div>
@@ -92,15 +93,17 @@
             if(e == 1){
               alert('请先登录');
             }else if(e == 2){
-              $(this).html('取消收藏');
-              location.href='HotelList?cityID='+city_id;
+              // $(this).html('取消收藏');
+              // $(this).css('h_state',1);
+              location.href="{{URL('home/HotelList')}}?cityID="+city_id+'&checkInDate='+"{{Session::get('checkInDate')}}"+'&checkOutDate='+"{{Session::get('checkOutDate')}}";
             }
           });
         }else if(text == 1){
            $.get("HotelCollectDel",{"h_id":h_id},function(e){
                     if(e == 1){
-                      $(this).html('收藏');
-                      location.href='HotelList?cityID='+city_id;
+                      // $(this).html('收藏');
+                      location.href="{{URL('home/HotelList')}}?cityID="+city_id+'&checkInDate='+"{{Session::get('checkInDate')}}"+'&checkOutDate='+"{{Session::get('checkOutDate')}}";
+                      // $(this).css('h_state',0);
                     }
             });
         }

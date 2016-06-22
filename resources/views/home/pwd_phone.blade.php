@@ -17,34 +17,28 @@
             <a href="/" class="home">
                 <span class="header-icon header-icon-home"></span>
                 <span class="header-name">主页</span></a>
-            <div class="title" id="titleString">我的订单</div>
+            <div class="title" id="titleString">手机找回</div>
             <a href="javascript:history.go(-1);" class="back">
                 <span class="header-icon header-icon-return"></span>
                 <span class="header-name">返回</span></a>
         </div>
         <div class="container width80 pt20">
             <div class="order-nav">
-                <a class="selected" href="">全部</a>
-                <a href="my_order_no">未完成</a>
-                <a class="last-a" href="my_order_yes">已完成</a>
-            </div>
-            
-            <div class="order-list">
-            @foreach($data['data'] as $v)
-                <ul>
-                    <li>
-                        <a href="order_info?id={{$v->o_id}}"><span class="order-hotel-name">{{$v->h_name}}</span></a>
-                        <span class="order-time">{{date('Y-m-d H:i:s',$v->o_addtime)}}</span>
-                    </li>
+                
+            <form method="post" action="pwd_phone_method" id="aspnetForm" class="form-horizontal">
+                <ul class="user-function-list">
+                    <li style="text-align:left">手机号:<input type="text" id="phone" name="phone"></li>
+                    <li style="text-align:left">验证码:<input type="text" name="code" ><input type="button" id="but" value="获取验证码"></li>
+                    <li style="text-align:left">新密码:<input type="password" name="user_pass"></li>
+                    <li style="text-align:left">确认密码:<input type="password" name="check_pass" ></li>
                 </ul>
-            
-            @endforeach
-            <div class="container width80 pt20">
-                <a href="javascript:page(1)">首页</a>
-                <a href="javascript:page({{$data['last']}})">上一页</a>
-                <a href="javascript:page({{$data['next']}})">下一页</a>
-                <a href="javascript:page({{$data['pages']}})">尾页</a>
-            </div>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="control-group">
+         <button onClick="__doPostBack('ctl00$ContentPlaceHolder1$btnOK','')" id="ctl00_ContentPlaceHolder1_btnOK" class="btn-large green button width100">立即找回</button>
+
+        </div>
+            </form>
+
             </div>
         </div>
         <div class="footer">
@@ -54,12 +48,11 @@
         </div>
     </body>
 </html>
-<script type="text/javascript" src="js/jq.js"></script>
+<script type="text/javascript" src="../js/jq.js"></script>
 <script type="text/javascript">
-    function page(page)
-    {
-        $.get('MyOrder',{'page':page},function(msg){
-            $("#div1").html(msg);
-        })
-    }
+
+    $("#but").click(function(){
+        var phone = $("#phone").val();
+        $.get('send_code',{'phone':phone})
+    })
 </script>
