@@ -26,6 +26,9 @@ Route::get('home/Order',"home\OrderController@Index");
 Route::get('home/MyAccount',"home\AccountController@Index");
 // 前台我的礼物
 Route::get('home/MyGift',"home\AccountController@MyGift");
+Route::get('home/MyGiftNo',"home\AccountController@MyGiftNo");
+Route::get('home/MyGiftYes',"home\AccountController@MyGiftYes");
+Route::get('home/MyGiftX', "home\AccountController@MyGiftX");
 // 前台我的订单  
 Route::get('home/MyOrder',"home\AccountController@MyOrder");
 // 前台我的信息
@@ -64,6 +67,10 @@ Route::get('home/HotelDesc',"home\HotelController@HotelDesc");
 // 前台修改注入时间
 Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
 
+
+//用户上传头像
+Route::any('home/UserImg', "home\AccountController@MyImg");
+
 // 前台酒店预定
 Route::get('home/HotelYU',"home\HotelController@HotelYU");
 // 前台酒店收藏
@@ -85,6 +92,7 @@ Route::get('home/HotelCollectDel',"home\HotelController@HotelCollectDel");
 route::post('exchangeGift','home\GiftController@exchangeGift');
 //前台礼物下单
 route::post('exchangeOrder','home\GiftController@exchangeOrder');
+
 
 
 
