@@ -30,10 +30,21 @@
             </div>
             
             <div class="order-list">
+            <ul>
+                <li>
+                    <span class="order-hotel-name">酒店名称</span>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <span>前往支付</span class="order-hotel-name">
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <span class="order-name">下单时间</span>
+                </li>
+            </ul>
             @foreach($data['data'] as $v)
                 <ul>
                     <li>
                         <a href="order_info?id={{$v->o_id}}"><span class="order-hotel-name">{{$v->h_name}}</span></a>
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <a href="PAY?o_num={{$v->o_num}}"><span>去支付</span class="order-hotel-name"></a>
                         <span class="order-time">{{date('Y-m-d H:i:s',$v->o_addtime)}}</span>
                     </li>
                 </ul>

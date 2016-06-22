@@ -228,6 +228,7 @@ class LoginController extends Controller
    {    
         
         Session::flush();
-        return redirect('/');
+        return  "<script>alert('退出成功');location.href='/';</script>";
+
    }
 }
