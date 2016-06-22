@@ -37,7 +37,8 @@
 		<script src="assets/js/ace-extra.min.js"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
+<script src="/js/highcharts.js"></script>
+<script src="/js/exporting.js"></script>
 		<!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.js"></script>
 		<script src="assets/js/respond.min.js"></script>
@@ -496,7 +497,7 @@
 
 											<div class="widget-body">
 												<div class="widget-main padding-4">
-													<div id="sales-charts"></div>
+													<div id="sales-charts">123123123</div>
 												</div><!-- /widget-main -->
 											</div><!-- /widget-body -->
 										</div><!-- /widget-box -->
