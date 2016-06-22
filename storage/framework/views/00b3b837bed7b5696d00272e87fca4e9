@@ -66,7 +66,7 @@ function __doPostBack(eventTarget, eventArgument) {
       <label class="checkbox fl">
           <input name="remember" value="7" type="checkbox" id="" style="float: none;margin-left: 0px;" /> 记住账号
       </label>
-     <a class="fr" href="GetPassword.aspx">忘记密码？</a>
+     <a class="fr" href="password">忘记密码？</a>
  
   </div>
      <div class="control-group">
