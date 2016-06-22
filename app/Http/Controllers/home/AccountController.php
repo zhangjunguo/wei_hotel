@@ -4,7 +4,7 @@ namespace App\Http\Controllers\home;
 
 header('content-type:text/html;charset=utf8');
 
-use DB,Session,Request;
+use DB,Session,Request,Validator;
 use App\Http\Controllers\Controller;
 
 
@@ -265,10 +265,31 @@ class AccountController extends Controller
     public function MyInfo()
     {
         $u_id = Session::get('user_id');
+        $user_name = Request::input('user_name');
 
-        $data = DB::table('users')->where('u_id', $u_id)->first();
+        if ($user_name) {
+            
+            $data = Request::all();
 
-    	return view('home/my_list')->with('data', $data);
+            //unset($data['_token']);
+
+            if(empty($data['user_card'])){
+                DB::table('users')->where('u_id', $u_id)->update(['user_name'=>$data['user_name']]);
+            }else{
+                DB::table('users')->where('u_id', $u_id)->update(['user_name'=>$data['user_name'], 'user_card'=>$data['user_card']]);
+            }
+
+            return redirect('home/MyAccount');
+        } else {
+
+            $data = DB::table('users')->where('u_id', $u_id)->first();
+
+            return view('home/my_list')->with('data', $data);
+        }
+
+        
+
+       
     }
 
     /**
