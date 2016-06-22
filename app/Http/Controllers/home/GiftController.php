@@ -39,6 +39,9 @@ class GiftController extends Controller
     public function exchangeGift()
     {
         $g_id = Request::input('g_id');
+
+        //查看用户是否需要送货
+        $oneGift =  DB::table('gift') -> where('g_id',$g_id) -> first();
         $g_score = Request::input('g_score');
         $data['g_name'] = Request::input('g_name');
         //echo $g_score;
@@ -56,7 +59,7 @@ class GiftController extends Controller
 
         $data['g_id'] = $g_id;
         $data['go_score'] = $g_score;
-
+        Session::put('is_post',$oneGift->is_post);
         return view('home/orderGift',['order_data'=>$data]);
     }
 
@@ -67,22 +70,25 @@ class GiftController extends Controller
     {
         $data = Request::all();
 
-        $region_data = DB::table('region')->get();
-        // print_r($region_data);die;
-        $str = "";
-        foreach ($region_data as $k => $v) {
-            if ($data['province'] == $v->region_id) {
-                $str .= $v->region_name;
+        //判断是否送货到家
+        if($data['is_post']==1) {
+            $region_data = DB::table('region')->get();
+            // print_r($region_data);die;
+            $str = "";
+            foreach ($region_data as $k => $v) {
+                if ($data['province'] == $v->region_id) {
+                    $str .= $v->region_name;
+                }
+                if ($data['city'] == $v->region_id) {
+                    $str .= $v->region_name;
+                }
+                if ($data['county'] == $v->region_id) {
+                    $str .= $v->region_name;
+                }
             }
-            if ($data['city'] == $v->region_id) {
-                $str .= $v->region_name;
-            }
-            if ($data['county'] == $v->region_id) {
-                $str .= $v->region_name;
-            }
+            $str .= $data['addre'];
+            $arr['addre'] = $str;
         }
-        $str .= $data['addre'];
-        $arr['addre'] = $str;
         $arr['u_id'] = Session::get('user_id');
         $arr['go_score'] = $data['go_score'];
         $arr['phone'] = $data['phone'];
@@ -92,12 +98,18 @@ class GiftController extends Controller
         // print_r($arr);
         $bool = DB::table('gift_order')->insert($arr);
         if ($bool) {
+
+            //礼物数量减一
+            DB::table('gift')->decrement('g_num');
             $content = "尊敬的用户" . Session::get('user_name') . "你已经下单成功(" . $data['g_name'] . ")，我们会以火箭的速度发货,记得给好评啊【一路狂奔】";
             $result = file_get_contents("http://api.jisuapi.com/sms/send?mobile=" . $arr['phone'] . "&content=" . $content . "&appkey=49f049d351201fa6 ");
             $jsonarr = json_decode($result, true);
             if ($jsonarr['status'] == 0) {
+                //减去需要的积分
                 $user_score = ceil(DB::table('users') -> where('u_id',$arr['u_id']) -> pluck('user_score')) -  ceil($arr['go_score']);
                 DB::table('users') -> where('u_id',$arr['u_id']) -> update(['user_score'=>$user_score]);
+                //礼物数量减一
+                DB::table('gift')->where('g_id',$arr['g_id'])->decrement('g_num');
                 echo "<script>alert('下单成功');location.href='home/Gift'</script>";
             }
         }else{
