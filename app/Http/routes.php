@@ -31,6 +31,12 @@ Route::get('home/MyGiftYes',"home\AccountController@MyGiftYes");
 Route::get('home/MyGiftX', "home\AccountController@MyGiftX");
 // 前台我的订单  
 Route::get('home/MyOrder',"home\AccountController@MyOrder");
+// Route::get('MyOrderpage',"home\AccountController@MyOrderPage");
+Route::get('home/my_order_no',"home\AccountController@my_order_no");
+Route::get('home/my_order_yes',"home\AccountController@my_order_yes");
+//订单详情
+route::get('home/order_info',"home\AccountController@Order_Info");
+
 // 前台我的信息
 Route::get('home/MyInfo',"home\AccountController@MyInfo");
 // 前台我的收藏
@@ -53,7 +59,22 @@ Route::post('home/Logingo',"home\LoginController@Login");
 Route::get('home/Register',"home\LoginController@Register");
 // 注册
 Route::post('home/enroll',"home\LoginController@Enroll");
-
+//退出
+route::get('home/loginout','home\LoginController@Loginout');
+//忘记密码
+Route::get('home/password','home\LoginController@Pwd');
+//手机找回页面
+Route::get('home/pwd_phone','home\LoginController@Pwd_phone');
+//手机找回
+route::post('home/pwd_phone_method','home\LoginController@pwd_phone_method');
+//邮箱找回页面
+route::any('home/pwd_email','home\LoginController@pwd_email');
+//邮箱找回
+route::any('home/pwd_email_method','home\LoginController@pwd_email_method');
+//发送手机验证码
+Route::get('home/send_code','home\LoginController@send_code');
+//发送邮箱验证码
+route::get('home/send_code_email','home\LoginController@send_code_email');
 // 前台预订酒店
 Route::get('home/Hotel',"home\HotelController@Index");
 // 前台酒店列表
