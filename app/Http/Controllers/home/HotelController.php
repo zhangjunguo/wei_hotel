@@ -29,7 +29,7 @@ class HotelController extends Controller
         $ar2 = array_unique($ids);
         foreach($ar1 as $k => $v){
             $ar[$k]['name'] = $v;
-            $ar[$k]['id'] = $ar2[$k];
+            $ar[$k]['id'] = $ar2[$k];                                                                                                                                                                                                                                                                                                                        
         }
         // print_R($ar);die;
     	return view('home/CityList')->with(['data'=>$ar]);

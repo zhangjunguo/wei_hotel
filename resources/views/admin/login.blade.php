@@ -90,6 +90,13 @@
 															<i class="icon-hid"></i>
 														</span>
 													</label>
+													 <label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="text" name="yanzhengma" value="" style="width:80px;"/>
+                                                            <img src="{{url('captch')}}" onclick=this.src="captch?a="+Math.random(1000,9999) >
+                                                            <!-- <a href="captch" target="_top">看不清,换一张</a> -->
+														</span>
+													</label>
 													<div class="space"></div>
 
 													<div class="clearfix">

@@ -134,6 +134,8 @@ route::post('exchangeOrder','home\GiftController@exchangeOrder');
 
 // 登陆页面
 Route::get('login',  'Admin\LoginController@login');
+//验证码
+Route::any('captch','Admin\LoginController@captch');
  // 实现登陆
 Route::post('PostLogin', 'Admin\LoginController@PostLogin');
 // 实现登出
