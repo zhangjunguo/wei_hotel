@@ -155,14 +155,15 @@
 							<div class="col-xs-12" id="table">
 								
 										<!-- PAGE CONTENT BEGINS -->
-                            <form class="form-horizontal" role="form" action="HotelAdd" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" role="form" action="HotelAdd" method="post" enctype="multipart/form-data" onsubmit="return sub()">
                             	<table id="tab_a0" width="800px">
                             	<th width="800px">
                             		<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">酒店名称</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-1" name="h_name" placeholder="" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-1" name="h_name" placeholder="" class="col-xs-10 col-sm-5" onblur="fun1()"/>
+											<span id="sp1"></span>
 										</div>
 									</div>
 
@@ -172,7 +173,8 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">酒店备注</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-2" placeholder="" name="h_beizhu" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-2" placeholder="" name="h_beizhu" class="col-xs-10 col-sm-5" onblur="fun2()" />
+											<span id="sp2"></span>
 										</div>
 									</div>
 
@@ -191,7 +193,8 @@
 										<div class="col-sm-9">
 											<div class="control-group">
 										<div class="controls">
-											<select name="h_type">
+											<select name="h_type" onchange="citys()">
+												<option value="…请选择…">…请选择…</option>
 												<option value="商务型酒店">商务型酒店</option>
 												<option value="度假型酒店">度假型酒店</option>
 												<option value="长住型酒店">长住型酒店</option>
@@ -201,6 +204,7 @@
 												<option value="连锁酒店">连锁酒店</option>
 												<option value="公寓式酒店">公寓式酒店</option>
 											</select>
+											<span id="sp7"></span>
 										</div>
 											</div>
 										</div>
@@ -228,7 +232,8 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">详细地址</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-2" placeholder="" name="h_address" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-2" placeholder="" name="h_address" class="col-xs-10 col-sm-5" onblur="fun3()" />
+											<span id="sp3"></span>
 										</div>
 									</div>
 									<script src="/js/area.js"></script>
@@ -265,7 +270,8 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">酒店电话</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-2" class="col-xs-10 col-sm-5" name="h_tel"/>
+											<input type="text" id="form-field-2" class="col-xs-10 col-sm-5" name="h_tel" onblur="fun4()" />
+											<span id="sp4"></span>
 										</div>
 									</div>
 
@@ -279,21 +285,23 @@
                             	</table>
                             	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 								<table id="tab_a1" style="display:none;"><th width="800px">
-									<textarea name="h_desc" id="TextArea1" cols="20" rows="2" class="ckeditor"></textarea>
+									<textarea name="h_desc" id="TextArea1" cols="20" rows="2" class="ckeditor" onkeyup="dis()"></textarea><span id="sp11"></span>
 								</th></table>
 								<table id="tab_a2" style="display:none;"><th width="800px">
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">X坐标</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-2" placeholder="" name="h_x" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-2" placeholder="" name="h_x" class="col-xs-10 col-sm-5" onblur="fun5()" />
+											<span id="sp5"></span>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">Y坐标</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-2" placeholder="" name="h_y" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-2" placeholder="" name="h_y" class="col-xs-10 col-sm-5" onblur="fun6()" />
+											<span id="sp6"></span>
 										</div>
 									</div>
 								</th></table>
@@ -414,3 +422,140 @@
 	<div style="display:none"><script src='js/admin/v7.cnzz.js' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
+
+<script>
+	function fun1()
+	{
+		var hname = document.getElementsByName('h_name')[0].value;
+		var sp = document.getElementById('sp1');
+		if(hname == ''){
+			sp.style.color = 'red';
+			sp.innerHTML = '不能为空';
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function fun2()
+	{
+		var hbeizhu = document.getElementsByName('h_beizhu')[0].value;
+		var sp = document.getElementById('sp2');
+		if(hbeizhu == ''){
+			sp.style.color = 'red';
+			sp.innerHTML = '不能为空';
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function fun3()
+	{
+		var hname = document.getElementsByName('h_address')[0].value;
+		var sp = document.getElementById('sp3');
+		if(hname == ''){
+			sp.style.color = 'red';
+			sp.innerHTML = '不能为空';
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function fun4()
+	{
+		var htel = document.getElementsByName('h_tel')[0].value;
+		var sp = document.getElementById('sp4');
+		if(htel == ''){
+			sp.style.color = 'red';
+			sp.innerHTML = '不能为空';
+			return false;
+		}else{
+			var reg = /^(1[34578]\d{9})|(\d{3}(\-)\d{8})$/;
+			if(reg.test(htel)){
+				return true;
+			}else{
+				sp.style.color = 'red';
+				sp.innerHTML = '格式不正确';
+				return false;
+			}
+		}
+	}
+
+	function citys()
+	{
+		var ucity = document.getElementsByName('h_type')[0].value;
+		var sp7 = document.getElementById('sp7');
+		if(ucity == '…请选择…'){
+			sp7.innerHTML = "必须选择一项";
+			sp7.style.color= 'red';
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+		function dis()
+		{
+			var text = document.getElementById('TextArea1').value;
+			//alert(text);
+			var sp11 = document.getElementById('sp11');
+			if(text == ''){
+				sp11.innerHTML = "不能为空";
+				sp11.style.color='red';
+				return false;
+			}else{
+				var reg = /^[\u4e00-\u9fa5\w]{0,300}$/;
+				var descscut = text.substr(0,300);
+				if (!reg.test(text)) {					
+					document.getElementById('text').value = descscut;
+					sp11.innerHTML = "不能超过300字";
+					sp11.style.color='red';
+					return false;
+				}else{
+					var descslen = text.length;
+					var descslast = 300 - descslen;
+					sp11.innerHTML = "还剩"+descslast+"字";
+					sp11.style.color='red';
+					return true;
+				}
+			}
+			
+		}
+
+	function fun5()
+	{
+		var hname = document.getElementsByName('h_x')[0].value;
+		var sp = document.getElementById('sp5');
+		if(hname == ''){
+			sp.style.color = 'red';
+			sp.innerHTML = '不能为空';
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function fun6()
+	{
+		var hname = document.getElementsByName('h_y')[0].value;
+		var sp = document.getElementById('sp6');
+		if(hname == ''){
+			sp.style.color = 'red';
+			sp.innerHTML = '不能为空';
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function sub()
+	{
+		if(fun1()&fun2()&fun3()&fun4()&fun5()&fun6()&citys()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+</script>

@@ -267,14 +267,14 @@
         <div class="fr">
           <em class="orange roomprice">
           <?php if($data->user_grade == 0){ ?>
-              普通价：<span>￥{{$v->r_price}}</span> 起 <br />
-              VIP：<span style="text-decoration:line-through">￥{{$v->r_vip_price}}</span> 起
+              普通价：<span>¥{{$v->r_price}}</span> 起 <br />
+              VIP：<span style="text-decoration:line-through">¥{{$v->r_vip_price}}</span> 起
           <?php }elseif($data->user_grade == 1){ ?>
-              普通价：<span style="text-decoration:line-through">￥{{$v->r_price}}</span> 起 <br />
-              VIP：<span>￥{{$v->r_vip_price}}</span> 起
+              普通价：<span style="text-decoration:line-through">¥{{$v->r_price}}</span> 起 <br />
+              VIP：<span>¥{{$v->r_vip_price}}</span> 起
           <?php }elseif($data->user_grade == 2){ ?>
-              普通价：<span>￥{{$v->r_price}}</span> 起 <br />
-              <!-- VIP：<span>￥{{$v->r_vip_price}}</span> 起 -->
+              普通价：<span>¥{{$v->r_price}}</span> 起 <br />
+              <!-- VIP：<span>¥{{$v->r_vip_price}}</span> 起 -->
           <?php } ?>
               
          </em>

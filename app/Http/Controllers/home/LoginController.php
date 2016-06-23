@@ -81,7 +81,7 @@ class LoginController extends Controller
         {
             return redirect('home/Register')->withErrors($validator);
         }
-        
+        $data['user_score'] = 0;
         $res = DB::table('users')->insert($data);
         if($res){
             return redirect('/');
