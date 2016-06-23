@@ -39,7 +39,7 @@
              <!--  <a href="HotelInfo?id={{$v->h_id}}&address={{$v->h_address}}"> -->
                   <h3>{{$v->h_name}}</h3>
                   <p>地址：{{$v->h_address}}</p>
-                  <p>评分：4.6 （{{$v->num}}人已评）</p>
+                  <p>评分：{{number_format($v->ave,1)}}&nbsp;&nbsp;（{{$v->num}}人已评）</p>
               <!-- </a> -->
                  <span style="margin-left:400px" id="shou_{{$v->h_id}}">
                 @if(!isset($v->collect))
@@ -52,7 +52,7 @@
                
                
                <ul class="unstyled">
-                   <li><a href="HotelInfo?id={{$v->h_id}}&address={{$v->h_address}}" class="order">预订</a></li>
+                   <li><a href="HotelInfo?id={{$v->h_id}}" class="order">预订</a></li>
                    <li><a href="HotelGps?id={{$v->h_id}}" class="gps">导航</a></li>
                    <li><a href="HoteReality?id={{$v->h_id}}" class="reality">实景</a></li>
                    <!-- <li><a href="HotelColl?id={{$v->h_id}}" class="collect">收藏</a></li> -->

@@ -123,13 +123,14 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-                            <form class="form-horizontal" role="form" action="RoomAdd" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" role="form" action="RoomAdd" method="post" enctype="multipart/form-data" onsubmit="return sub()">
                             <input type="hidden" name="h_id" id="hid" value="{{$h_id}}">
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">户型名称</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-1" name="r_name" placeholder="" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-1" name="r_name" placeholder="户型名称" class="col-xs-10 col-sm-5" onblur="fun1()" />
+											<span id="sp1"></span>
 										</div>
 									</div>
 
@@ -139,7 +140,8 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2">普通价格</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-2" placeholder="" name="r_price" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-2" placeholder="普通价格" name="r_price" class="col-xs-10 col-sm-5" onblur="fun2()" />
+											<span id="sp2"></span>
 										</div>
 									</div>
 
@@ -148,7 +150,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-3">会员价格</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-3" placeholder="" name="r_vip_price" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-3" placeholder="会员价格" name="r_vip_price" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 
@@ -157,7 +159,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">促销价格</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-4" placeholder="" name="r_pro_price" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-4" placeholder="促销价格" name="r_pro_price" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 
@@ -173,7 +175,8 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">户型数量</label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-4" placeholder="" name="r_num" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-4" placeholder="户型数量" name="r_num" class="col-xs-10 col-sm-5" onblur="fun3()" />
+											<span id="sp3"></span>
 										</div>
 									</div>
 									
@@ -303,4 +306,59 @@
 		var h_id = $('#h_id').val();
 		window.location.href='RoomShow?h_id='+h_id;
 	})
+
+	function fun1()
+	{
+		var r_name = document.getElementsByName('r_name')[0].value;
+		var sp = document.getElementById('sp1');
+		if(r_name == ''){
+			sp.style.color = 'red';
+			sp.innerHTML = '不能为空';
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function fun2()
+	{
+		var r_price = document.getElementsByName('r_price')[0].value;
+		var sp = document.getElementById('sp2');
+		if(r_price == ''){
+			sp.style.color = 'red';
+			sp.innerHTML = '不能为空';
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function fun3()
+	{
+		var r_num = document.getElementsByName('r_num')[0].value;
+		var sp = document.getElementById('sp3');
+		if(r_num == ''){
+			sp.style.color = 'red';
+			sp.innerHTML = '不能为空';
+			return false;
+		}else{
+			var reg = /^\d+$/;
+			if(reg.test(r_num)){
+				return true;
+			}else{
+				sp.style.color = 'red';
+				sp.innerHTML = '必须为数字';
+				return false;
+			}
+		}
+	}
+
+	function sub()
+	{
+		if(fun1()&fun2()&fun3()){
+			return true;
+		}else{
+			return false;
+		}
+	}	
 </script>

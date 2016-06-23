@@ -53,7 +53,7 @@ class ActivityController extends Controller
 					$res = DB::table('activity')->insert($data);
 					if($res){
 						 $username=Session::get('username');
-					     $date=date("Y-H-d m:i:s");
+					     $date=date("Y-m-d H:i:s");
 					     $ip=Session::get('ip');
 					     $content="添加一条活动";
 					     $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
@@ -78,7 +78,7 @@ class ActivityController extends Controller
 		if($res){
 			unlink($img);
 		   $username=Session::get('username');
-	       $date=date("Y-H-d m:i:s");
+	       $date=date("Y-m-d H:i:s");
 	       $ip=Session::get('ip');
 	       $content="删除一条活动";
            $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
@@ -121,7 +121,7 @@ class ActivityController extends Controller
 		$res = DB::table('activity')->where('act_id',$act_id)->update($data);
 		if($res){
 			 $username=Session::get('username');
-		       $date=date("Y-H-d m:i:s");
+		       $date=date("Y-m-d H:i:s");
 		       $ip=Session::get('ip');
 		       $content="修改一条活动信息";
            $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
@@ -145,7 +145,7 @@ class ActivityController extends Controller
 	 		$result = DB::table('activity')->where('act_id',$act_id)->update(['act_name'=>$act_name]);
 		 	if($result){
 		 	  $username=Session::get('username');
-		      $date=date("Y-H-d m:i:s");
+		      $date=date("Y-m-d H:i:s");
 		      $ip=Session::get('ip');
 		      $content="修改一条活动名称";
               $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);

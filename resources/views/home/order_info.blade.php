@@ -26,7 +26,7 @@
             <form name="aspnetForm" method="post" action="login.aspx?ReturnUrl=%2fMember%2fDefault.aspx" id="aspnetForm" class="form-horizontal">
                 <ul class="user-function-list">
                     <li style="text-align:left">酒店：{{$data->h_name}}</li>
-                    <li style="text-align:left">房型：{{$data->r_name}}</li>
+                    
                     <li style="text-align:left">房型：{{$data->r_name}}</li>
                     <li style="text-align:left">订单状态: 
                     

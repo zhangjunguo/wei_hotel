@@ -18,7 +18,7 @@ Route::get('/',"home\IndexController@Index");
 Route::get('home/Activity',"home\ActivityController@Index");
 // 前台活动详情
 Route::get('home/ActivityInfo',"home\ActivityController@ActivityInfo");
-
+Route::get('home/JoinAct', "home\ActivityController@JoinAct");
 // 前台我的订单
 Route::get('home/Order',"home\OrderController@Index");
 
@@ -31,9 +31,10 @@ Route::get('home/MyGiftYes',"home\AccountController@MyGiftYes");
 Route::get('home/MyGiftX', "home\AccountController@MyGiftX");
 // 前台我的订单  
 Route::get('home/MyOrder',"home\AccountController@MyOrder");
-// Route::get('MyOrderpage',"home\AccountController@MyOrderPage");
 Route::get('home/my_order_no',"home\AccountController@my_order_no");
 Route::get('home/my_order_yes',"home\AccountController@my_order_yes");
+Route::get('home/my_order_pay',"home\AccountController@my_order_pay");
+
 //订单详情
 route::get('home/order_info',"home\AccountController@Order_Info");
 
@@ -55,6 +56,8 @@ Route::get('home/Login',"home\LoginController@Index");
 // 登录
 Route::post('home/Logingo',"home\LoginController@Login");
 
+//验证用户信息是否完善
+route::get('user_info','home\LoginController@User_info');
 // 前台注册
 Route::get('home/Register',"home\LoginController@Register");
 // 注册
@@ -90,6 +93,10 @@ Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
 
 // 前台添加评论页面
 Route::get('home/comment',"home\CommentController@comment");
+//前台提交评论
+Route::get('home/commentok',"home\CommentController@commentok");
+//前台提交评论
+Route::get('home/show',"home\CommentController@show");
 
 //用户上传头像
 Route::any('home/UserImg', "home\AccountController@MyImg");
@@ -112,6 +119,8 @@ Route::get('home/HotelCollectDel',"home\HotelController@Cancel");
 // 支付
 Route::get('home/PAY',"home\PAYController@pay");
 Route::get('home/return_url',"home\PAYController@return_url");
+// 订单积分
+Route::get('home/OrderScore',"home\HotelController@OrderScore");
 
 
 

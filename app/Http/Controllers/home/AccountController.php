@@ -172,9 +172,10 @@ class AccountController extends Controller
         if(!empty($user_name)){
             $user_id = Session::get('user_id');
             // echo $user_id;die;
-            $arr = DB::table('hotel_order')->join('hotel', 'hotel_order.h_id', '=', 'hotel.h_id')->where('u_id',$user_id)->get();
-
-            $sum = count($arr);    //总条数
+            $str = DB::table('hotel_order')->join('hotel', 'hotel_order.h_id', '=', 'hotel.h_id')->where('u_id',$user_id)->get();            
+           
+            // dd($data);die; 
+            $sum = count($str);    //总条数
             $number = 3;    //每页条数
             $pages = ceil($sum/$number); //总页数
             $page = Request::input('page')?Request::input('page'):1; //当前页
@@ -182,14 +183,19 @@ class AccountController extends Controller
             $next = $page>=$pages ? $pages : $page+1 ;  //下一页
             $start = ($page-1)*$number;
             $sql = "select * from wei_hotel_order inner join wei_hotel on wei_hotel_order.h_id= wei_hotel.h_id where u_id=$user_id limit $start,$number";
-            $data['data'] = DB::select($sql);
-            
+            $arr = DB::select($sql);
+
+             foreach($arr as $k=>$v){
+                $arr[$k]->num = DB::table('comment')->where('h_id',$v->h_id)->count();
+            } 
+
+            $data['data'] = $arr;
             $data['last'] = $last;
             $data['next'] = $next;
             $data['pages'] = $pages;
+            // dd($data);die;
 
-
-            return view('home/my_order',compact('data'));
+            return view('home/my_order')->with('data',$data);
         }else{
             return redirect('home/Login');
         }
@@ -202,7 +208,8 @@ class AccountController extends Controller
     {   
         $user_id = Session::get('user_id');
         $arr = DB::table('hotel_order')->join('hotel', 'hotel_order.h_id', '=', 'hotel.h_id')->where('u_id',$user_id)->where('o_state',2)->get();
-         $sum = count($arr);    //总条数
+         
+        $sum = count($arr);    //总条数
         $number = 3;    //每页条数
         $pages = ceil($sum/$number); //总页数
         $page = Request::input('page')?Request::input('page'):1; //当前页
@@ -210,8 +217,12 @@ class AccountController extends Controller
         $next = $page>=$pages ? $pages : $page+1 ;  //下一页
         $start = ($page-1)*$number;
         $sql = "select * from wei_hotel_order inner join wei_hotel on wei_hotel_order.h_id= wei_hotel.h_id where u_id=$user_id && o_state=2 limit $start,$number";
-        $data['data'] = DB::select($sql);
-        // dd($data['data']);die;
+        $arr = DB::select($sql);
+
+         foreach($arr as $k=>$v){
+            $arr[$k]->num = DB::table('comment')->where('h_id',$v->h_id)->count();
+        } 
+        $data['data'] = $arr;
         $data['last'] = $last;
         $data['next'] = $next;
         $data['pages'] = $pages;
@@ -227,8 +238,8 @@ class AccountController extends Controller
     public function my_order_yes()
     {   
         $user_id = Session::get('user_id');
-        $arr = DB::table('hotel_order')->join('hotel', 'hotel_order.h_id', '=', 'hotel.h_id')->where('u_id',$user_id)->where('o_state',3)->get();
-         $sum = count($arr);    //总条数
+        $arr = DB::table('hotel_order')->join('hotel', 'hotel_order.h_id', '=', 'hotel.h_id')->where('u_id',$user_id)->where('o_state',3)->get(); 
+        $sum = count($arr);    //总条数
         $number = 3;    //每页条数
         $pages = ceil($sum/$number); //总页数
         $page = Request::input('page')?Request::input('page'):1; //当前页
@@ -236,7 +247,11 @@ class AccountController extends Controller
         $next = $page>=$pages ? $pages : $page+1 ;  //下一页
         $start = ($page-1)*$number;
         $sql = "select * from wei_hotel_order inner join wei_hotel on wei_hotel_order.h_id= wei_hotel.h_id where u_id=$user_id && o_state=3 limit $start,$number";
-        $data['data'] = DB::select($sql);
+        $arr = DB::select($sql);
+        foreach($arr as $k=>$v){
+            $arr[$k]->num = DB::table('comment')->where('h_id',$v->h_id)->count();
+        } 
+        $data['data'] = $arr;
         // dd($data['data']);die;
         $data['last'] = $last;
         $data['next'] = $next;
@@ -245,7 +260,33 @@ class AccountController extends Controller
 
         return view('home/my_order_yes',compact('data'));
     } 
+    /**
+     * 
+     */
+    public function my_order_pay()
+    {
+      $user_id = Session::get('user_id');
+        $arr = DB::table('hotel_order')->join('hotel', 'hotel_order.h_id', '=', 'hotel.h_id')->where('u_id',$user_id)->where('o_state',1)->get();
+        $sum = count($arr);    //总条数
+        $number = 3;    //每页条数
+        $pages = ceil($sum/$number); //总页数
+        $page = Request::input('page')?Request::input('page'):1; //当前页
+        $last = $page<=1 ? 1 : $page-1 ;   //上一页
+        $next = $page>=$pages ? $pages : $page+1 ;  //下一页
+        $start = ($page-1)*$number;
+        $sql = "select * from wei_hotel_order inner join wei_hotel on wei_hotel_order.h_id= wei_hotel.h_id where u_id=$user_id && o_state=1 limit $start,$number";
+        $arr = DB::select($sql);
+        foreach($arr as $k=>$v){
+            $arr[$k]->num = DB::table('comment')->where('h_id',$v->h_id)->count();
+        }
+        $data['data'] = $arr;
+        $data['last'] = $last;
+        $data['next'] = $next;
+        $data['pages'] = $pages;
 
+
+        return view('home/my_order_pay',compact('data'));  
+    }
     /**
      * 订单详情
      */

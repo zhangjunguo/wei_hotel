@@ -53,6 +53,8 @@
 
     $("#but").click(function(){
         var phone = $("#phone").val();
-        $.get('send_code',{'phone':phone})
+        $.get('send_code',{'phone':phone},function(msg){
+            
+        })
     })
 </script>
