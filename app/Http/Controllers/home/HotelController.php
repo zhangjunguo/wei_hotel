@@ -74,9 +74,8 @@ class HotelController extends Controller
         $h_id = Request::input('id');
         $arr = DB::table('comment')->join('users','comment.u_id','=','users.u_id')->where('h_id',$h_id)->get();
 
-        foreach($arr as $k => $v){
-            $arr[$k]->user_name = substr_replace($v->user_name,'*',3,3);
-        }
+       
+        // print_R($arr);die;
         $count = count($arr);
         $num = 5;
         $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
@@ -88,6 +87,9 @@ class HotelController extends Controller
         $next = ($page+1>$page_count) ? $page_count : $page+1;
         $arr = DB::table('comment')->join('users','comment.u_id','=','users.u_id')->where('h_id',$h_id)->skip($limit)->take($num)->get();
         // print_r($arr);die;
+         foreach($arr as $k => $v){
+            $arr[$k]->user_name = substr_replace($v->user_name,'*',3,3);
+        }
         return view('home/HotelReview')->with(['arr'=>$arr,'next'=>$next,'last'=>$last,'page'=>$page,'page_count'=>$page_count,'h_id'=>$h_id]);
     }
 
@@ -119,12 +121,16 @@ class HotelController extends Controller
         if($cityID){
             $where.=" and city_id=$cityID";
         }
-
         $arr = DB::select("select * from wei_hotel where $where");
         // 展示评论
-        $comment = DB::table('comment')->get();
         foreach($arr as $k => $v){
             $arr[$k]->num = DB::table("comment")->where('h_id',$v->h_id)->count();
+            $arr[$k]->score = DB::table('comment')->where('h_id',$v->h_id)->lists('c_star');
+            if($arr[$k]->num != ''){
+                $arr[$k]->ave = array_sum($v->score)/$v->num;
+            }else{
+                $arr[$k]->ave = 0;
+            }
         }
         // print_r($arr);die;
         if(!empty(Session::get('user_id'))){

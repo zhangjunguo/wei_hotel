@@ -39,7 +39,7 @@
              <!--  <a href="HotelInfo?id={{$v->h_id}}&address={{$v->h_address}}"> -->
                   <h3>{{$v->h_name}}</h3>
                   <p>地址：{{$v->h_address}}</p>
-                  <p>评分：4.6 （{{$v->num}}人已评）</p>
+                  <p>评分：{{number_format($v->ave,1)}}&nbsp;&nbsp;（{{$v->num}}人已评）</p>
               <!-- </a> -->
                  <span style="margin-left:400px" id="shou_{{$v->h_id}}">
                 @if(!isset($v->collect))
