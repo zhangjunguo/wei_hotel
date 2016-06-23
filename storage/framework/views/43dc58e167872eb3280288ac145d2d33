@@ -26,7 +26,7 @@
  <div id="img_box">
       <ul id="img_list">
         <?php foreach($arr as $k => $v): ?>
-          <li id="img_<?php echo e($k+1); ?>" img-no="<?php echo e($k+1); ?>"><a href="HotelInfo?id=<?php echo e($v->h_id); ?>"><img src="/uploads/<?php echo e($v->h_img); ?>" width="505px" height="200px" style="margin-left:-25px" /></a></li>
+          <li id="img_<?php echo e($k+1); ?>" img-no="<?php echo e($k+1); ?>"><a href="home/HotelInfo?id=<?php echo e($v->h_id); ?>"><img src="/uploads/<?php echo e($v->h_img); ?>" width="505px" height="200px" style="margin-left:-25px" /></a></li>
         <?php endforeach; ?>
       </ul>
   </div>
