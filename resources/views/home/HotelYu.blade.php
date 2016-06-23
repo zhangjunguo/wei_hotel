@@ -88,7 +88,7 @@
     <tr>
       <td>会员积分</td>
       <td>
-          <input type="text"  placeholder="{{$res->user_score}}" id="score" onblur="score(this)" />
+          <input type="text"  placeholder="{{$res->user_score}}" id="score" />
           <span id="check_score">(积分最大兑换总金额的5%，100积分10元)</span>
       </td>
     </tr>
@@ -139,6 +139,10 @@
 </body>
 </html>
 <script>
+  flag='a';
+  $.ajaxSetup({
+    async:false
+  });
   function change(num){
     var price = $("#price").attr('placeholder');
     // alert(price);
@@ -158,33 +162,53 @@
       var price = $("#price").attr('placeholder');
       var score = $("#score").val();
       // alert(nums);
-      $.get("HotelOk",{nums:nums,od_start_time:od_start_time,od_end_time:od_end_time,h_id:h_id,r_id:r_id,price:price,score:score},function(e){
-          if(e){
-            // alert(e);
-            if(confirm('马上去支付')){
-              location.href='PAY?o_num='+e;
-            }else{
-              location.href='MyOrder';
-            }
-          }
-      });
-  });
 
-// 会员积分
-  function score(score){
-      var score = $(score).val();
       var num_price = $("#num_price").html();
       $.get("OrderScore",{score:score},function(e){
           if(e == 1){
             alert("当前积分不够");
+            flag=false;
           }else if(e == 2){
               if(score*0.1>num_price*0.05){
                 alert("不能超过总价的5%");
+                flag=false;
               }else{
                 $("#check_score").html("<font style='color:red'>OK</font>");
+                flag=true;
               }
           }
       });
-  }
+      // alert(flag);
+      // return false;
+      if(flag == true){
+          $.get("HotelOk",{nums:nums,od_start_time:od_start_time,od_end_time:od_end_time,h_id:h_id,r_id:r_id,price:price,score:score},function(e){
+              if(e){
+                // alert(e);
+                if(confirm('马上去支付')){
+                  location.href='PAY?o_num='+e;
+                }else{
+                  location.href='MyOrder';
+                }
+              }
+          });
+      }
+  });
+
+// 会员积分
+  // function score(score){
+  //     var score = $(score).val();
+  //     var num_price = $("#num_price").html();
+  //     $.get("OrderScore",{score:score},function(e){
+  //         if(e == 1){
+  //           alert("当前积分不够");
+  //         }else if(e == 2){
+  //             if(score*0.1>num_price*0.05){
+  //               alert("不能超过总价的5%");
+  //             }else{
+  //               $("#check_score").html("<font style='color:red'>OK</font>");
+  //             }
+  //         }
+  //     });
+  // }
 </script>
 

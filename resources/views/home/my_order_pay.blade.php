@@ -29,8 +29,8 @@
 <ul class="unstyled hotel-bar">
       <li><a href="MyOrder"  >全部</a></li>
       <li><a href="my_order_no">未完成</a></li>
-      <li  class="first"><a class="active" href="my_order_yes">已完成</a></li>
-      <li><a href="my_order_pay">待支付</a></li>
+      <li  ><a  href="my_order_yes">已完成</a></li>
+      <li class="first"><a class="active" href="">待支付</a></li>
 </ul>
 </div>
      
@@ -53,16 +53,14 @@
                
                
                <ul class="unstyled">
-                   <li><a href="comment?h_id={{$v->h_id}}" class="order">评价</a></li>
+                   <li><a href="PAY?o_num={{$v->o_num}}" class="order">去支付</a></li>
                    <li><a href="HotelGps?id={{$v->h_id}}" class="gps">导航</a></li>
                    <li><a href="HoteReality?id={{$v->h_id}}" class="reality">实景</a></li>
                </ul>
              </li>
         @endforeach 
             </div>
-
             <div class="gezifooter">
-
                 <a href="javascript:page(1)">首页</a>
                 <a href="javascript:page({{$data['last']}})">上一页</a>
                 <a href="javascript:page({{$data['next']}})">下一页</a>
@@ -93,7 +91,7 @@
 <script type="text/javascript">
     function page(page)
     {
-        $.get('my_order_yes',{'page':page},function(msg){
+        $.get('my_order_pay',{'page':page},function(msg){
             $("#div1").html(msg);
         })
     }

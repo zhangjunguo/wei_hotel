@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\home;
 
+use DB;
 use App\Http\Controllers\Controller;
 
 class IndexController extends Controller
@@ -11,6 +12,8 @@ class IndexController extends Controller
 	 */
     public function Index()
     {
-    	return view('home/index');
+    	$arr = DB::table('hotel')->take(5)->get();
+    	//print_r($arr);die;
+    	return view('home/index')->with('arr', $arr);
     }
 }
