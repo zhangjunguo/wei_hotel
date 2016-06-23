@@ -91,7 +91,7 @@
 <script type="text/javascript">
     function page(page)
     {
-        $.get('my_order_yes',{'page':page},function(msg){
+        $.get('my_order_pay',{'page':page},function(msg){
             $("#div1").html(msg);
         })
     }
