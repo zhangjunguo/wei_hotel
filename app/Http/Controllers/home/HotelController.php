@@ -43,7 +43,7 @@ class HotelController extends Controller
         // 酒店id
         $id = Request::input('id');
         Session::put('h_id',$id);
-        $address = Request::input('address');
+        // $address = Request::input('address');
         // echo $address;die;
         $arr = DB::table('room')->join('hotel',"room.h_id","=","hotel.h_id")->where("room.h_id",$id)->get();
         // print_r($arr);die;
@@ -71,7 +71,24 @@ class HotelController extends Controller
      */
     public function HotelReview()
     {
-        return view('home/HotelReview');
+        $h_id = Request::input('id');
+        $arr = DB::table('comment')->join('users','comment.u_id','=','users.u_id')->where('h_id',$h_id)->get();
+
+        foreach($arr as $k => $v){
+            $arr[$k]->user_name = substr_replace($v->user_name,'*',3,3);
+        }
+        $count = count($arr);
+        $num = 5;
+        $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $page_count = ceil($count/$num);
+        $limit = ($page-1)*$num;
+        // 上一页
+        $last = ($page-1<1) ? 1 : $page-1;
+        // 下一页
+        $next = ($page+1>$page_count) ? $page_count : $page+1;
+        $arr = DB::table('comment')->join('users','comment.u_id','=','users.u_id')->where('h_id',$h_id)->skip($limit)->take($num)->get();
+        // print_r($arr);die;
+        return view('home/HotelReview')->with(['arr'=>$arr,'next'=>$next,'last'=>$last,'page'=>$page,'page_count'=>$page_count,'h_id'=>$h_id]);
     }
 
      /**
@@ -102,7 +119,9 @@ class HotelController extends Controller
         if($cityID){
             $where.=" and city_id=$cityID";
         }
+
         $arr = DB::select("select * from wei_hotel where $where");
+        // 展示评论
         $comment = DB::table('comment')->get();
         foreach($arr as $k => $v){
             $arr[$k]->num = DB::table("comment")->where('h_id',$v->h_id)->count();
@@ -165,6 +184,11 @@ class HotelController extends Controller
     public function HotelOk()
     {
         // echo 123;
+        $score = Request::input("score");
+        if($score == ''){
+            $score=0;
+        }
+        DB::table('users')->where("u_id",Session::get('user_id'))->decrement('user_score', $score);
         $arr['o_num'] = "H".time().rand(1000,9999);
         $arr['h_id'] = Request::input('h_id');
         $arr['u_id'] = Session::get('user_id');
@@ -172,6 +196,7 @@ class HotelController extends Controller
         $price = Request::input('price');
         $nums = Request::input('nums');
         $arr['o_price'] = $price*$nums;
+        $arr['o_price'] = $arr['o_price']-$score*0.1;
         $arr['o_state'] = 1;
 
         $o_id = DB::table('hotel_order')->insertGetId($arr);
@@ -180,6 +205,7 @@ class HotelController extends Controller
             $data['r_id'] = Request::input('r_id');
             $data['od_count'] = $nums;
             $data['od_xiaoji'] = $nums*$price;
+            $data['od_xiaoji'] = $data['od_xiaoji']-$score*0.1;
             $data['od_start_time'] = strtotime(Request::input('od_start_time'));
             $data['od_end_time'] = strtotime(Request::input('od_end_time'));
 
@@ -249,6 +275,20 @@ class HotelController extends Controller
         $res = DB::table('collect')->where('u_id',$user_id)->where('h_id',$hotel_id)->delete();
         if($res){
             return "<a href='javascript:collection(".$hotel_id.")'><img src='../home/qu.jpg' alt='收藏本店' width='25' /></a>";
+        }
+    }
+
+    /**
+     * 会员积分
+     */
+    public function OrderScore()
+    {
+        $score = Request::input('score');
+        $res = DB::table('users')->where("u_id",Session::get('user_id'))->first();
+        if($score>$res->user_score){
+            echo 1;
+        }else{
+            echo 2;
         }
     }
 }
