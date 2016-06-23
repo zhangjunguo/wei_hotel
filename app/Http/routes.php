@@ -112,6 +112,8 @@ Route::get('home/HotelCollectDel',"home\HotelController@Cancel");
 // 支付
 Route::get('home/PAY',"home\PAYController@pay");
 Route::get('home/return_url',"home\PAYController@return_url");
+// 订单积分
+Route::get('home/OrderScore',"home\HotelController@OrderScore");
 
 
 

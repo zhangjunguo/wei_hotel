@@ -52,7 +52,7 @@
                
                
                <ul class="unstyled">
-                   <li><a href="HotelInfo?id={{$v->h_id}}&address={{$v->h_address}}" class="order">预订</a></li>
+                   <li><a href="HotelInfo?id={{$v->h_id}}" class="order">预订</a></li>
                    <li><a href="HotelGps?id={{$v->h_id}}" class="gps">导航</a></li>
                    <li><a href="HoteReality?id={{$v->h_id}}" class="reality">实景</a></li>
                    <!-- <li><a href="HotelColl?id={{$v->h_id}}" class="collect">收藏</a></li> -->

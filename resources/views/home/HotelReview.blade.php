@@ -11,7 +11,7 @@
 <script type="text/javascript" src="../home/js/zepto.js"></script>
 	
 </head>
-<body>
+<body id="div1">
  <div class="header">
  <a href="/" class="home">
             <span class="header-icon header-icon-home"></span>
@@ -44,82 +44,16 @@
 </script>
 
 <div class="hotel-comment-list">
-	 
+	 @foreach($arr as $k => $v)
       <div class="hotel-user-comment">
-				<span class="hotel-user"><img width="32" height="32" src="http://www.gridinn.com//images/user01.png">会员李*清:</span>
+				<span class="hotel-user"><img width="32" height="32" src="../uploads/User/{{$v->user_img}}">会员{{$v->user_name}}:</span>
 				<div class="hotel-user-comment-cotent">
-					<p>	这次去这个房间有点烟味，住了这么多次只有这个有烟味~除了烟味都是一如既往的好！</p>
-					<span>2014-04-11</span>
+					<p>{{$v->c_content}}</p>
+					<span>{{$v->c_time}}</span>
 				</div>
 			</div> 
-            
-      <div class="hotel-user-comment hotel-apply-user-comment none">
-				<div class="hotel-apply-comment">
-					<div class="hotel-apply-div"><span class="hotel-user">店长回复</span></div>
-					<div class="hotel-user-comment-cotent">
-						<p></p>
-				</div>
-				</div>
-			</div>         
-      
-      <div class="hotel-user-comment">
-				<span class="hotel-user"><img width="32" height="32" src="http://www.gridinn.com//images/user02.png">会员韩*芳:</span>
-				<div class="hotel-user-comment-cotent">
-					<p>	好~</p>
-					<span>2014-04-10</span>
-				</div>
-			</div> 
-            
-      <div class="hotel-user-comment hotel-apply-user-comment none">
-				<div class="hotel-apply-comment">
-					<div class="hotel-apply-div"><span class="hotel-user">店长回复</span></div>
-					<div class="hotel-user-comment-cotent">
-						<p></p>
-				</div>
-				</div>
-			</div>         
-      
-      <div class="hotel-user-comment">
-				<span class="hotel-user"><img width="32" height="32" src="http://www.gridinn.com//images/user02.png">会员韩*芳:</span>
-				<div class="hotel-user-comment-cotent">
-					<p>	一如既往的不错~</p>
-					<span>2014-04-10</span>
-				</div>
-			</div> 
-            
-      <div class="hotel-user-comment hotel-apply-user-comment none">
-				<div class="hotel-apply-comment">
-					<div class="hotel-apply-div"><span class="hotel-user">店长回复</span></div>
-					<div class="hotel-user-comment-cotent">
-						<p></p>
-				</div>
-				</div>
-			</div>         
-      
-      <div class="hotel-user-comment">
-				<span class="hotel-user"><img width="32" height="32" src="http://www.gridinn.com//photos/201306/6426.jpg">会员陈*蓉:</span>
-				<div class="hotel-user-comment-cotent">
-					<p>	比昨天住的简直好太多了。唯一一点不好就是洗完澡之后那些积水什么的都渗漏到房间里来了，找前台来帮忙清理，清理了10分钟。。。真恐怖。。。</p>
-					<span>2014-04-10</span>
-				</div>
-			</div> 
-            
-      <div class="hotel-user-comment hotel-apply-user-comment none">
-				<div class="hotel-apply-comment">
-					<div class="hotel-apply-div"><span class="hotel-user">店长回复</span></div>
-					<div class="hotel-user-comment-cotent">
-						<p></p>
-				</div>
-				</div>
-			</div>         
-      
-      <div class="hotel-user-comment">
-				<span class="hotel-user"><img width="32" height="32" src="http://www.gridinn.com//photos/201306/6426.jpg">会员陈*蓉:</span>
-				<div class="hotel-user-comment-cotent">
-					<p>	房间空调是坏了还是老化了16度的温度和26度似的，坐厕也是坏的，老是冲不下去。酒店的过道地毯可能应该清洗了，走过去一阵阵臭味。办理入住的时候前台也没说阁楼要加10块电脑费啊以前都不用的，退房的时候又加收了10块钱。总之没有以前住的舒坦。</p>
-					<span>2014-04-10</span>
-				</div>
-			</div> 
+      @endforeach
+ 
             
       <div class="hotel-user-comment hotel-apply-user-comment none">
 				<div class="hotel-apply-comment">
@@ -136,10 +70,20 @@
     
 <!-- AspNetPager V7.2 for VS2005 & VS2008  Copyright:2003-2008 Webdiyer (www.webdiyer.com) -->
 <div id="ctl00_ContentPlaceHolder1_AspNetPager1" style="width:100%;text-align:center;">
-<a class="nextprebutton" class="nextprebutton" disabled="disabled" style="margin-right:5px;">上页</a><span class="currentpage" style="margin-right:5px;">1</span><a href="HotelReview.aspx@id=5&page=2" style="margin-right:5px;">2</a><a href="HotelReview.aspx@id=5&page=3" style="margin-right:5px;">3</a><a href="HotelReview.aspx@id=5&page=4" style="margin-right:5px;">4</a><a href="HotelReview.aspx@id=5&page=5" style="margin-right:5px;">5</a><a href="HotelReview.aspx@id=5&page=6" style="margin-right:5px;">...</a><a class="nextprebutton" class="nextprebutton" href="HotelReview.aspx@id=5&page=2" style="margin-right:5px;">下页</a>
+<!-- <a class="nextprebutton" class="nextprebutton" disabled="disabled" style="margin-right:5px;">上页</a><span class="currentpage" style="margin-right:5px;">1</span><a href="HotelReview.aspx@id=5&page=2" style="margin-right:5px;">2</a><a href="HotelReview.aspx@id=5&page=3" style="margin-right:5px;">3</a><a href="HotelReview.aspx@id=5&page=4" style="margin-right:5px;">4</a><a href="HotelReview.aspx@id=5&page=5" style="margin-right:5px;">5</a><a href="HotelReview.aspx@id=5&page=6" style="margin-right:5px;">...</a><a class="nextprebutton" class="nextprebutton" href="HotelReview.aspx@id=5&page=2" style="margin-right:5px;">下页</a> -->
+<a href="javascript:page(1)">首页</a>
+<a href="javascript:page({{$last}})">上一页</a>
+<a href="javascript:page({{$next}})">下一页</a>
+<a href="javascript:page({{$page_count}})">尾页</a>
 </div>
 <!-- AspNetPager V7.2 for VS2005 & VS2008 End -->
-
+<script>
+	function page(page){
+		$.get("HotelReview",{page:page,id:{{$h_id}}},function(e){
+			$("#div1").html(e);
+		});
+	}
+</script>
   
     </div>	
 </div>
