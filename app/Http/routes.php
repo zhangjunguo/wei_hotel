@@ -18,7 +18,7 @@ Route::get('/',"home\IndexController@Index");
 Route::get('home/Activity',"home\ActivityController@Index");
 // 前台活动详情
 Route::get('home/ActivityInfo',"home\ActivityController@ActivityInfo");
-
+Route::get('home/JoinAct', "home\ActivityController@JoinAct");
 // 前台我的订单
 Route::get('home/Order',"home\OrderController@Index");
 

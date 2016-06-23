@@ -11,14 +11,25 @@
 
 <script src="../home/js/jquery-1.7.2.min.js"></script>
 <script src="../home/js/bootstrap.min.js"></script>
-
+<style>
+    #img_box{ width: 100%; height: 240px;  overflow: hidden; position: relative; }
+    #img_list{ list-style: none; position: relative; width: 1200px}
+    #img_list li{ float: left;}
+</style>
 </head>
 <body>
- 
+  
  <div class="container">
  <div class="header">
- <img src="home/img/logo.png" style="height: 40px; margin: 10px 0px 0px 15px" />
+ <img src="home/img/logo.png" style="height: 40px; margin: 10px 0px 10px 15px" />
  </div>
+ <div id="img_box">
+      <ul id="img_list">
+        @foreach ($arr as $k => $v)
+          <li id="img_{{$k+1}}" img-no="{{$k+1}}"><a href="HotelInfo?id={{$v->h_id}}"><img src="/uploads/{{$v->h_img}}" width="505px" height="200px" style="margin-left:-25px" /></a></li>
+        @endforeach
+      </ul>
+  </div>
      <div style="padding:0 5px 0 0;">
       
      <ul class="unstyled defaultlist pt20">
@@ -82,3 +93,82 @@
   
 </body>
 </html>
+<script src="/jq.js"></script>
+<script>
+
+var fn;
+
+$(function(){
+
+    startEvent();
+
+    // 鼠标滑过
+    $('#img_box').on({
+        mouseover : function() {
+            clearEvent();
+        },
+        mouseout : function() {
+            startEvent();
+        }
+    });
+
+    // 鼠标点击
+    $('#order_list li').on({
+        click : function() {
+            var order = $(this).attr('order');
+            $('#img_list li').css('margin-left', '0');
+            eachMoveImg(order);
+            $(this).find('a').css('color', 'red');
+            $(this).siblings('li').find('a').css('color', '#000');
+        },
+        mouseover : function() {
+            clearEvent();
+        },
+        mouseout : function() {
+            startEvent();
+        }
+    });
+
+});
+
+// 轮播
+function slide()
+{
+    $('#img_list li:first').animate({
+        marginLeft : '-480px'
+    }, 1500, function(){
+        $(this).css('margin-left', '0').appendTo('#img_list');
+        var imgNo = parseInt( $(this).attr('img-no') ) + 1;
+        if (imgNo == 5) {
+            imgNo = 1;
+        }
+        $('#order_list li').find('a').css('color', '#000');
+        $('#order_' + imgNo).find('a').css('color', 'red')
+    });
+}
+
+// 启动轮播事件
+function startEvent()
+{
+    fn = setInterval('slide()', 5000);
+}
+
+// 清除轮播事件
+function clearEvent()
+{
+    clearInterval(fn);
+}
+
+// 遍历移动图片位置
+function eachMoveImg(order)
+{
+    var imgNo;
+    $('#img_list li').each(function(){
+        imgNo = $(this).attr('img-no');
+        if (imgNo == order) {
+            return false;
+        }
+        $(this).appendTo('#img_list');
+    });
+}
+</script>
