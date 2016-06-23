@@ -46,7 +46,7 @@
              <!--  <a href="HotelInfo?id={{$v->h_id}}&address={{$v->h_address}}"> -->
                   <h3>{{$v->h_name}}</h3>
                   <p>地址：{{$v->h_address}}</p>
-                  <p>评分：4.6 （{{$v->num}}人已评）</p>
+                 <p>订单号： <font color="red">{{$v->o_num}}</font></p>
               <!-- </a> -->
                  </div>
               <div class="clear"></div>  

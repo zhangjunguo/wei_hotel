@@ -46,14 +46,14 @@
              <!--  <a href="HotelInfo?id={{$v->h_id}}&address={{$v->h_address}}"> -->
                   <h3>{{$v->h_name}}</h3>
                   <p>地址：{{$v->h_address}}</p>
-                  <p>评分：4.6 （{{$v->num}}人已评）</p>
+                  <p>订单号： <font color="red">{{$v->o_num}}</font></p>
               <!-- </a> -->
                   </div>
               <div class="clear"></div>  
                
                
                <ul class="unstyled">
-                   <li><a href="HotelInfo?id={{$v->h_id}}&address={{$v->h_address}}" class="order">评价</a></li>
+                   <li><a href="comment?h_id={{$v->h_id}}" class="order">评价</a></li>
                    <li><a href="HotelGps?id={{$v->h_id}}" class="gps">导航</a></li>
                    <li><a href="HoteReality?id={{$v->h_id}}" class="reality">实景</a></li>
                </ul>
