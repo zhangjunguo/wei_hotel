@@ -69,7 +69,7 @@
  </div>    
  <!--  <div class="copyrights"> <a href="http://www.cssmoban.com/" >免费模板</a></div> -->
   <div class="footer">
-  <div class="gezifooter"> <a href="home/Hotel" class="ui-link">酒店预订</a> <font color="#878787">|</font> <a href="home/Login" class="ui-link">我的订单</a> <font color="#878787">|</font> <a href="home/Login" class="ui-link">我的格子</a> <font color="#878787">|</font> <a href="home/comment" class="ui-link">酒店评论</a>
+  <div class="gezifooter"> <a href="home/Hotel" class="ui-link">酒店预订</a> <font color="#878787">|</font> <a href="home/Login" class="ui-link">我的订单</a> <font color="#878787">|</font> <a href="home/Login" class="ui-link">我的格子</a> 
   <?php if(Session::get('user_name')){ ?>
   <font color="#878787">|</font> <a href="home/loginout" title="退出" >退出</a>
   <?php } ?>

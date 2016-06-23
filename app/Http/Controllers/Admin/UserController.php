@@ -13,7 +13,7 @@ class UserController extends Controller {
 		  $user=DB::delete('delete from wei_users where u_id = ?',[$u_id]);
       		if($user){
             $username=Session::get('username');
-            $date=date("Y-H-d m:i:s");
+            $date=date("Y-m-d H:i:s");
             $ip=Session::get('ip');
             $content="删除一条用户信息";
               $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);

@@ -35,7 +35,7 @@ class ArticleController extends Controller
 				$res = DB::table('article')->insert($data);	//入库
 				if($res){
 					$username=Session::get('username');
-			        $date=date("Y-H-d m:i:s");
+			        $date=date("Y-m-d H:i:s");
 			        $ip=Session::get('ip');
 			        $content="添加一条文章";
 	                $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);

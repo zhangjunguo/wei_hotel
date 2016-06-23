@@ -43,7 +43,7 @@ class GiftController extends Controller
             $bool = DB::table('gift') -> insert($gift_data);
             if($bool){
               $username=Session::get('username');
-              $date=date("Y-H-d m:i:s");
+              $date=date("Y-m-d H:i:s");
               $ip=Session::get('ip');
               $content="添加一条礼品信息";
               $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
@@ -81,7 +81,7 @@ class GiftController extends Controller
             ->delete();
         if($bool){
             $username=Session::get('username');
-              $date=date("Y-H-d m:i:s");
+              $date=date("Y-m-d H:i:s");
               $ip=Session::get('ip');
               $content="删除一条礼品信息";
               $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
@@ -136,7 +136,7 @@ class GiftController extends Controller
                     -> update($gift_data);
                 if($bool){
                     $username=Session::get('username');
-                    $date=date("Y-H-d m:i:s");
+                    $date=date("Y-m-d H:i:s");
                     $ip=Session::get('ip');
                     $content="修改一条礼品信息";
                     $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);

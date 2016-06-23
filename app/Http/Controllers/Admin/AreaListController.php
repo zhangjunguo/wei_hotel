@@ -76,7 +76,7 @@ class AreaListController extends Controller
            
 			$this->AreaJson();
             $username=Session::get('username');
-		      $date=date("Y-H-d m:i:s");
+		      $date=date("Y-m-d H:i:s");
 		      $ip=Session::get('ip');
 		      $content="添加地区";
               $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);

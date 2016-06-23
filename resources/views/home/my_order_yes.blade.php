@@ -44,7 +44,7 @@
                     <li>
                         <a href="order_info?id={{$v->o_id}}"><span class="order-hotel-name">{{$v->h_name}}</span></a>
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <a href="">去评论</a>
+                        <a href="comment?h_id={{$v->h_id}}">去评论</a>
                         <span class="order-time">{{date('Y-m-d H:i:s',$v->o_addtime)}}</span>
                     </li>
                 </ul>
