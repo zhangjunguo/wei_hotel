@@ -13,7 +13,7 @@ class LoginController extends Controller
 	 * 展示登录页面
 	 */
     public function Index()
-    {
+    {   
     	return view('home/login');
     }
 
@@ -22,9 +22,9 @@ class LoginController extends Controller
      */
     public function Login()
     {
-        $user_name = Request::input('user_name');
+        $user_name = trim(Request::input('user_name'));
         $user_pwd = md5(Request::input('user_pwd'));
-        $remember = Request::input('remember');
+        $remember = trim(Request::input('remember'));
 
         // $sql = "select * from wei_users where user_phone = '$user_name'";
         $user = DB::table('users')->where('user_phone',$user_name)->first();
@@ -41,6 +41,17 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * 验证用户信息是否完善
+     */
+    public function User_info()
+    {
+        $user_id = Request::input('user_id');
+        $user_name = DB::table('users')->where('u_id',$user_id)->pluck('user_name');
+        if(empty($user_name)){
+            return 1;
+        }
+    }
     /**
      * 展示注册页面
      */
@@ -84,7 +95,8 @@ class LoginController extends Controller
         $data['user_score'] = 0;
         $res = DB::table('users')->insert($data);
         if($res){
-            return redirect('/');
+            Session::put('Enroll',$data['user_phone']);
+            echo "<script>alert('注册成功,请重新登录');location.href='Login'</script>";
         }else{
             echo "<script>alert('注册失败');location.href='Register'</script>";
         }
@@ -117,14 +129,26 @@ class LoginController extends Controller
 
         $number = Session::get('code');
         
-
+        // echo $number;die;
         if($code == $number){
-             $res = DB::table('users')->where('user_phone',$phone)->update(['user_pass'=>$user_pass]);
-             if($res){
-                echo "<script>alert('修改成功,请重新登录');location.href='Login'</script>";
-             }else{
-                echo "<script>alert('修改失败');location.href='pwd_phone'</script>";
-             }
+            $pwd = DB::table('users')->where('user_phone',$phone)->pluck('user_pass');
+            if($user_pass){
+                if($user_pass == $pwd){
+                    echo "<script>alert('密码与原密码相同');location.href='pwd_email'</script>";
+                }else{
+                    
+                    $res = DB::table('users')->where('user_phone',$phone)->update(['user_pass'=>$user_pass]);
+
+                    if($res){
+                        echo "<script>alert('修改成功,请重新登录');location.href='Login'</script>";
+                    }else{
+                        echo "<script>alert('修改失败');location.href='pwd_phone'</script>";
+                    }
+                }
+            }else{
+                echo "<script>alert('手机号码不存在');location.href='pwd_email'</script>";
+            }
+            
         }else{
             echo "<script>alert('验证码错误');location.href='pwd_phone'</script>";
         }
@@ -197,22 +221,28 @@ class LoginController extends Controller
         }
 
         $number = Session::get('code_email');
-         // echo $number.$code;die;
+        // echo $arr['email'];die;
+        // echo $number.$code;die;
         if($number == $code){
-            $str = DB::table('users')->where('user_email',$arr['email'])->pluck('user_pass');
-            // echo $user_pass."<br/>";
-            // echo $str;die;
-            if($str != $user_pass){
+            $str = DB::table('users')->where('user_email',$arr['email'])->pluck('user_pass'); 
 
-                 $res = DB::table('users')->where('user_email',$arr['email'])->update(['user_pass'=>$user_pass]);
-                if($res){
-                    echo "<script>alert('修改成功,请重新登录');location.href='Login'</script>";
+            if($str){
+
+                if($str != $user_pass){
+                    $res = DB::table('users')->where('user_email',$arr['email'])->update(['user_pass'=>$user_pass]);
+
+                    if($res){
+                        echo "<script>alert('修改成功,请重新登录');location.href='Login'</script>";
+                    }else{
+                        echo "<script>alert('修改失败');location.href='pwd_email'</script>";
+                    }
+
+
                 }else{
-                    echo "<script>alert('修改失败');location.href='pwd_email'</script>";
+                    echo "<script>alert('密码与原密码相同');location.href='pwd_email'</script>"; 
                 }
-
             }else{
-                echo "<script>alert('密码与原密码相同');location.href='pwd_email'</script>"; 
+                echo "<script>alert('邮箱不存在');location.href='pwd_email'</script>";
             }
 
         }else{

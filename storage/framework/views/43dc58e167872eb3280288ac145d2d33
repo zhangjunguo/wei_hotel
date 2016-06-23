@@ -25,9 +25,9 @@
  </div>
  <div id="img_box">
       <ul id="img_list">
-        @foreach ($arr as $k => $v)
-          <li id="img_{{$k+1}}" img-no="{{$k+1}}"><a href="HotelInfo?id={{$v->h_id}}"><img src="/uploads/{{$v->h_img}}" width="505px" height="200px" style="margin-left:-25px" /></a></li>
-        @endforeach
+        <?php foreach($arr as $k => $v): ?>
+          <li id="img_<?php echo e($k+1); ?>" img-no="<?php echo e($k+1); ?>"><a href="HotelInfo?id=<?php echo e($v->h_id); ?>"><img src="/uploads/<?php echo e($v->h_img); ?>" width="505px" height="200px" style="margin-left:-25px" /></a></li>
+        <?php endforeach; ?>
       </ul>
   </div>
      <div style="padding:0 5px 0 0;">
@@ -79,7 +79,7 @@
      </div>
 
  </div>  
- <input type="hidden" value="{{Session::get('user_id')}}">
+ <input type="hidden" value="<?php echo e(Session::get('user_id')); ?>">
 <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >免费模板</a></div>
 
   <div class="footer">
