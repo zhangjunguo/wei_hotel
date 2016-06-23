@@ -130,15 +130,19 @@
 </div>
 <div class="footer">
   <div class="gezifooter">
-      
+  <?php if(Session::get('user_name')){ ?>
+  <font color="#878787">|</font> <a href="loginout" title="退出" >退出</a>
+  <?php }else{ ?>
       <a href="Login" class="ui-link">立即登陆</a> <font color="#878787">|</font> 
-       <a href="Register" class="ui-link">免费注册</a> <font color="#878787">|</font>                   
+       <a href="Register" class="ui-link">免费注册</a> <font color="#878787">|</font>   
+   <?php } ?>
+                  
       <a href="../../www.gridinn.com/@display=pc" class="ui-link">电脑版</a>
   </div>
   <div class="gezifooter">
     <p style="color:#bbb;">格子微酒店连锁 &copy; 版权所有 2012-2014</p>
   </div>
-  </div>
+</div>
 
 </body>
 </html>

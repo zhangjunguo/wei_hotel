@@ -32,7 +32,7 @@ class AdminController extends Controller {
       $re = DB::table('admin')->insert(['adm_name'=>$username,'adm_pass'=>$pwd,'adm_email'=>$email,'adm_phone'=>$phone]);
 		  if($re){ 
        $username=Session::get('username');
-       $date=date("Y-H-d m:i:s");
+       $date=date("Y-m-d H:i:s");
        $ip=Session::get('ip');
        $content="添加一条管理员信息";
        $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
@@ -46,7 +46,7 @@ class AdminController extends Controller {
         $re = DB::table('admin')->where('adm_id',$id)->delete();
         if($re){
            $username=Session::get('username');
-       $date=date("Y-H-d m:i:s");
+       $date=date("Y-m-d H:i:s");
        $ip=Session::get('ip');
        $content="删除一条管理员信息";
        $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]); 
@@ -73,7 +73,7 @@ class AdminController extends Controller {
       $re = DB::table('admin')->where('adm_id',$id)->update(['adm_name'=>$username,'adm_email'=>$email,'adm_phone'=>$phone]);
       if($re){
        $username=Session::get('username');
-       $date=date("Y-H-d m:i:s");
+       $date=date("Y-m-d H:i:s");
        $ip=Session::get('ip');
        $content="修改管理员信息";
        $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
@@ -91,7 +91,7 @@ class AdminController extends Controller {
      if ($re) {
       echo 1;
        $username=Session::get('username');
-       $date=date("Y-H-d m:i:s");
+       $date=date("Y-m-d H:i:s");
        $ip=Session::get('ip');
        $content="修改管理员姓名";
        $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
@@ -120,7 +120,7 @@ class AdminController extends Controller {
           // 添加到管理员日志
           $re = DB::table('adm_role')->insert($data);
           $username=Session::get('username');
-          $date=date("Y-H-d m:i:s");
+          $date=date("Y-m-d H:i:s");
           $ip=Session::get('ip');
           $content="分配角色";
           $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);

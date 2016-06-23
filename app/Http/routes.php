@@ -90,6 +90,10 @@ Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
 
 // 前台添加评论页面
 Route::get('home/comment',"home\CommentController@comment");
+//前台提交评论
+Route::get('home/commentok',"home\CommentController@commentok");
+//前台提交评论
+Route::get('home/show',"home\CommentController@show");
 
 //用户上传头像
 Route::any('home/UserImg', "home\AccountController@MyImg");
