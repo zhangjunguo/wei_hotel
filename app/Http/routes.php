@@ -18,7 +18,7 @@ Route::get('/',"home\IndexController@Index");
 Route::get('home/Activity',"home\ActivityController@Index");
 // 前台活动详情
 Route::get('home/ActivityInfo',"home\ActivityController@ActivityInfo");
-
+Route::get('home/JoinAct', "home\ActivityController@JoinAct");
 // 前台我的订单
 Route::get('home/Order',"home\OrderController@Index");
 
@@ -91,12 +91,20 @@ Route::get('home/HotelDesc',"home\HotelController@HotelDesc");
 // 前台修改注入时间
 Route::post('home/HoteUpdateTime',"home\HotelController@HoteUpdateTime");
 
+// 前台添加评论页面
+Route::get('home/comment',"home\CommentController@comment");
+//前台提交评论
+Route::get('home/commentok',"home\CommentController@commentok");
+//前台提交评论
+Route::get('home/show',"home\CommentController@show");
 
 //用户上传头像
 Route::any('home/UserImg', "home\AccountController@MyImg");
 
 // 前台酒店预定
 Route::get('home/HotelYU',"home\HotelController@HotelYU");
+// 确认订单
+Route::any('home/HotelOk',"home\HotelController@HotelOk");
 // 前台酒店收藏
 Route::get('home/HotelColl',"home\HotelController@HotelColl");
 // 酒店实景
@@ -106,11 +114,13 @@ Route::get('home/HotelMap',"home\HotelController@HotelMap");
 // 酒店导航
 Route::get('home/HotelGps',"home\HotelController@HotelGps");
 // 酒店收藏
-Route::get('home/HotelCollect',"home\HotelController@HotelCollect");
-Route::get('home/HotelCollectDel',"home\HotelController@HotelCollectDel");
+Route::get('home/HotelCollect',"home\HotelController@Collection");
+Route::get('home/HotelCollectDel',"home\HotelController@Cancel");
 // 支付
 Route::get('home/PAY',"home\PAYController@pay");
 Route::get('home/return_url',"home\PAYController@return_url");
+// 订单积分
+Route::get('home/OrderScore',"home\HotelController@OrderScore");
 
 
 
@@ -271,6 +281,8 @@ Route::group(['middleware' => 'permission'], function(){
     //系统管理
 	Route::get('updatePass',  'Admin\SystemController@updatePass');//密码修改页面
 	Route::post('passUpdate',  'Admin\SystemController@passUpdate');//密码修改
+	Route::get('gallery',  'Admin\SystemController@gallery');//画廊
+	Route::get('calendar',  'Admin\SystemController@calendar');//日历
     // 评价管理
     route::get('commentList','Admin\CommentController@commentList');
     // 礼物管理

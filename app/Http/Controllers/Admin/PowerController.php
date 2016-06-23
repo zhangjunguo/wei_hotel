@@ -1,7 +1,7 @@
 <?php 
 namespace App\Http\Controllers\Admin;
 header('content-type:text/html;charset=utf8');
-use DB,Request;
+use DB,Request,Session;
 use App\Http\Controllers\Controller;
 class PowerController extends Controller {
 	// 权限添加页面
@@ -19,7 +19,7 @@ class PowerController extends Controller {
 		$re = DB::table('power')->insert(['p_name'=>$name,'pid'=>$pid,'p_routes'=>$routes]);
 		if($re){
         $username=Session::get('username');
-          $date=date("Y-H-d m:i:s");
+          $date=date("Y-m-d H:i:s");
           $ip=Session::get('ip');
           $content="添加一条权限";
               $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]); 
@@ -38,7 +38,7 @@ class PowerController extends Controller {
         $re = DB::table('power')->where('p_id',$id)->delete();
         if($re){ 
           $username=Session::get('username');
-          $date=date("Y-H-d m:i:s");
+          $date=date("Y-m-d H:i:s");
           $ip=Session::get('ip');
           $content="删除一条权限信息";
           $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
@@ -65,7 +65,7 @@ class PowerController extends Controller {
       $re = DB::table('power')->where('p_id',$id)->update(['p_name'=>$name,'pid'=>$pid,'p_routes'=>$routes]);
            if($re){
             $username=Session::get('username');
-            $date=date("Y-H-d m:i:s");
+            $date=date("Y-m-d H:i:s");
             $ip=Session::get('ip');
             $content="编辑一条权限信息";
               $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);
@@ -115,7 +115,7 @@ class PowerController extends Controller {
 		      }
          if ($re){
           $username=Session::get('username');
-          $date=date("Y-H-d m:i:s");
+          $date=date("Y-m-d H:i:s");
           $ip=Session::get('ip');
           $content="分配权限";
           $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);

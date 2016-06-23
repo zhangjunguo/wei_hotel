@@ -35,6 +35,8 @@
                <input type="hidden" name="go_score" value="{{$order_data['go_score']}}"/>
                <input type="hidden" name="g_id" value="{{$order_data['g_id']}}"/>
            </tr>
+           <input type="hidden" name="is_post" value="<?php echo Session::get('is_post')?>" id="is_post"/>
+           <?php  if(Session::get('is_post')==1){?>
            <tr>
                <th>收货地址</th>
                <td width="100px" style="text-align: center">
@@ -56,6 +58,7 @@
                    <span id="show_addre"></span>
                </td>
            </tr>
+           <?php }?>
            <tr>
                <th>手机号</th>
                <td width="100px" style="text-align: center">
@@ -94,7 +97,7 @@
          if(addre == ''){
              alert("你好,地址没填哦");
              return false;
-         }
+      }
 
          var preg = /^[\u4E00-\u9FA5]{5,10}$/;
          if(preg.test(addre)){
@@ -108,10 +111,19 @@
 
      //验收
      function check(){
-         if(check_addre() && check_phone()){
-              return true;
+         //]alert($("#is_post").val());
+         if($("#is_show").val()==1) {
+             if (check_addre() && check_phone()) {
+                 return true;
+             } else {
+                 return false;
+             }
          }else{
-             return false;
+             if (check_phone()) {
+                 return true;
+             } else {
+                 return false;
+             }
          }
      }
  </script>

@@ -1,7 +1,7 @@
 <?php 
 namespace App\Http\Controllers\Admin;
 header('content-type:text/html;charset=utf8');
-use DB,Request;
+use DB,Request,Session;
 use App\Http\Controllers\Controller;
 class OrderController extends Controller 
 {
@@ -39,7 +39,7 @@ class OrderController extends Controller
 		}else{
 			DB::table('hotel_order')->join('hotel_order_details',"hotel_order.o_id","=","hotel_order_details.o_id")->where("hotel_order.o_id",$o_id)->delete();
 			$username=Session::get('username');
-		      $date=date("Y-H-d m:i:s");
+		      $date=date("Y-m-d H:i:s");
 		      $ip=Session::get('ip');
 		      $content="删除一条订单信息";
               $re = DB::table('log')->insert(['adm_name'=>$username,'l_content'=>$content,'l_time'=>$date,'l_ip'=>$ip]);

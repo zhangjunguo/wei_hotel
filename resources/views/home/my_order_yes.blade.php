@@ -60,7 +60,9 @@
              </li>
         @endforeach 
             </div>
+
             <div class="gezifooter">
+
                 <a href="javascript:page(1)">首页</a>
                 <a href="javascript:page({{$data['last']}})">上一页</a>
                 <a href="javascript:page({{$data['next']}})">下一页</a>

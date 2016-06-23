@@ -160,6 +160,23 @@
 											<input type="file" name="g_img">
 										</div>
 									</div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-4">是否需要送货到家</label>
+
+                                    <div class="col-sm-9">
+                                        <?php if($gift_data->is_post==1){?>
+                                            <input type="radio" name="is_post" value="1" checked="checked">是
+                                            <input type="radio" name="is_post" value="0">否
+                                         <?php }?>
+                                            <?php if($gift_data->is_post==0){?>
+                                            <input type="radio" name="is_post" value="1">是
+                                            <input type="radio" name="is_post" value="0" checked="checked">否
+                                           <?php }?>
+                                        <span id="show_is"></span>
+                                    </div>
+                                </div>
+
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-4">礼物描述</label>
 

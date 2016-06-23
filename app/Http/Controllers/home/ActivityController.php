@@ -32,4 +32,25 @@ class ActivityController extends Controller
 
         return view('home/news')->with('data', $data);
     }
+
+    /**
+     * 参与活动
+     */
+    public function JoinAct()
+    {
+        //接值
+        $data = Request::all();
+        $u_id = Request::get('u_id');
+        $act_id = Request::get('act_id');
+
+        $arr = DB::table('vip_act')->where('u_id', $u_id)->where('act_id', $act_id)->first();
+
+        if($arr){
+            echo '1';
+        }else{
+            DB::table('vip_act')->insert($data);
+            DB::table('users')->where('u_id', $u_id)->increment('user_score', 100);
+            echo '2';
+        }
+    }
 }
