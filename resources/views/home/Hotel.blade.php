@@ -278,9 +278,9 @@
           <?php } ?>
               
          </em>
-       <?php if($v->r_state == 1){ ?>
+       <?php if($v->r_num > 0){ ?>
     <a href='HotelYU?h_id={{$h_id}}&r_id={{$v->r_id}}&price={{$v->r_price}}&vip_price={{$v->r_vip_price}}' title='立即预定' class='btn btn-success iframe'>预定</a>
-    <?php }elseif($v->r_ == 0){ ?>
+    <?php }elseif($v->r_num <= 0){ ?>
         <span class='btn'>满房</span>
     <?php } ?>
     </div>

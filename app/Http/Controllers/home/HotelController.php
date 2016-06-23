@@ -62,7 +62,7 @@ class HotelController extends Controller
             $data->user_grade = 2;
         }
         
-
+        // print_R($arr);die;
         return view('home/Hotel')->with(['arr'=>$arr,'data'=>$data,'h_id'=>$id]);
     }
 
