@@ -216,6 +216,8 @@ class HotelController extends Controller
             $data['od_end_time'] = strtotime(Request::input('od_end_time'));
 
             $re = DB::table('hotel_order_details')->insert($data);
+
+            DB::table('room')->where('h_id',$arr['h_id'])->where('r_id',$data['r_id'])->decrement('r_num');
             if($re){
                 echo $arr['o_num'];
             }
