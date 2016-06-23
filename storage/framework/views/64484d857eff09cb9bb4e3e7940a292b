@@ -30,40 +30,40 @@
   <div class="container hotellistbg">
          <ul class="unstyled hotellist">
      
-  <!-- style="background:url('../uploads/{{$arr->h_img}}')" -->
+  <!-- style="background:url('../uploads/<?php echo e($arr->h_img); ?>')" -->
   <table border="2" width='600' >
     <tr>
       <td width="80">酒店名称</td>
       <td>
-        <input type="text" placeholder="{{$arr->h_name}}" />
+        <input type="text" placeholder="<?php echo e($arr->h_name); ?>" />
       </td>
     </tr>
     <tr>
       <td>酒店类型</td>
       <td>
-        <input type="text" placeholder="{{$arr->h_type}}" />
+        <input type="text" placeholder="<?php echo e($arr->h_type); ?>" />
       </td>
     </tr>
     <tr>
       <td>酒店地址</td>
       <td>
-        <input type="text" placeholder="{{$arr->h_address}}"/>
+        <input type="text" placeholder="<?php echo e($arr->h_address); ?>"/>
       </td>
     </tr>
     <tr>
       <td>房间类型</td>
       <td>
-        <input type="text" placeholder="{{$data->r_name}}" />
+        <input type="text" placeholder="<?php echo e($data->r_name); ?>" />
       </td>
     </tr>
     <tr>
       <td>房间单价</td>
       <td>
-        @if($res->user_score>=4000 || $res->user_grade == 1)
-          <input type="text"  placeholder="{{$data->r_vip_price}}" id="price" />
-        @else
-          <input type="text"  placeholder="{{$data->r_price}}" id="price" />
-        @endif
+        <?php if($res->user_score>=4000 || $res->user_grade == 1): ?>
+          <input type="text"  placeholder="<?php echo e($data->r_vip_price); ?>" id="price" />
+        <?php else: ?>
+          <input type="text"  placeholder="<?php echo e($data->r_price); ?>" id="price" />
+        <?php endif; ?>
       </td>
     </tr>
     <tr>
@@ -75,39 +75,41 @@
     <tr>
       <td>入住日期</td>
       <td>
-        <input type="text" id="od_start_time" value="{{Session::get('checkInDate')}}" />
+        <input type="text" id="od_start_time" value="<?php echo e(Session::get('checkInDate')); ?>" />
       </td>
     </tr>
     <tr>
       <td>离店日期</td>
       <td>
-        <input type="text" id="od_end_time" value="{{Session::get('checkOutDate')}}" />
+        <input type="text" id="od_end_time" value="<?php echo e(Session::get('checkOutDate')); ?>" />
       </td>
     </tr>
-@if($res->user_score > 0)
+<?php if($res->user_score > 0): ?>
     <tr>
       <td>会员积分</td>
       <td>
-          <input type="text"  placeholder="{{$res->user_score}}" id="score" />
+          <input type="text"  placeholder="<?php echo e($res->user_score); ?>" id="score" />
           <span id="check_score">(积分最大兑换总金额的5%，100积分10元)</span>
       </td>
     </tr>
-@else
+<?php else: ?>
   <input type="hidden" value="0" id="score" />
-@endif
+<?php endif; ?>
 
     <tr>
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-    <input type="hidden" id="h_id" value="{{$arr->h_id}}" />
-    <input type="hidden" id="r_id" value="{{$data->r_id}}" />
+    <input type="hidden" id="h_id" value="<?php echo e($arr->h_id); ?>" />
+    <input type="hidden" id="r_id" value="<?php echo e($data->r_id); ?>" />
       <td colspan="2">
         <input type="button" value="确认" id="button"/>
         订单总价：<span id="num_price">
-          @if($res->user_score>=4000 || $res->user_grade == 1)
-                {{$data->r_vip_price}}
-          @else
-                {{$data->r_price}}
-          @endif
+          <?php if($res->user_score>=4000 || $res->user_grade == 1): ?>
+                <?php echo e($data->r_vip_price); ?>
+
+          <?php else: ?>
+                <?php echo e($data->r_price); ?>
+
+          <?php endif; ?>
         </span>
       </td>
     </tr>
