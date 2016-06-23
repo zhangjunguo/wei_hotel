@@ -92,7 +92,7 @@ class LoginController extends Controller
         {
             return redirect('home/Register')->withErrors($validator);
         }
-        $data['user_score'] = 0;
+        
         $res = DB::table('users')->insert($data);
         if($res){
             Session::put('Enroll',$data['user_phone']);
@@ -134,9 +134,11 @@ class LoginController extends Controller
             $pwd = DB::table('users')->where('user_phone',$phone)->pluck('user_pass');
             if($user_pass){
                 if($user_pass == $pwd){
+
                     echo "<script>alert('密码与原密码相同');location.href='pwd_email'</script>";
-                }else{
                     
+                }else{
+
                     $res = DB::table('users')->where('user_phone',$phone)->update(['user_pass'=>$user_pass]);
 
                     if($res){
