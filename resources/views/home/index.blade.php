@@ -62,23 +62,40 @@
              <a href="home/Help">
             <h3> 帮助咨询</h3>
             <figure class="wdxc_icon"></figure>
-              </a>
+            </a>
          </li>
      </ul>
      </div>
- </div>    
+ </div>  
+ <input type="hidden" value="{{Session::get('user_id')}}">
 <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >免费模板</a></div>
   <div class="footer">
   <div class="gezifooter"> <a href="home/Hotel" class="ui-link">酒店预订</a> <font color="#878787">|</font> <a href="home/Login" class="ui-link">我的订单</a> <font color="#878787">|</font> <a href="home/Login" class="ui-link">我的格子</a> <font color="#878787">|</font> <a href="http://www.cssmoban.com/" title="网站模板" target="_blank">网站模板</a>
   <?php if(Session::get('user_name')){ ?>
   <font color="#878787">|</font> <a href="home/loginout" title="退出" >退出</a>
+  <?php }else{ ?>
+   <font color="#878787">|</font> <a href="home/Login" title="登录" >登陆</a>
+   <font color="#878787">|</font> <a href="home/Register" title="注册" >注册</a>
   <?php } ?>
   </div>
   <div class="gezifooter">
     <p style="color:#bbb;">格子微酒店连锁 &copy; 版权所有 2012-2013</p>
   </div>
   </div>
-  
-  
 </body>
 </html>
+<script type="text/javascript" src="js/jq.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var user_id = $(":input[type='hidden']").val();
+        if(user_id){
+            $.get("user_info",{'user_id':user_id},function(msg){
+                if(msg == 1){
+                    if(confirm("您的个人信息未完善,建议及时完善")){
+                        location.href="home/MyInfo";
+                    }
+                }
+            }) 
+        }            
+    })
+</script>

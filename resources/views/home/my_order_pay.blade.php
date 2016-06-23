@@ -27,10 +27,10 @@
  </div>
 <div class="order-nav">
 <ul class="unstyled hotel-bar">
-      <li ><a href="MyOrder">全部</a></li>
-      <li class="first"><a class="active" href="my_order_no">未完成</a></li>
-      <li><a href="my_order_yes">已完成</a></li>
-      <li><a href="my_order_pay">待支付</a></li>
+      <li><a href="MyOrder"  >全部</a></li>
+      <li><a href="my_order_no">未完成</a></li>
+      <li  ><a  href="my_order_yes">已完成</a></li>
+      <li class="first"><a class="active" href="">待支付</a></li>
 </ul>
 </div>
      
@@ -48,16 +48,12 @@
                   <p>地址：{{$v->h_address}}</p>
                   <p>评分：4.6 （{{$v->num}}人已评）</p>
               <!-- </a> -->
-                 </div>
+                  </div>
               <div class="clear"></div>  
                
                
                <ul class="unstyled">
-               <?php if($v->o_state == 1){ ?>
-                   <li><a href="HotelInfo?id={{$v->h_id}}&address={{$v->h_address}}" class="order">支付</a></li>
-                <?php }elseif($v->o_state == 3){ ?>
-                    <li><a href="HotelInfo?id={{$v->h_id}}&address={{$v->h_address}}" class="order">评价</a></li>
-                <?php } ?>
+                   <li><a href="PAY?o_num={{$v->o_num}}" class="order">去支付</a></li>
                    <li><a href="HotelGps?id={{$v->h_id}}" class="gps">导航</a></li>
                    <li><a href="HoteReality?id={{$v->h_id}}" class="reality">实景</a></li>
                </ul>
@@ -95,7 +91,7 @@
 <script type="text/javascript">
     function page(page)
     {
-        $.get('my_order_no',{'page':page},function(msg){
+        $.get('my_order_yes',{'page':page},function(msg){
             $("#div1").html(msg);
         })
     }

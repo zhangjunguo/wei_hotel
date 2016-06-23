@@ -31,9 +31,10 @@ Route::get('home/MyGiftYes',"home\AccountController@MyGiftYes");
 Route::get('home/MyGiftX', "home\AccountController@MyGiftX");
 // 前台我的订单  
 Route::get('home/MyOrder',"home\AccountController@MyOrder");
-// Route::get('MyOrderpage',"home\AccountController@MyOrderPage");
 Route::get('home/my_order_no',"home\AccountController@my_order_no");
 Route::get('home/my_order_yes',"home\AccountController@my_order_yes");
+Route::get('home/my_order_pay',"home\AccountController@my_order_pay");
+
 //订单详情
 route::get('home/order_info',"home\AccountController@Order_Info");
 
@@ -55,6 +56,8 @@ Route::get('home/Login',"home\LoginController@Index");
 // 登录
 Route::post('home/Logingo',"home\LoginController@Login");
 
+//验证用户信息是否完善
+route::get('user_info','home\LoginController@User_info');
 // 前台注册
 Route::get('home/Register',"home\LoginController@Register");
 // 注册
