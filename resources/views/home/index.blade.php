@@ -26,7 +26,7 @@
  <div id="img_box">
       <ul id="img_list">
         @foreach ($arr as $k => $v)
-          <li id="img_{{$k+1}}" img-no="{{$k+1}}"><a href="HotelInfo?id={{$v->h_id}}"><img src="/uploads/{{$v->h_img}}" width="505px" height="200px" style="margin-left:-25px" /></a></li>
+          <li id="img_{{$k+1}}" img-no="{{$k+1}}"><a href="home/HotelInfo?id={{$v->h_id}}"><img src="/uploads/{{$v->h_img}}" width="505px" height="200px" style="margin-left:-25px" /></a></li>
         @endforeach
       </ul>
   </div>
