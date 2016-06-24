@@ -54,7 +54,7 @@
                
                <ul class="unstyled">
                    <?php if($v->o_state == 1 ){ ?>
-                       <li><a href="HotelInfo?id=<?php echo e($v->h_id); ?>&address=<?php echo e($v->h_address); ?>" class="order">支付</a></li>
+                       <li><a href="PAY?o_num=<?php echo e($v->o_num); ?>" class="order">支付</a></li>
                     <?php }elseif($v->o_state == 3){ ?>
                         <li><a href="comment?h_id=<?php echo e($v->h_id); ?>" class="order">评价</a></li>
                     <?php } ?>

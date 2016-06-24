@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 header('content-type:text/html;charset=utf8');
-
 use DB,Request,Session;
+use Captcha\CaptchaBuilder;
 use Mail;
 use App\Http\Controllers\Controller;
 class LoginController extends Controller {
@@ -13,7 +13,14 @@ class LoginController extends Controller {
     {
         return view('admin.login');
     }
+    //生成验证码
+    public function captch(){
 
+      $builder = new CaptchaBuilder;
+      $builder->build(150,32);
+      Session::set('phrase',$builder->getPhrase()); //存储验证码
+      return response($builder->output())->header('Content-type','image/jpeg');
+    }
     // 登录操作
     public function PostLogin()
     {   
@@ -21,7 +28,11 @@ class LoginController extends Controller {
         $adm_time = time();
         $username = Request::input('username');
         $pwd = md5(Request::input('pwd'));
+        $yanzhengma = Session::get('phrase');
+        $code=Request::input('yanzhengma');
         $user= DB::table('admin')->where('adm_name',$username)->where('adm_pass',$pwd)->first();
+               
+        if ($user){
                 Session::put('username',$username);
                 Session::put('uid',$user->adm_id);
                 Session::put('ip',$ip);
@@ -32,11 +43,13 @@ class LoginController extends Controller {
                 ->where('admin.adm_id',$uid)
                 ->first();
                  Session::put('rname',$arr->ro_name);// print_r($user);die;
-        if ($user){
             if($adm_time - $user->adm_time>10){
                 DB::table('admin') -> where('adm_name',$username) -> update(['adm_update_num'=>0]);
-              
+              if($code == $yanzhengma){
                 return redirect('admin')->with('message', '成功登录');
+               }else{
+                 echo "验证码输入不正确";
+               }
             }else{
                 echo '<script>alert("客官再等会,10秒不够呢");location.href="login"</script>';
             }

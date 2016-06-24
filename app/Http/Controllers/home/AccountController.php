@@ -293,9 +293,13 @@ class AccountController extends Controller
     public function Order_Info()
     {
         $o_id = Request::input('id');
-       /* $sql = "select * from wei_hotel_order inner join wei_hotel on wei_hotel_order.h_id= wei_hotel.h_id where o_id=$o_id";
-        $data = DB::query($sql);*/
-        $data = DB::table('hotel_order')->join('room', 'hotel_order.h_id', '=', 'room.h_id')->join('hotel', 'hotel_order.h_id', '=', 'hotel.h_id')->where('o_id',$o_id)->first();
+       
+        //$data = DB::table('hotel_order')->join('room', 'hotel_order.h_id', '=', 'room.h_id')->join('hotel', 'hotel_order.h_id', '=', 'hotel.h_id')->where('o_id',$o_id)->first();
+        $data = DB::table('hotel_order')
+                    ->join('hotel', 'hotel_order.h_id', '=', 'hotel.h_id')
+                    ->join('hotel_order_details', 'hotel_order.o_id', '=', 'hotel_order_details.o_id')
+                    ->join('room', 'hotel_order_details.r_id', '=', 'room.r_id')
+                    ->where('hotel_order.o_id',$o_id)->first();
         // dd($data);die;
         return view('home/order_info',compact('data'));
     }
