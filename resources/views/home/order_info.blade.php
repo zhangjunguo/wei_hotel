@@ -22,7 +22,7 @@
                 <span class="header-icon header-icon-return"></span>
                 <span class="header-name">返回</span></a>
         </div>
-        <div class="container width80 pt20">
+        <div class="container width80 pt30">
             <form name="aspnetForm" method="post" action="login.aspx?ReturnUrl=%2fMember%2fDefault.aspx" id="aspnetForm" class="form-horizontal">
                 <ul class="user-function-list">
                     <li style="text-align:left">酒店：{{$data->h_name}}</li>
@@ -41,21 +41,19 @@
                         echo "已退订";
                     }
                     ?>
-                   
-
-
+                    
                     </li>
                     <li style="text-align:left">下单时间: {{date('Y-m-d H:i:s',$data->o_addtime)}}</li>
                     <li style="text-align:left">酒店电话：{{$data->h_tel}}</li>
                     <li style="text-align:left">酒店描述：{{$data->h_desc}}</li>
-                    
                 </ul>
             </form>
         </div>
-        <div class="footer">
-            <div class="gezifooter">
-                <p style="color:#bbb;">1408phpF4组 &copy; 版权所有 2012-2016</p></div>
-        </div>
+       
+            <div class="footer" style="margin-top:50px">
+                <p style="color:#bbb;">1408phpF4组 &copy; 版权所有 2012-2016</p>
+            </div>
+       
     </body>
 
 </html>
