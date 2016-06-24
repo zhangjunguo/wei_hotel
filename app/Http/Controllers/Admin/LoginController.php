@@ -31,6 +31,8 @@ class LoginController extends Controller {
         $yanzhengma = Session::get('phrase');
         $code=Request::input('yanzhengma');
         $user= DB::table('admin')->where('adm_name',$username)->where('adm_pass',$pwd)->first();
+               
+        if ($user){
                 Session::put('username',$username);
                 Session::put('uid',$user->adm_id);
                 Session::put('ip',$ip);
@@ -41,7 +43,6 @@ class LoginController extends Controller {
                 ->where('admin.adm_id',$uid)
                 ->first();
                  Session::put('rname',$arr->ro_name);// print_r($user);die;
-        if ($user){
             if($adm_time - $user->adm_time>10){
                 DB::table('admin') -> where('adm_name',$username) -> update(['adm_update_num'=>0]);
               if($code == $yanzhengma){
