@@ -25,9 +25,9 @@
         <div class="container width80 pt30">
             <form name="aspnetForm" method="post" action="login.aspx?ReturnUrl=%2fMember%2fDefault.aspx" id="aspnetForm" class="form-horizontal">
                 <ul class="user-function-list">
-                    <li style="text-align:left">酒店：{{$data->h_name}}</li>
+                    <li style="text-align:left">酒店：<?php echo e($data->h_name); ?></li>
                     
-                    <li style="text-align:left">房型：{{$data->r_name}}</li>
+                    <li style="text-align:left">房型：<?php echo e($data->r_name); ?></li>
                     <li style="text-align:left">订单状态: 
                     
                     <?php 
@@ -41,11 +41,13 @@
                         echo "已退订";
                     }
                     ?>
-                    
+                   
+
+
                     </li>
-                    <li style="text-align:left">下单时间: {{date('Y-m-d H:i:s',$data->o_addtime)}}</li>
-                    <li style="text-align:left">酒店电话：{{$data->h_tel}}</li>
-                    <li style="text-align:left">酒店描述：{{$data->h_desc}}</li>
+                    <li style="text-align:left">下单时间: <?php echo e(date('Y-m-d H:i:s',$data->o_addtime)); ?></li>
+                    <li style="text-align:left">酒店电话：<?php echo e($data->h_tel); ?></li>
+                    <li style="text-align:left">酒店描述：<?php echo e($data->h_desc); ?></li>
                 </ul>
             </form>
         </div>
