@@ -149,6 +149,9 @@
     var nums = $(num).val();
     // alert(nums);
     $("#num_price").html(price*nums);
+    // if(nums > {{$data->r_num}}){
+    //     alert('房间没有足够的数量');
+    // }
   }
 
 
@@ -178,6 +181,10 @@
               }
           }
       });
+      if(nums > {{$data->r_num}}){
+        alert('房间没有足够的数量');
+        flag=false;
+      }
       // alert(flag);
       // return false;
       if(flag == true){
