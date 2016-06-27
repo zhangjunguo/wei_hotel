@@ -86,7 +86,7 @@ class OrderController extends Controller
 
 		$where = 1;
 		if($o_num){
-			$where.=" and o_num=$o_num";
+			$where.=" and o_num='$o_num'";
 		}
 		if($od_start_time){
 			$where.=" and od_start_time < '$od_start_time'";
