@@ -68,7 +68,6 @@ class LoginController extends Controller {
                     DB::table('admin') -> where('adm_name',$username) -> update(['adm_update_num'=>$adm_update_num]);
                     echo '<script>alert("密码错误,输入次数还剩"+'.(3-$adm_update_num).');location.href="login"</script>';
                 }
-
             }else{
                 echo "<script>alert('用户名错误');location.href='login'</script>";
             }
